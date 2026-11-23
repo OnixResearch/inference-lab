@@ -1,0 +1,15 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/inference-lab benchmark --out runs/validation/bootstrap-run2`
+# Inference Lab bootstrap seed report
+
+- **Execution class**: `bounded_contract_harness`
+- **Physical hardware gate**: `unavailable_hardware_runtime` (no physical GPU or model server executed)
+- **Scenario**: `serving-contract-v1`
+
+| Profile | Accepted/planned | Invalid | OOM | Timeout | Unsupported | Peak KV tokens |
+| --- | --- | --- | --- | --- | --- | --- |
+| `unbounded-naive-rejected` | 2/6 | 1 | 1 | 1 | 1 | 640 |
+| `static-batch-bounded` | 2/6 | 1 | 1 | 1 | 1 | 640 |
+| `prefill-decode-split-bounded` | 3/6 | 1 | 1 | 0 | 1 | 1024 |
+
+Every planned request remains represented with its explicit non-collapsing outcome. Logical ticks are deterministic contract units, never wall-clock latency or GPU throughput. Presence of `COMPLETE` marks completed artifact publication only.

@@ -1,0 +1,77 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s
+     Running unittests src/lib.rs (target/debug/deps/inference_lab-7b48e7a0ca790b34)
+
+running 2 tests
+test json::tests::json_quoting_and_finite_floats ... ok
+test json::tests::sha256_matches_nist_vectors ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (target/debug/deps/inference_lab-768f3bd039be7e7f)
+
+running 1 test
+test tests::parse_accepts_all_valid_commands_and_rejects_bad_args ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bootstrap.rs (target/debug/deps/bootstrap-620373bc7339656f)
+
+running 3 tests
+test seed_rejects_empty_or_zero_bound_scenarios ... ok
+test seed_preserves_all_non_collapsing_outcomes_and_denominators ... ok
+test cli_publishes_byte_identical_runs_and_refuses_overwrite ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/diffusion.rs (target/debug/deps/diffusion-d473dd1e38d02146)
+
+running 4 tests
+test default_off_interchange_comparison_reports_exact_field_losses ... ok
+test capability_probe_exposes_ar_chat_lack_of_diffusion_support ... ok
+test ebm_selection_fixture_handles_ties_duplicates_nan_missing_and_resampling ... ok
+test noble_adversarial_guards_reject_without_mutating_incumbent ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/power.rs (target/debug/deps/power-58c2fc5da71becad)
+
+running 1 test
+test power_protocol_controls_enforce_correctness_drift_axis_and_telemetry_gates ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/related_work.rs (target/debug/deps/related_work-b3404a7de23f6bfb)
+
+running 2 tests
+test related_work_records_are_default_off_unverified_and_strictly_gated ... ok
+test gate_validator_rejects_default_on_verified_claims_or_empty_repo_pins ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/stage.rs (target/debug/deps/stage-151775c0b4a21c86)
+
+running 3 tests
+test stage_reset_actually_clears_populated_kv_cache_before_gen2 ... ok
+test stage_all_negative_controls_reject_and_block_silent_cpu_fallback ... ok
+test stage_split_placements_match_unsplit_reference_within_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/tokenizer.rs (target/debug/deps/tokenizer-df7de90db3c4a21e)
+
+running 3 tests
+test reference_bpe_roundtrips_utf8_and_protects_special_tokens ... ok
+test chat_template_blocks_role_boundary_injection_from_user_content ... ok
+test parity_harness_passes_exact_reference_and_disqualifies_all_faulty_backends ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/trace.rs (target/debug/deps/trace-ca0de65c3f86c85a)
+
+running 3 tests
+test perturbation_matrix_ranks_untraced_only ... ok
+test trace_positive_control_joins_scoped_identities_and_leaves_batched_attribution_unavailable ... ok
+test trace_all_seven_negative_controls_block_causal_substantiation ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,3 @@
+{"schema":"inference-lab.related-work-inputs.v1","issues":[56,58,60],"records":[{"issue":56,"slug":"issue-56-fpga-maple","doc_path":"docs/related-work/issue-56-fpga-maple.md","default_off":true},
+{"issue":58,"slug":"issue-58-compositional-harness-rlm27b","doc_path":"docs/related-work/issue-58-compositional-harness-rlm27b.md","default_off":true},
+{"issue":60,"slug":"issue-60-latent-lattice-lm","doc_path":"docs/related-work/issue-60-latent-lattice-lm.md","default_off":true}]}

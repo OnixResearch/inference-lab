@@ -1,0 +1,194 @@
+{
+  "schema": "inference-lab.batch1-evidence.v1",
+  "issues": [
+    1,
+    40,
+    41,
+    43,
+    52,
+    56,
+    58,
+    60
+  ],
+  "source_revision": null,
+  "source_revision_status": "Generated before initial commit; exact source and build inputs are bound by source_sha256.",
+  "source_sha256": {
+    ".github/workflows/ci.yml": "9d5d23c39ae8809a14599d07ab705c32632da2188beaaa6f8164489e7bd97349",
+    "Cargo.lock": "09cf915531a567e6dc91f86ce575be9308c2328433a03bea4d78a4e1da4782b9",
+    "Cargo.toml": "d74162111258882bbbefaf2512b836c5cfad8a07e29f42585a2ab756333fc6e9",
+    "flake.lock": "c545c139b85b410770113109201ea6cba0481d0b931feaeaca485d9cd6515907",
+    "flake.nix": "9a5e0961bfd8b58e2776fc515efe194a8b3bfb78546509fa4e80034cc3e8139b",
+    "rust-toolchain.toml": "b323b19900e4b811af0a8facce5ec11249ed135ae5a46ff5c0be90067521e11f",
+    "src/diffusion.rs": "56f630c210c0beb02ea4eee5722ad80b2812364dabb8e1a62c2293190e49be70",
+    "src/json.rs": "db36ceadbd3d11c53d92ec7ce481e97dfc3dde01c76762eb2c6a6c0149426072",
+    "src/lib.rs": "95b3f50e3f5e7e232ff19bad88d767c0e260a0d73aa2687390aee27129ac3304",
+    "src/main.rs": "d4879cbe09549d44291650db9cc3ef5793c6737ce100aa77b5918059ddab56cd",
+    "src/power.rs": "9566412f58f4b864b54066e6be1c7b18e8a5cf8f1dd235b80088f6815e5965d0",
+    "src/provenance.rs": "aa45f14754341e4a43cc6f152b55daeab63d9c7a58a8fba3e63a8b9459922f36",
+    "src/related_work.rs": "7be8cbe8531410b31952f8f93572a2509963683cd35e3b6616418a64d754a3b9",
+    "src/seed.rs": "10459fa218c2e06cb72470b630fc5939248b7436af29e6119e7680bf7ae153f8",
+    "src/stage.rs": "f900c11867c4b0ebeb5177ef3c546160e8fe6234bb74199fc62177d12ee4cfff",
+    "src/tokenizer.rs": "16fd155c8b0c862b2132d78918e5d5f71b93cb88a8e7aaf51a81e6e977534572",
+    "src/trace.rs": "1bf7a738078833ab7c7358115833b74be6fabf6e909883c8f1d707da23ec67ef",
+    "tests/bootstrap.rs": "e5efee1c16997ed258a5b54dfa9e7e5f694df63c377df05700c90ebbaa5687c4",
+    "tests/diffusion.rs": "ea87dec6fe31ae5a5ce319f845cdd0ceb914e304609e6300b761632e540a07fe",
+    "tests/power.rs": "0f45b9f853b837d961ee9e8ec948247012d33fa13d7c88ac82b93fade9756946",
+    "tests/related_work.rs": "da415d9d02472deced72412897d1474a312da099582f80153a7e2cb3c01c09d6",
+    "tests/stage.rs": "73113091c055722da5b5369dc16ce05d07e7d9968a5e98a187172420d4d1b8f8",
+    "tests/tokenizer.rs": "9dd5947549dfaf107011c9cf46fa9c23db9bd17343349304ceb9118f193a073c",
+    "tests/trace.rs": "bbf89c97ba4abf2c423e3ac1909c1d62abc0d480906648c2a6a69cd3b5e24b9b"
+  },
+  "tool_versions": {
+    "rustc": "rustc 1.85.1 (4eb161250 2025-03-15)",
+    "cargo": "cargo 1.85.1 (d73d2caf9 2024-12-31)",
+    "nix": "nix (Nix) 2.36.0"
+  },
+  "suites": [
+    {
+      "subdir": "issue-01-diffusion",
+      "issues": [
+        1
+      ],
+      "command": [
+        "inference-lab",
+        "diffusion",
+        "--out",
+        "runs/validation/issue-01-diffusion"
+      ],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "repeatability": {
+        "runs": 2,
+        "byte_identical": true
+      },
+      "artifact_sha256": {
+        "inputs.json": "4c8c83e86f64f3a905c6cf72f51c08d52a183173813bcbbcb1eff73de44437c2",
+        "results.json": "01e2b9b2968537d65e27630a22d20f0688d03dafad6fdfaaa84013aedaa3273e",
+        "summary.md": "a69a45488828716891ae7279f1d7f9092aa3adc6cb91971c06f8deec6ac244bb",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-40-trace",
+      "issues": [
+        40
+      ],
+      "command": [
+        "inference-lab",
+        "trace",
+        "--out",
+        "runs/validation/issue-40-trace"
+      ],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "repeatability": {
+        "runs": 2,
+        "byte_identical": true
+      },
+      "artifact_sha256": {
+        "inputs.json": "c94bde745a7cb97d7085d88b861749cb379050626527fb9336565412bf7e8084",
+        "results.json": "a98ac9b19c742975ae0ed90b16e4e1ab0a6963231716133a43ab540a63a1e921",
+        "summary.md": "973c564e48971c724145e79fc5e19853fcb514348f60a145b083c64c5ab03b43",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-41-stage",
+      "issues": [
+        41
+      ],
+      "command": [
+        "inference-lab",
+        "stage",
+        "--out",
+        "runs/validation/issue-41-stage"
+      ],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "repeatability": {
+        "runs": 2,
+        "byte_identical": true
+      },
+      "artifact_sha256": {
+        "inputs.json": "1a38fb6742d2d4b22d82071f90887125410a1f071e85173a1120f24dff8c09f9",
+        "results.json": "464d67e8fc8c68ba81a2663a1525ed96d886cb3bdac8c56c65187b25097eecbf",
+        "summary.md": "62d1ab34f5fbe70afec20ee5e9040a13a591fbdb4c840ab007cafb81d9dd7279",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-43-power",
+      "issues": [
+        43
+      ],
+      "command": [
+        "inference-lab",
+        "power",
+        "--out",
+        "runs/validation/issue-43-power"
+      ],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "repeatability": {
+        "runs": 2,
+        "byte_identical": true
+      },
+      "artifact_sha256": {
+        "inputs.json": "0f59ab1eff059d641dc221319d027f7135f7ed8421ccc4ea0dbdb5b40b16d40f",
+        "results.json": "196b57981e1697352e3d2e8c3bf096d87b8fd4ff9b487bc732646cf9bf9c48bd",
+        "summary.md": "f3abb416b6d061d0d666bfb021824d438a5691144174711f3b275349dd778b2c",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-52-tokenizer",
+      "issues": [
+        52
+      ],
+      "command": [
+        "inference-lab",
+        "tokenizer",
+        "--out",
+        "runs/validation/issue-52-tokenizer"
+      ],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "repeatability": {
+        "runs": 2,
+        "byte_identical": true
+      },
+      "artifact_sha256": {
+        "inputs.json": "19785acde5365a2b4744b855add0d34336c060cc6e2746f988a64ea40fdd6f28",
+        "results.json": "5939a82efbfc76931801c7ded4b1463eebb3962498d58b715289c771c7ddbaab",
+        "summary.md": "652b80c4459bd36a73d311a70b62bafc7c3c83b08580dcf52bf40db87ac8a200",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-56-58-60-related-work",
+      "issues": [
+        56,
+        58,
+        60
+      ],
+      "command": [
+        "inference-lab",
+        "related-work",
+        "--out",
+        "runs/validation/issue-56-58-60-related-work"
+      ],
+      "execution_class": "blocked_on_artifacts",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "repeatability": {
+        "runs": 2,
+        "byte_identical": true
+      },
+      "artifact_sha256": {
+        "inputs.json": "2b73db7d632ec62582e97eb39146bda81f92571cc0ad5a2ad11fb09b3c6e75ec",
+        "results.json": "602adcfbe594a1d13b2662609f0e6044455f35b48262cde1c1e2fb4bdb2c8f70",
+        "summary.md": "30766d3af130b9f989e08c95f704869c8a0f0633f56f9cbd16288a55a47c9f72",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

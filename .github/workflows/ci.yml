@@ -1,0 +1,42 @@
+name: Check inference lab
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out exact source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install Nix
+        uses: cachix/install-nix-action@3dc140bfc76c49fbd4dd958429132e3746bcb086 # v31
+      - name: Check pinned package, tests, formatting and lints
+        run: nix flake check --no-update-lock-file --print-build-logs
+      - name: Build the CLI
+        run: nix build --no-update-lock-file --print-build-logs
+      - name: Run bounded contract harnesses
+        run: |
+          mkdir -p "$RUNNER_TEMP/inference-lab-batch1"
+          for cmd in benchmark diffusion trace stage power tokenizer related-work; do
+            result/bin/inference-lab "$cmd" --out "$RUNNER_TEMP/inference-lab-batch1/$cmd"
+          done
+          git rev-parse HEAD > "$RUNNER_TEMP/inference-lab-batch1/source-revision.txt"
+          sha256sum Cargo.lock flake.lock rust-toolchain.toml > "$RUNNER_TEMP/inference-lab-batch1/input-sha256.txt"
+      - name: Retain contract harness evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: inference-lab-batch1-${{ github.sha }}
+          path: ${{ runner.temp }}/inference-lab-batch1/
+          if-no-files-found: warn
+          retention-days: 14

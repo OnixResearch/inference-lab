@@ -1,0 +1,15 @@
+[package]
+name = "inference-lab"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+publish = false
+description = "Reproducible inference, backend, contract, and measurement experiments"
+
+[dependencies]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "warn"
