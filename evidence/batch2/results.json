@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.batch2-suite.results.v1",
+  "issues": [2,3,4,5,6,7,8,9,10,11],
+  "total_suites": 10,
+  "bounded_contract_harness_suites": 8,
+  "blocked_on_artifacts_suites": 2,
+  "physical_hardware_executed": false,
+  "suites": [{"issue":2,"command":"proof-completion","subdir":"issue-02-proof-completion","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":3,"command":"drafting","subdir":"issue-03-drafting","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":4,"command":"kernel-opt","subdir":"issue-04-kernel-opt","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":5,"command":"kv-routing","subdir":"issue-05-kv-routing","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":6,"command":"adaptive-spec","subdir":"issue-06-adaptive-spec","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":7,"command":"serving-bench","subdir":"issue-07-serving-bench","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":8,"command":"deepseek-spark","subdir":"issue-08-deepseek-spark","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"},{"issue":9,"command":"learned-compiler","subdir":"issue-09-learned-compiler","execution_class":"blocked_on_artifacts","hardware_or_artifact_gate":"blocked_on_artifacts"},{"issue":10,"command":"structured-read","subdir":"issue-10-structured-read","execution_class":"blocked_on_artifacts","hardware_or_artifact_gate":"blocked_on_artifacts"},{"issue":11,"command":"lifecycle","subdir":"issue-11-lifecycle","execution_class":"bounded_contract_harness","hardware_or_artifact_gate":"unavailable_hardware_runtime"}]
+}

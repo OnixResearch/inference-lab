@@ -20,6 +20,17 @@ Inference Lab separates pure deterministic evaluation from all external effects:
 | `src/power.rs` | `#43` | Power and throttle cadence qualification schema, device-vs-host axis separation, sensor-gated energy reporting, observer perturbation, and paired AB/BA protocol controls |
 | `src/tokenizer.rs` | `#52` | Deterministic BPE + special-token reference tokenizer, chat-template renderer (`chatml-v1`, `qwen-thinking-v1`), role-boundary injection checks, and disqualifying backend parity harness |
 | `src/related_work.rs` | `#56`, `#58`, `#60` | Pinned default-off related-work gate contracts and validator ensuring unverified external claims never become acceptance targets |
+| `src/proof_completion.rs` | `#2` | Masked proof completion contract as second consumer of `#1`, frozen-context guards, partition discipline, intake equivalence, matched budgets, and offline replay |
+| `src/drafting.rs` | `#3` | Greedy conformance, exact analytical stochastic rejection-sampling verifier, block verification, silent-fallback guard, and pinned non-gating DFlash2/DNeo claims |
+| `src/kernel_opt.rs` | `#4` | Independent kernel-opt evaluator gate ordering, soak stage, local repeat noise floor, separate experimental factors, retained `runs/` log, and license provenance |
+| `src/kv_routing.rs` | `#5` | 13-dimension snapshot compatibility & generation fencing, RSI `#86` & TT `#46` guards, soft-affinity load escape, sticky/RDMA/recompute comparison, and ChaosControl transfer faults |
+| `src/adaptive_spec.rs` | `#6` | Adaptive speculative graph & concurrency characterization reusing `#3` block verifier and `#7` workload identity, plus CPU-overlap vs continuous-batching guard |
+| `src/serving_bench.rs` | `#7` | Portable `tt-onix` serving compatibility contract (`LGPL-2.1-only`), offline reducer & tamper verifier, branch-aware agent trace replay, Eunomia transport controls, and OASYS RLM trace profile |
+| `src/deepseek_spark.rs` | `#8` | DeepSeek/Spark migration manifest (`dsv41-1017`), repaired counter accounting, burst/sustained & cache controls, 9 device-free fixtures, and semantic vs legacy quality checks |
+| `src/learned_compiler.rs` | `#9` | `blocked_on_artifacts` asset recovery inventory (`compiler-lab@50dcbdce`), preserved `#30`/`#31` baselines, Darwin/AppleContainer isolation gate, and model-free controls |
+| `src/structured_read.rs` | `#10` | Conditional `blocked_on_artifacts` extraction gate (2 distinct real backends + 2nd consumer), AR/diffusion/Clef capability separation, normalization scope, calibration invalidation, and adversarial fixtures |
+| `src/lifecycle.rs` | `#11` | Disposable Spark NixOS adapter contract, `A -> B -> A` & RSI `#86` variant transitions, Systems `#10` raw vs exclusive elapsed-time partition, unified-memory provenance guards, Animus `#17` controls, and residency policies |
+| `src/batch2.rs` | `#2`–`#11` | Deterministic Batch 2 suite orchestrator emitting per-issue bundles, aggregate reports, and SHA-256 `manifest.json` |
 
 ## Future real-backend adapter boundary
 

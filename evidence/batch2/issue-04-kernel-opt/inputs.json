@@ -1,0 +1,7 @@
+{
+  "schema": "inference-lab.issue-04-kernel-opt.inputs.v1",
+  "issue": 4,
+  "execution_class": "bounded_contract_harness",
+  "local_noise_floor": {"hardware_label":"local_frozen_contract_baseline","baseline_repeats_ms":[10.0,10.12,9.91,10.05,9.97],"baseline_mean_ms":10.01,"noise_floor_abs_ms":0.159373774505,"noise_floor_rel_fraction":0.015921455995,"foreign_roofline_reused":false},
+  "license_and_prior_verdict_provenance": ["basetenlabs/deepseek-ultrafast@3aad78f1f6a3ae87ddb6b7344edbb40433b519aa: Elastic License 2.0 (inspect only, no incompatible copy)","NVIDIA/compute-eval@00fbad91: Apache-2.0 harness, NVIDIA Evaluation Dataset License for data/","NVIDIA/CompileIQ@ed52623f: NVIDIA Software License Agreement (distinct from Apache-2.0)","dangxingyu/megakernel-zoo@e3cef3b1cca3dc9164c062899e3e3215380640ba: Apache-2.0 (H100/B200 claims 1.13-2.05x unverified & non-gating)","RSI #26 confirmation preserved: 156/264 plain vs 153/264 forced across 42 paired trials -> frozen verdict NULL (off by default)"]
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.issue-10-structured-read.inputs.v1",
+  "issue": 10,
+  "execution_class": "blocked_on_artifacts",
+  "donor_pin": "OnixResearch/tt-onix@5ed5e90cdd265443fa2f9b73e4ce46aeaa71837a (structured_read_core.py, check.py)",
+  "donor_license": "LGPL-2.1-only",
+  "distinct_operations": ["ar_label_read","diffusion_canvas_read","clef_joint_head_read"],
+  "boundary_notes": ["TT/Torch-specific details (ENGINE_NAME=qwen38-p150x2, MAXIMUM_SLOTS_PER_READ=31, GDN/KV/conv state) stay private behind the TT adapter.","Per-field normalized distribution is not proof of jointly valid multi-field action; confidence never authorizes execution.","Offline re-prefill is not online early stopping; cropping KV cannot be assumed to roll back hybrid GDN/recurrent state.","tt-onix#16 owns Qwen escalation/stopping (AutoThink/DeLLMa); Animus owns routing; RSI owns policy training."]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.issue-02-proof-completion.inputs.v1",
+  "issue": 2,
+  "execution_class": "bounded_contract_harness",
+  "cohort_checker_family": "lean-4.35.0-pinned",
+  "bounds": {"max_held_out_tasks":24,"max_admissions_per_task_arm":8,"generation_seeds":3,"optional_python_enabled":false},
+  "external_owners": {"intake":"compiler-lab#75","lean_policy":"compiler-lab#160","repl_sessions":"compiler-lab#218","tactic_comparison":"compiler-lab#219","compaction":"memory-lab#7","training":"rsi-lab#84"},
+  "non_gating_unverified_author_claims": [
+    {"source":"Diffusion-Proof 2026.findings-emnlp.1367","note":"pass@32 + 32 corrections (+4 MiniF2F, +0 ProofNet) is not a matched-budget win or Verus transfer"},
+    {"source":"daVinci-Prover arXiv:2611.16433v1 / GAIR-NLP/daVinci-prover","note":"Reported figures are unverified external claims; targets Lean 4.35.0"}
+  ]
+}

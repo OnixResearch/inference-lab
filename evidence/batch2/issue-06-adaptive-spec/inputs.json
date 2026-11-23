@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.issue-06-adaptive-spec.inputs.v1",
+  "issue": 6,
+  "extends_issue": 3,
+  "reuses_serving_runner_issue": 7,
+  "execution_class": "bounded_contract_harness",
+  "shared_workload_identity": {"schema_version":"onix.qwen38-benchmark.v1","profile_id":"qwen38-p150x2-compat-v1","workload_digest":{"algorithm":"sha256","hex":"754a1c8adf1f915d14080b24f3bc51021c93719dd82ec8475fe2c7367db37e2b"},"model_id":"Qwen/Qwen3.8-27B-pinned","checkpoint_digest":{"algorithm":"sha256","hex":"3eaacfebd58a50ffebba295cbf497bcc02e2fd80e1ad022fe1bdb2bedfa8e6f9"},"tokenizer_digest":{"algorithm":"sha256","hex":"d3029454444784caf6a6bc5673a912268b2ca76922abdd5f0af88d3b0c2e4059"},"chat_template_digest":{"algorithm":"sha256","hex":"41c677d7ddd45c311fae58edc06cf55e1a3fa4473a2ad1427a469e8b4d551ee8"},"precision":"bf16-reference-pinned","backend_revision":"tt-onix@5ed5e90cdd265443fa2f9b73e4ce46aeaa71837a","hardware_label":"device_free_contract_fixture","cache_policy":"server_cache_unknown_client_only"},
+  "adaptive_policy_lengths": [{"case":"fixed-high-conf","chosen_verify_len":4},{"case":"fixed-low-tail","chosen_verify_len":4},{"case":"adaptive-high-conf","chosen_verify_len":6},{"case":"adaptive-low-tail","chosen_verify_len":2}],
+  "license_and_scope_notes": ["basetenlabs/deepseek-ultrafast@3aad78f1f6a3ae87ddb6b7344edbb40433b519aa is Elastic License 2.0; zero source copied.","Upstream targets sm_100a/sm_103a only; B300/GB300 results cannot extrapolate to GB10 sm_121 or RTX 5080 sm_120.","Reuses #3 block verifier and #7 WorkloadIdentity without duplicating serving infrastructure."]
+}

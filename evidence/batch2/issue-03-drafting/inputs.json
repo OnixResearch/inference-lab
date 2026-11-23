@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.issue-03-drafting.inputs.v1",
+  "issue": 3,
+  "execution_class": "bounded_contract_harness",
+  "target_checkpoint_digest": {"algorithm":"sha256","hex":"e71bdd682560eb359a763dcbadb20fb64b59ddb9f5f92cd491c27d2f765981ce"},
+  "drafter_checkpoint_digest": {"algorithm":"sha256","hex":"004d387e356a11fa6087558e637fcb84591fabd38dc994f4017f8646885defb1"},
+  "non_gating_unverified_author_claims": [{"claim_id":"jrb-ai-dflash2-tensorfold-qwen38-27b","source_ref":"x.com/JRB_AI/status/2123682757960462484","pinned_revisions":["single DGX Spark Qwen3.8-27B TensorFold DFlash2/DSpine"],"license":"unverified_social_post","author_claimed_metrics":"14.7 -> 97.7 tok/s single stream (6.6x); no parity or task-quality numbers","verified_locally":false,"gating_target":false,"scope_limitation":"External unverified claim only; never a pass/fail gate."},{"claim_id":"dneo-qwen3-4b-parallel-drafter","source_ref":"arXiv:2611.21925v1","pinned_revisions":["J-sandler/DNeo@8449a3ce891f6b3321efafc1e5c0c7e5c40e11c7 (dneo-inference 0.1.0rc6+, MIT)","J-sandler/Qwen3-4B-DNeo@8451a2e8446c0bfa09be47623ff044d896540ec4 (Apache-2.0)","Qwen/Qwen3-4B@1cfa9a7208912126459214e8b04321603b3df60c","num_hidden_layers=5, block_size=16, target_layer_ids=[0,17,21,24,28,31,35]"],"license":"MIT (runtime) / Apache-2.0 (draft weights)","author_claimed_metrics":"Up to 1.3x vs DFlash-2; H100 80GB BF16 SGLang 4.51 tok/fwd & 701 tok/s (2.96x); Transformers 4.54 tok/fwd & 390 tok/s (3.37x)","verified_locally":false,"gating_target":false,"scope_limitation":"4B checkpoint only; cannot stand in for 27B arm; GB10/SM121 execution unverified."}]
+}
