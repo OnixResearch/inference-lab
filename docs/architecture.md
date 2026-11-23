@@ -31,6 +31,17 @@ Inference Lab separates pure deterministic evaluation from all external effects:
 | `src/structured_read.rs` | `#10` | Conditional `blocked_on_artifacts` extraction gate (2 distinct real backends + 2nd consumer), AR/diffusion/Clef capability separation, normalization scope, calibration invalidation, and adversarial fixtures |
 | `src/lifecycle.rs` | `#11` | Disposable Spark NixOS adapter contract, `A -> B -> A` & RSI `#86` variant transitions, Systems `#10` raw vs exclusive elapsed-time partition, unified-memory provenance guards, Animus `#17` controls, and residency policies |
 | `src/batch2.rs` | `#2`–`#11` | Deterministic Batch 2 suite orchestrator emitting per-issue bundles, aggregate reports, and SHA-256 `manifest.json` |
+| `src/rsi_bench.rs` | `#12` | Standalone RSI benchmark consolidation manifest (`rsi-lab@01e47e26`), RSI `#82` sweep repair gate, pure-Rust RWKV-7 recurrence invariance fixture, and fake-quant non-speedup guard |
+| `src/djev_protocol.rs` | `#13` | Reusable `djev.systemone.v1` protocol split, canonical UTF-8/non-ASCII wire-byte builder, closed RSI `#42` cache-identity regressions, capability separation, and whole-decision deadlines |
+| `src/rwkv_leaf.rs` | `#14` | Conditional `blocked_on_artifacts` native RWKV numerical leaf gate, byte-prefix trie tokenizer, structural safetensors admission, zero-reallocation workspace, and FP32-CPU vs FLA-BF16-CUDA guard |
+| `src/ggml_ops.rs` | `#15` | Pinned `ggml@417a024b` `test-backend-ops` 4-axis qualification, pure-Rust `F32`/`Q8_0`/`Q4_0` dot reference, explicit `MXFP4`/`NVFP4` unsupported handling, and silent-fallback disqualification |
+| `src/rwkv_ggml.rs` | `#16` | Independent FP32 ggml-style `wkv7` vs FP64 native RSI recurrence across 64-step drift, binary export/import round-trips, negative controls, and kernel-vs-agent-state boundary |
+| `src/graphical_sampling.rs` | `#17` | Compiler Lab `#222` exact joint enumeration oracle (`<= 256` states), sequential/serial-color/color-phase CPU Gibbs, honest IPS ESS, 8 controls, and non-gating AMARA/default-off CRAM separation |
+| `src/qwen38_quant.rs` | `#18` | Qwen3.8-27B quant/serving profile reusing `#7` & `#3`, `64 KiB/token` calculated KV planning, offline rescoring, 12 conformance fixtures, MACaQ/QSA/P150x2/Monoglot/`ttf`/QDA Spearman KL/`vegaml` |
+| `src/deepseek_ref.rs` | `#19` | Corrected pinned DeepSeek-style reference (`6901be60`, MIT) implementing TINY MLA + MoE + MTP and reproducing/fixing all 5 upstream defects including Eq. 18 (`0.017` vs `0.003`) |
+| `src/mla_comparison.rs` | `#20` | Reuses `#19` to compare uncached, explicit-expansion, and absorbed MLA (`0` materialized per-head K/V intermediates), `1e6` sentinel poisoning, recompilation accounting, and 7 controls |
+| `src/sparse_moe.rs` | `#21` | Reuses `#19` to compare dense, independent tiny scalar, and grouped sparse MoE dispatch with full analytical backward pass + FD & 3-step update parity, BF16-underflow-safe counts, and 7 negative controls |
+| `src/batch3.rs` | `#12`–`#21` | Deterministic Batch 3 suite orchestrator emitting per-issue bundles, aggregate reports, and SHA-256 `manifest.json` |
 
 ## Future real-backend adapter boundary
 

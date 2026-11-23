@@ -46,6 +46,22 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 | `lifecycle` | [#11](https://github.com/OnixResearch/inference-lab/issues/11) | `bounded_contract_harness` | Disposable Spark NixOS adapter contract (`models.nix@1abf9f9e`), `A -> B -> A` & RSI `#86` `parent -> variant -> parent`, Systems `#10` raw vs exclusive elapsed-time partition, unified-memory provenance/overlap guards, 13 lifecycle/Animus `#17` controls, and residency-policy comparison |
 | `batch2-suite` | `#2`–`#11` | `bounded_contract_harness` + `blocked_on_artifacts` | Runs all 10 Batch 2 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
 
+## Implemented harnesses (Batch 3: `#12`–`#21`)
+
+| Command | Tracked issue(s) | Execution class | Current bounded scope |
+| --- | --- | --- | --- |
+| `rsi-bench` | [#12](https://github.com/OnixResearch/inference-lab/issues/12) | `bounded_contract_harness` | Standalone RSI benchmark consolidation manifest (`rsi-lab@01e47e26`), RSI `#82` kernel-sweep repair gate, pure-Rust RWKV-7 recurrence invariance fixture, encoder phase separation, fake-quant non-speedup guard, and immutable closed `#18` receipts |
+| `djev-protocol` | [#13](https://github.com/OnixResearch/inference-lab/issues/13) | `bounded_contract_harness` | Dual-consumer `djev.systemone.v1` protocol split, canonical UTF-8/non-ASCII wire-byte serializer & span-offset guard, closed RSI `#42` effective cache-identity regressions, scoring-vs-generative/proof separation, and whole-decision deadline controls |
+| `rwkv-leaf` | [#14](https://github.com/OnixResearch/inference-lab/issues/14) | `blocked_on_artifacts` | Deferred conditional extraction gate (requires two concrete non-mock native-RWKV consumers), pure-Rust byte-prefix trie tokenizer, structural safetensors admission validator, zero-reallocation reusable-workspace recurrent step, and FP32-CPU vs FLA-BF16-CUDA guard |
+| `ggml-ops` | [#15](https://github.com/OnixResearch/inference-lab/issues/15) | `bounded_contract_harness` | Pinned `ggml@417a024b` `test-backend-ops` 4-axis qualification (`advertised_support`, `executed_success`, `numerical_pass`, `performance_measured`), pure-Rust `F32`/`Q8_0`/`Q4_0` dot reference, explicit `MXFP4`/`NVFP4` unsupported status, silent-fallback disqualification, and `grants_placement_authority=false` |
+| `rwkv-ggml` | [#16](https://github.com/OnixResearch/inference-lab/issues/16) | `bounded_contract_harness` | Independent FP32 ggml-style `wkv7` vs FP64 native RSI recurrence across token/chunked parity, 64-step drift checkpoints, binary state export/import round-trips with SHA-256 receipts, negative controls, and `asserts_agent_persistence_correctness=false` |
+| `graphical-sampling` | [#17](https://github.com/OnixResearch/inference-lab/issues/17) | `bounded_contract_harness` | Compiler Lab `#222` (`fd0bb432`) exact joint enumeration oracle (`<= 256` states), sequential vs serial-color vs color-phase CPU Gibbs, deterministic per-(sweep, node) RNG trajectory parity, honest IPS ESS (`None` on stuck chains), 8 controls, and non-gating AMARA/default-off CRAM separation |
+| `qwen38-quant` | [#18](https://github.com/OnixResearch/inference-lab/issues/18) | `bounded_contract_harness` | Reuses `#7` & `#3` with exact `64 KiB/token` calculated KV planning, offline rescoring (`zero accepted -> cost=None`), 12 conformance fixtures, MACaQ (`3810efc`), QSA (`#31`/`#32`), P150x2 concurrency (`tt-stack@e55c6527`), default-off Monoglot pruning, `blocked_on_artifacts` ternary `ttf`, QDA Spearman KL rank correlation, and out-of-scope `vegaml` (`rsi-lab#151`) |
+| `deepseek-ref` | [#19](https://github.com/OnixResearch/inference-lab/issues/19) | `bounded_contract_harness` | Corrected pinned DeepSeek-style reference (`6901be60`, MIT) with pure-Rust TINY MLA + MoE + MTP, exact Eq. 18 (`0.017` vs buggy `0.003`), `n_mtp=0`, all-dense, decoupled eval/log intervals, exact-fit `get_batch` & short-data guard, gradient/mask/NaN/checkpoint regressions |
+| `mla-comparison` | [#20](https://github.com/OnixResearch/inference-lab/issues/20) | `bounded_contract_harness` | Reuses `#19` across uncached, explicit-expansion, and absorbed MLA (`0` materialized per-head K/V intermediates), `batch=2` irregular chunks, `1e6` sentinel poisoning, 144-vs-480 element accounting (non-speedup), prefix/recompilation sweeps, gradient parity, and 7 controls |
+| `sparse-moe` | [#21](https://github.com/OnixResearch/inference-lab/issues/21) | `bounded_contract_harness` | Reuses `#19` across dense, independent tiny scalar, and grouped sparse MoE dispatch with full analytical backward pass + FD & 3-step update parity, BF16-underflow-immune load counts, non-dropping capacity accounting, pair sweep, and 7 negative controls |
+| `batch3-suite` | `#12`–`#21` | `bounded_contract_harness` + `blocked_on_artifacts` | Runs all 10 Batch 3 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
+
 ## Ownership boundaries
 
 | Owner | Responsibility retained there |
@@ -68,6 +84,8 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [Bootstrap validation evidence](evidence/bootstrap/README.md)
 - [Batch 1 contract harness evidence](evidence/batch1/README.md)
 - [Batch 2 contract harness evidence (`#2`–`#11`)](evidence/batch2/README.md)
+- [Batch 3 contract & reference-math evidence (`#12`–`#21`)](evidence/batch3/README.md)
 - [OpenSpec change record (Batch 1)](openspec/changes/bootstrap-and-batch1-contracts/proposal.md)
 - [OpenSpec change record (Batch 2)](openspec/changes/batch2-drafting-serving-lifecycle/proposal.md)
+- [OpenSpec change record (Batch 3)](openspec/changes/batch3-rwkv-ggml-mla-moe-quant/proposal.md)
 - [Contribution rules](AGENTS.md)

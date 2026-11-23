@@ -1,0 +1,14 @@
+{
+  "schema": "inference-lab.issue-16-rwkv-ggml.inputs.v1",
+  "issue": 16,
+  "execution_class": "bounded_contract_harness",
+  "ggml_commit": "417a024b4fb6bc3116d41af7c067166a039bdf12",
+  "rsi_commit": "01e47e268d71bc1c53cc36e11c179f2b8f22f5c5",
+  "pinned_ggml_sources": ["src/ggml.c#L5894-L5939","src/ggml-cpu/ops.cpp","src/ggml-cuda/wkv.cu"],
+  "state_layout": "row_major_[n_heads,head_dim,head_dim]",
+  "n_heads": 2,
+  "head_dim": 4,
+  "state_bytes_f32": 128,
+  "state_bytes_f64": 256,
+  "parity_tolerance": 0.00001
+}

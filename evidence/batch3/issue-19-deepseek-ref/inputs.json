@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.issue-19-deepseek-ref.inputs.v1",
+  "issue": 19,
+  "execution_class": "bounded_contract_harness",
+  "upstream_repo": "Vaibhaav-Tiwari/deepseek-v3-jax",
+  "upstream_commit": "6901be60941b98dc654ed542465290db9e8bafa6",
+  "upstream_license": "MIT",
+  "precision_policy": "fp64_master_eval",
+  "mla_params_digest": {"algorithm":"sha256","hex":"20d606ccedd4a69eb573dda29d1cdbe0f21821d84f12dc3e8f28b1f19d1eb5f1"},
+  "linux_removes_macos_jax_metal_dep": true,
+  "official_deepseek_checkpoint_importer": false
+}

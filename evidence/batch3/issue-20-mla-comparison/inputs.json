@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.issue-20-mla-comparison.inputs.v1",
+  "issue": 20,
+  "execution_class": "bounded_contract_harness",
+  "reused_issue_19_params_digest": {"algorithm":"sha256","hex":"20d606ccedd4a69eb573dda29d1cdbe0f21821d84f12dc3e8f28b1f19d1eb5f1"},
+  "batch_size": 2,
+  "cache_capacity": 12,
+  "unused_cache_sentinel": 1000000.0,
+  "default_dim_latent_elems": 144,
+  "default_dim_expanded_elems": 480,
+  "default_dim_element_reduction_pct": 70.0,
+  "element_count_reduction_is_measured_speedup": false
+}

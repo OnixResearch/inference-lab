@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.issue-17-graphical-sampling.inputs.v1",
+  "issue": 17,
+  "execution_class": "bounded_contract_harness",
+  "compiler_lab_222_commit": "fd0bb4328d811768a08083f5d7a0ddccf2dab275",
+  "model_id": "compiler-lab-222-asymmetric-4node-cycle-v1",
+  "total_joint_states": 16,
+  "ess_estimator_version": "ess-ips-v1",
+  "cram_pin_commit": "62bbe830c7d6f87f2ba18f30a28039258b986454",
+  "cram_default_off_enabled": false,
+  "amara_speedup_used_as_gate": false
+}

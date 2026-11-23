@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.issue-13-djev-protocol.inputs.v1",
+  "issue": 13,
+  "execution_class": "bounded_contract_harness",
+  "donor_repo": "OnixResearch/rsi-lab",
+  "donor_commit": "01e47e268d71bc1c53cc36e11c179f2b8f22f5c5",
+  "wire_version": "djev.systemone.v1",
+  "named_consumers": ["OnixResearch/rsi-lab::rwkv_clm_adapter (existing RSI caller)","OnixResearch/inference-lab::issue-1-structured-read-worker (named second consumer)"],
+  "retained_in_rsi": ["Action kinds/descriptions/arguments and decision-point rendering remain in RSI.","Default decision instructions, template file format, and learned templates remain in RSI.","Candidate shortlist/tournament policy, fusion coefficients, and calibration remain in RSI.","Per-agent state, snapshot/version handling, LabelCache, training, and diffusion_async.py whole-decision deadlines remain in RSI."]
+}

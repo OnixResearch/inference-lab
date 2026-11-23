@@ -1,0 +1,15 @@
+{
+  "schema": "inference-lab.issue-14-rwkv-leaf.results.v1",
+  "issue": 14,
+  "execution_class": "blocked_on_artifacts",
+  "hardware_gate": {"target_hardware":"second_concrete_native_rwkv_consumer_and_pinned_leaf_crate","status":"blocked_on_artifacts","reason":"Issue #14 remains explicitly DEFERRED (blocked_on_artifacts) until a second concrete non-mock native-RWKV consumer with named call sites demonstrates the leaf API; RSI #74 PGO and RSI #11 packing remain in RSI."},
+  "trigger_verdicts": [{"case_id":"01-current-state-deferred-single-rsi-consumer","trigger_satisfied":false,"qualified_consumers":1,"rejection_reason":"paper_planned_benchmark_or_mock_cannot_satisfy_second_consumer_trigger"},{"case_id":"02-negative-second-mock-adapter-rejected","trigger_satisfied":false,"qualified_consumers":1,"rejection_reason":"paper_planned_benchmark_or_mock_cannot_satisfy_second_consumer_trigger"},{"case_id":"03-positive-contract-two-concrete-consumers-satisfy-trigger","trigger_satisfied":true,"qualified_consumers":2,"rejection_reason":null}],
+  "trie_token_ids": [257,258,32,259,260,261],
+  "trie_roundtrip_exact": true,
+  "generic_whitespace_diverges": true,
+  "workspace_steps_executed": 6,
+  "workspace_reallocations": 0,
+  "fp32_cpu_interchangeable_with_fla_bf16_cuda": false,
+  "final_output_l2_norm": 0.565543181956,
+  "admission_and_wrapper_controls": [{"case_id":"01-positive-valid-safetensors-admission","outcome":"accepted","detail":"admitted"},{"case_id":"02-negative-malformed-empty-header","outcome":"invalid","detail":"malformed_or_oversized_safetensors_header"},{"case_id":"03-negative-shape-byte-span-mismatch","outcome":"invalid","detail":"tensor_shape_and_byte_span_mismatch"},{"case_id":"04-negative-overlapping-tensor-ranges","outcome":"invalid","detail":"overlapping_tensor_byte_ranges"},{"case_id":"05-negative-tampered-weight-digest","outcome":"invalid","detail":"pinned_weight_digest_mismatch"},{"case_id":"06-negative-missing-immutability-safety-contract","outcome":"invalid","detail":"mapped_file_immutability_safety_contract_missing"},{"case_id":"07-control-rsi-wrapper-per-agent-isolation-and-offset-refusal","outcome":"accepted","detail":"Agent epochs/offsets, immutable snapshots, fork/restore, and staged atomic rollback stay owned by RSI rwkv7_backend.rs."},{"case_id":"08-negative-silent-checkpoint-version-bump-rejected","outcome":"invalid","detail":"Behavioral extraction cannot silently alter checkpoint bytes; any version change requires explicit declaration."},{"case_id":"09-negative-fp32-cpu-claimed-equivalent-to-fla-bf16-cuda-rejected","outcome":"invalid","detail":"FP32 CPU architectural behavior is explicitly non-interchangeable with FLA BF16 CUDA policy parity."}]
+}

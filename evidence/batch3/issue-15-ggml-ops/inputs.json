@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.issue-15-ggml-ops.inputs.v1",
+  "issue": 15,
+  "execution_class": "bounded_contract_harness",
+  "ggml_repo": "ggml-org/ggml",
+  "ggml_pin_commit": "417a024b4fb6bc3116d41af7c067166a039bdf12",
+  "pinned_files": ["tests/test-backend-ops.cpp","include/ggml-backend.h"],
+  "bounded_dtypes": ["F32","Q8_0","Q4_0","MXFP4","NVFP4"],
+  "input_digest": {"algorithm":"sha256","hex":"4acd06cdfc6aa4d233cb16d658e90693722052f7f40b862b9b9f9512c6318fd8"},
+  "grants_placement_authority": false
+}

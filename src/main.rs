@@ -8,9 +8,10 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, batch2, deepseek_spark, diffusion, drafting, kernel_opt, kv_routing,
-    learned_compiler, lifecycle, power, proof_completion, related_work, seed, serving_bench, stage,
-    structured_read, tokenizer, trace,
+    adaptive_spec, batch2, batch3, deepseek_ref, deepseek_spark, diffusion, djev_protocol,
+    drafting, ggml_ops, graphical_sampling, kernel_opt, kv_routing, learned_compiler, lifecycle,
+    mla_comparison, power, proof_completion, qwen38_quant, related_work, rsi_bench, rwkv_ggml,
+    rwkv_leaf, seed, serving_bench, sparse_moe, stage, structured_read, tokenizer, trace,
 };
 
 const HELP: &str = "\
@@ -21,26 +22,39 @@ Usage:
   inference-lab --help
 
 Bootstrap & Batch 1 commands:
-  benchmark         Bootstrap serving/KV-budget contract seed (serving-contract-v1)
-  diffusion         Issue #1 bounded diffusion proposal contract, EBM selection & tree interchange
-  trace             Issue #40 host & GPU trace correlation qualification + negative controls
-  stage             Issue #41 versioned transformer stage contract & 4-layer split reference
-  power             Issue #43 power & throttle cadence qualification + protocol controls
-  tokenizer         Issue #52 BPE & chat-template conformance + disqualifying parity checker
-  related-work      Issues #56, #58, #60 pinned default-off related-work gate receipts
+  benchmark           Bootstrap serving/KV-budget contract seed (serving-contract-v1)
+  diffusion           Issue #1 bounded diffusion proposal contract, EBM selection & tree interchange
+  trace               Issue #40 host & GPU trace correlation qualification + negative controls
+  stage               Issue #41 versioned transformer stage contract & 4-layer split reference
+  power               Issue #43 power & throttle cadence qualification + protocol controls
+  tokenizer           Issue #52 BPE & chat-template conformance + disqualifying parity checker
+  related-work        Issues #56, #58, #60 pinned default-off related-work gate receipts
 
 Batch 2 commands (#2-#11):
-  proof-completion  Issue #2 masked proof completion through Compiler Lab's frozen gate
-  drafting          Issue #3 diffusion drafting conformance & exact rejection-sampling parity
-  kernel-opt        Issue #4 reference-assisted vs spec-only kernel optimization gate ordering
-  kv-routing        Issue #5 session KV routing, bounded soft affinity & RDMA compatibility
-  adaptive-spec     Issue #6 adaptive speculative graph & concurrency characterization
-  serving-bench     Issue #7 portable serving benchmark extraction, branch-trace & RLM profiles
-  deepseek-spark    Issue #8 DeepSeek/Spark migration, repaired counters & semantic quality checks
-  learned-compiler  Issue #9 learned-compiler recovery inventory (blocked_on_artifacts) & controls
-  structured-read   Issue #10 conditional shared structured-read gate (blocked_on_artifacts)
-  lifecycle         Issue #11 centralized model-lifecycle protocol & Spark adapter controls
-  batch2-suite      Run all Batch 2 harnesses (#2-#11) with SHA-256 manifest.json & COMPLETE last
+  proof-completion    Issue #2 masked proof completion through Compiler Lab's frozen gate
+  drafting            Issue #3 diffusion drafting conformance & exact rejection-sampling parity
+  kernel-opt          Issue #4 reference-assisted vs spec-only kernel optimization gate ordering
+  kv-routing          Issue #5 session KV routing, bounded soft affinity & RDMA compatibility
+  adaptive-spec       Issue #6 adaptive speculative graph & concurrency characterization
+  serving-bench       Issue #7 portable serving benchmark extraction, branch-trace & RLM profiles
+  deepseek-spark      Issue #8 DeepSeek/Spark migration, repaired counters & semantic quality checks
+  learned-compiler    Issue #9 learned-compiler recovery inventory (blocked_on_artifacts) & controls
+  structured-read     Issue #10 conditional shared structured-read gate (blocked_on_artifacts)
+  lifecycle           Issue #11 centralized model-lifecycle protocol & Spark adapter controls
+  batch2-suite        Run all Batch 2 harnesses (#2-#11) with SHA-256 manifest.json & COMPLETE last
+
+Batch 3 commands (#12-#21):
+  rsi-bench           Issue #12 standalone RSI inference benchmark consolidation & RSI #82 gate
+  djev-protocol       Issue #13 reusable djev protocol client split & closed RSI #42 cache identity
+  rwkv-leaf           Issue #14 conditional native RWKV numerical leaf gate (blocked_on_artifacts)
+  ggml-ops            Issue #15 pinned ggml test-backend-ops 4-axis capability & quant reference
+  rwkv-ggml           Issue #16 ggml RWKV-7 recurrence & state-continuation parity vs native RSI
+  graphical-sampling  Issue #17 discrete graphical sampling exact oracle, color-phase Gibbs & ESS
+  qwen38-quant        Issue #18 Qwen3.8-27B quant/serving profile, MACaQ, QSA, Monoglot & QDA KL
+  deepseek-ref        Issue #19 corrected pinned DeepSeek-style reference & 5 defect regressions
+  mla-comparison      Issue #20 explicit vs absorbed MLA parity, sentinel poisoning & memory bytes
+  sparse-moe          Issue #21 sparse MoE dispatch vs dense/tiny reference & analytical gradients
+  batch3-suite        Run all Batch 3 harnesses (#12-#21) with SHA-256 manifest.json & COMPLETE last
 
 Rules:
   The output directory must not exist; its parent directory must exist.
@@ -70,6 +84,17 @@ enum Command {
     StructuredRead(PathBuf),
     Lifecycle(PathBuf),
     Batch2Suite(PathBuf),
+    RsiBench(PathBuf),
+    DjevProtocol(PathBuf),
+    RwkvLeaf(PathBuf),
+    GgmlOps(PathBuf),
+    RwkvGgml(PathBuf),
+    GraphicalSampling(PathBuf),
+    Qwen38Quant(PathBuf),
+    DeepSeekRef(PathBuf),
+    MlaComparison(PathBuf),
+    SparseMoe(PathBuf),
+    Batch3Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -96,6 +121,17 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "structured-read" => Ok(Command::StructuredRead(out)),
                 "lifecycle" => Ok(Command::Lifecycle(out)),
                 "batch2-suite" => Ok(Command::Batch2Suite(out)),
+                "rsi-bench" => Ok(Command::RsiBench(out)),
+                "djev-protocol" => Ok(Command::DjevProtocol(out)),
+                "rwkv-leaf" => Ok(Command::RwkvLeaf(out)),
+                "ggml-ops" => Ok(Command::GgmlOps(out)),
+                "rwkv-ggml" => Ok(Command::RwkvGgml(out)),
+                "graphical-sampling" => Ok(Command::GraphicalSampling(out)),
+                "qwen38-quant" => Ok(Command::Qwen38Quant(out)),
+                "deepseek-ref" => Ok(Command::DeepSeekRef(out)),
+                "mla-comparison" => Ok(Command::MlaComparison(out)),
+                "sparse-moe" => Ok(Command::SparseMoe(out)),
+                "batch3-suite" => Ok(Command::Batch3Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -133,6 +169,33 @@ fn publish(path: &Path, inputs: &str, results: &str, summary: &str) -> Result<()
 }
 
 fn publish_batch2_suite(path: &Path, bundle: &batch2::Batch2Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch3_suite(path: &Path, bundle: &batch3::Batch3Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -304,6 +367,91 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch2_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::RsiBench(path) => {
+            let report = rsi_bench::run_default_harness()?;
+            let inputs = rsi_bench::inputs_json(&report);
+            let results = rsi_bench::results_json(&report);
+            let summary = rsi_bench::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::DjevProtocol(path) => {
+            let report = djev_protocol::run_default_harness()?;
+            let inputs = djev_protocol::inputs_json(&report);
+            let results = djev_protocol::results_json(&report);
+            let summary = djev_protocol::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::RwkvLeaf(path) => {
+            let report = rwkv_leaf::run_default_harness()?;
+            let inputs = rwkv_leaf::inputs_json(&report);
+            let results = rwkv_leaf::results_json(&report);
+            let summary = rwkv_leaf::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::GgmlOps(path) => {
+            let report = ggml_ops::run_default_harness()?;
+            let inputs = ggml_ops::inputs_json(&report);
+            let results = ggml_ops::results_json(&report);
+            let summary = ggml_ops::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::RwkvGgml(path) => {
+            let report = rwkv_ggml::run_default_harness()?;
+            let inputs = rwkv_ggml::inputs_json(&report);
+            let results = rwkv_ggml::results_json(&report);
+            let summary = rwkv_ggml::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::GraphicalSampling(path) => {
+            let report = graphical_sampling::run_default_harness()?;
+            let inputs = graphical_sampling::inputs_json(&report);
+            let results = graphical_sampling::results_json(&report);
+            let summary = graphical_sampling::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Qwen38Quant(path) => {
+            let report = qwen38_quant::run_default_harness()?;
+            let inputs = qwen38_quant::inputs_json(&report);
+            let results = qwen38_quant::results_json(&report);
+            let summary = qwen38_quant::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::DeepSeekRef(path) => {
+            let report = deepseek_ref::run_default_harness()?;
+            let inputs = deepseek_ref::inputs_json(&report);
+            let results = deepseek_ref::results_json(&report);
+            let summary = deepseek_ref::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::MlaComparison(path) => {
+            let report = mla_comparison::run_default_harness()?;
+            let inputs = mla_comparison::inputs_json(&report);
+            let results = mla_comparison::results_json(&report);
+            let summary = mla_comparison::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SparseMoe(path) => {
+            let report = sparse_moe::run_default_harness()?;
+            let inputs = sparse_moe::inputs_json(&report);
+            let results = sparse_moe::results_json(&report);
+            let summary = sparse_moe::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch3Suite(path) => {
+            let bundle = batch3::run_all()?;
+            publish_batch3_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -354,6 +502,17 @@ mod tests {
             "structured-read",
             "lifecycle",
             "batch2-suite",
+            "rsi-bench",
+            "djev-protocol",
+            "rwkv-leaf",
+            "ggml-ops",
+            "rwkv-ggml",
+            "graphical-sampling",
+            "qwen38-quant",
+            "deepseek-ref",
+            "mla-comparison",
+            "sparse-moe",
+            "batch3-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

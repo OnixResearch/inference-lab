@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.issue-21-sparse-moe.inputs.v1",
+  "issue": 21,
+  "execution_class": "bounded_contract_harness",
+  "shared_parameter_set_across_dense_tiny_sparse": true,
+  "tie_breaking_policy": "descending_score_then_ascending_expert_id",
+  "load_count_source": "actual_selected_assignments_not_bf16_gates_gt_zero",
+  "sweep_condition_count": 4
+}

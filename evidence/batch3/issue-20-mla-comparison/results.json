@@ -1,0 +1,16 @@
+{
+  "schema": "inference-lab.issue-20-mla-comparison.results.v1",
+  "issue": 20,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"physical_gpu_jit_mla_latency_and_peak_vram","status":"unavailable_hardware_runtime","reason":"CPU uncached, explicit-expansion, and absorbed MLA numerical/gradient parity and exact allocation-byte accounting ran locally; GPU synchronized latency remains unavailable_hardware_runtime."},
+  "explicit_vs_uncached_max_err": 0.0,
+  "absorbed_vs_uncached_max_err": 0.0,
+  "absorbed_vs_explicit_max_err": 0.0,
+  "absorbed_materialized_kv_elems": 0,
+  "explicit_materialized_kv_elems": 1472,
+  "absorbed_prep_bytes": 192,
+  "gradient_fd_parity_max_err": 0.0,
+  "scoped_decision": "GO_FOR_CPU_ABSORBED_MLA_PARITY_INCONCLUSIVE_FOR_GPU_SPEEDUP",
+  "strategy_accounting": [{"strategy":"full_allocated_cache","shape_recompilations":1,"explicit_materialized_kv_elems":3072,"absorbed_materialized_kv_elems":0,"absorbed_prep_bytes":192,"explicit_peak_bytes":4992,"absorbed_peak_bytes":2304},{"strategy":"valid_prefix_only","shape_recompilations":4,"explicit_materialized_kv_elems":1472,"absorbed_materialized_kv_elems":0,"absorbed_prep_bytes":192,"explicit_peak_bytes":4224,"absorbed_peak_bytes":2304},{"strategy":"bucketed_prefix","shape_recompilations":3,"explicit_materialized_kv_elems":2048,"absorbed_materialized_kv_elems":0,"absorbed_prep_bytes":192,"explicit_peak_bytes":4992,"absorbed_peak_bytes":2304}],
+  "controls": [{"case_id":"01-positive-absorbed-vs-explicit-vs-uncached-poisoned-cache","outcome":"accepted","max_abs_err":0.0,"first_divergent_pos":null,"detail":"Absorbed MLA matches explicit & uncached paths across batch=2, chunks [3,2,1,3], reset/reuse, and 1e6 sentinel-poisoned unused slots with 0 per-head K/V expansion intermediates."},{"case_id":"02-negative-wrong-causal-mask-detected","outcome":"invalid","max_abs_err":0.119083031164,"first_divergent_pos":0,"detail":"Future token leakage from disabled causal mask caught at earliest position."},{"case_id":"03-negative-wrong-rope-offset-detected","outcome":"invalid","max_abs_err":0.000955998726,"first_divergent_pos":1,"detail":"Shifted RoPE position offset caught immediately."},{"case_id":"04-negative-wrong-attention-scale-detected","outcome":"invalid","max_abs_err":0.002947591826,"first_divergent_pos":1,"detail":"2x attention scaling mismatch detected."},{"case_id":"05-negative-wrong-absorbed-projection-layout-detected","outcome":"invalid","max_abs_err":0.001890499194,"first_divergent_pos":1,"detail":"Misaligned head projection in absorbed W_UK caught immediately."},{"case_id":"06-negative-unused-1e6-sentinel-leak-detected","outcome":"invalid","max_abs_err":479978.318573297525,"first_divergent_pos":0,"detail":"Reading one unused 1e6 sentinel cache slot causes catastrophic output divergence."},{"case_id":"07-negative-stale-cache-and-capacity-overflow-detected","outcome":"invalid","max_abs_err":0.067861964992,"first_divergent_pos":0,"detail":"Unreset stale cache diverges from clean sequence and capacity overflow is explicitly rejected."}]
+}

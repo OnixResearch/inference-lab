@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.issue-14-rwkv-leaf.inputs.v1",
+  "issue": 14,
+  "execution_class": "blocked_on_artifacts",
+  "donor_repo": "OnixResearch/rsi-lab",
+  "donor_commit": "01e47e268d71bc1c53cc36e11c179f2b8f22f5c5",
+  "candidate_leaf_modules": ["crates/swarm-model/src/rwkv7_recurrent.rs","crates/swarm-model/src/rwkv7_cpu.rs","crates/swarm-model/src/rwkv7_weights.rs","crates/swarm-model/src/rwkv7_tokenizer.rs"],
+  "retained_in_rsi": ["crates/swarm-model/src/rwkv7_backend.rs & backend.rs (InferenceBackend)","Agent IDs/epochs/offsets, immutable snapshots, checkpoint/fork/restore, staged atomic ingest","RSI #11 packing_flip_replay.py decision ownership & RSI #74 PGO end-to-end arm"]
+}
