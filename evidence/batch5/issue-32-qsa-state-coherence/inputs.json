@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.qsa-state-coherence.inputs.v1",
+  "issue": 32,
+  "execution_class": "bounded_contract_harness",
+  "pinned_engine_commit": "864934c78136ad75274f202b8eb1e7c751d81fb1",
+  "qsa_block_size": 4,
+  "tested_slot_limit": 1,
+  "tested_context_limit": 32,
+  "sample_sequence": [1,4,2,7,3,0,5,6,2,1,7,4,3],
+  "synthetic_contract_fixture": true
+}

@@ -1,0 +1,169 @@
+{
+  "schema": "inference-lab.batch5-evidence.v1",
+  "issues": [32, 33, 34, 35, 36, 37, 38, 39, 42, 44, 45, 46],
+  "digest_algorithm": "sha256",
+  "top_level_artifact_sha256": {
+    "inputs.json": "69a625d75c715e2c526c6c7971c6996c25c4e9ed832f9c46b27893bd94f1978c",
+    "results.json": "9f8aa58af5a0072882fd4c3febfd40dac3321df874240110ed8bfa51d45bb7ee",
+    "summary.md": "5c74570ef3974116e79b79567c579bd9cd40ff6d38b25744737d1123c4425921",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "suites": [
+    {
+      "subdir": "issue-32-qsa-state-coherence",
+      "issues": [32],
+      "command": ["inference-lab", "qsa-state-coherence", "--out", "runs/validation/issue-32-qsa-state-coherence"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "ae71a4ebbcd1e548f214cc07cd78b6f1a67dc72bbd0cc0ffbc122348348a1e3c",
+        "results.json": "b7df02979d8e0980d9e0bf96877ea5755a3c017a88a38fffe300c873102031bd",
+        "summary.md": "a8a65211a7745ca880583bb9cd92c8e1c8908660618a2aadb37cae9ba649ad41",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-33-inkling-residuals",
+      "issues": [33],
+      "command": ["inference-lab", "inkling-residuals", "--out", "runs/validation/issue-33-inkling-residuals"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "b5748f913f1e044df7f044f6b31d4cbd1fd04c2ade12d520f47b9266646f74c0",
+        "results.json": "86f481e738ef52cb3b72f54da5c7cd6af13bf729262f0190851ef6d371f31a3a",
+        "summary.md": "037f42a92396a2f4b2053f695bf2d5ce2e1b4c0c45377f21ced6224548963436",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-34-phoenix-nano",
+      "issues": [34],
+      "command": ["inference-lab", "phoenix-nano", "--out", "runs/validation/issue-34-phoenix-nano"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "836129e52e51cebe1fa0a8b84d4c284c3f2b208bd08d661108f9f00abe7faf7b",
+        "results.json": "4bbb885fad92e490f81d33816c73a9af915a2c1f1eea69fe6a3e356fdd7ce400",
+        "summary.md": "36319412bb602cf07806b0a50645bdee163fbf4aa8137fc0b3b3b08f909d054b",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-35-nemotron-spark",
+      "issues": [35],
+      "command": ["inference-lab", "nemotron-spark", "--out", "runs/validation/issue-35-nemotron-spark"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "d7bdb33d11228ba3ba05395c04648cfb88be990a2940cedd6af80c3de2a87526",
+        "results.json": "2ca6b8a396a7a2f341a8ffbe0d43187eaaeeaf62a7f8c1fbd7127f1f4eef9c58",
+        "summary.md": "b2e3332ecf7e2cb1821ea9c25a55e62dde8fb9c41701cbfe97a8537c229fbd3a",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-36-compact-hybrids",
+      "issues": [36],
+      "command": ["inference-lab", "compact-hybrids", "--out", "runs/validation/issue-36-compact-hybrids"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "5eec7bfaedcb71336971431b9337b223ac9248a48c8c3efd79f3211d7ffbec0d",
+        "results.json": "186e95564fcb2fe35ff554152a1e37f443ae608cbccc43e7419f0afdeec06e87",
+        "summary.md": "27f692cda3ad1cc2dd1193e720d2b6219b4b5a2ce1edb3f4108b8ad634d304cb",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-37-native-recurrent-bench",
+      "issues": [37],
+      "command": ["inference-lab", "native-recurrent-bench", "--out", "runs/validation/issue-37-native-recurrent-bench"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "a8a7dbad44c6f06f14cff64ce65d0d9429534e1ea5aad66959387d091639a1ed",
+        "results.json": "7dbbbe892ef8777c41f48dcba8109b744e05c9b3d835fc749e8823e5cc81f8de",
+        "summary.md": "e0f29443576d5d3b9d8c892aaa822c394c18db6fe08850cec723b22547d10275",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-38-tiered-eval",
+      "issues": [38],
+      "command": ["inference-lab", "tiered-eval", "--out", "runs/validation/issue-38-tiered-eval"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "adb9f7821883c7f65616b3a224f10a4a085183227f5ccc85fda6971ca3fd464a",
+        "results.json": "c51b1ee78226620ea0329c891f56ab025fd74864eab9c976008d6a0f406b9133",
+        "summary.md": "5b6cbd7ff83b272006a0f33726996fd288dda62620920f6c15c6b9e4eb8dea88",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-39-cpu-contention",
+      "issues": [39],
+      "command": ["inference-lab", "cpu-contention", "--out", "runs/validation/issue-39-cpu-contention"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "d6df1595cf8e2fc3aa17147e779f41c01bbed517d91600220766773370df9b1a",
+        "results.json": "b5d28f22490fed239cddc4f5cf8b90b7d2451eb2c062f63ff76dbc15c58483d9",
+        "summary.md": "2a8b48a87bcca362f2acb1bd851bd44378ce721fa80e79bfa68b69b585856e64",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-42-split-m2-p150",
+      "issues": [42],
+      "command": ["inference-lab", "split-m2-p150", "--out", "runs/validation/issue-42-split-m2-p150"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "6a40ecb2bb8830aadec3faa631e714ae6c67d153d1f54b41e48305f629b7ac50",
+        "results.json": "2c231c8fb109948ff1eea43cc0fe59eabe4c4ce28a45615f70a2d8b5655515ea",
+        "summary.md": "98588066e46da556f6b0a31d403c801b8e143abeec596fcc4beedac1c480431a",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-44-quark-eval",
+      "issues": [44],
+      "command": ["inference-lab", "quark-eval", "--out", "runs/validation/issue-44-quark-eval"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "1414a653c0bbc09a51a5763859b4a1d6096ae61e365772b2b0c51586b83530d8",
+        "results.json": "826026971891744706ac1f980b0fd3712509cbebba67028c42c2ea9e90968486",
+        "summary.md": "00e7f4e7d74dc3961c817285b05e0a18c4d7ffb646488bdaf089f1eab6b82d45",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-45-intervention-replay",
+      "issues": [45],
+      "command": ["inference-lab", "intervention-replay", "--out", "runs/validation/issue-45-intervention-replay"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "a0c863d6deda9f8d9e19fb784fa32f16e3d03d7092cbc4a6ec9ee0b396745678",
+        "results.json": "1362ed187252dddbed022585062562c39b4d400c75a07d28a5500c6214d48aa7",
+        "summary.md": "e571d52bc7791c55c6a590ab0bec3eddd573be103b9f54c4865c0ea6810ab2d9",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-46-biollm-protocol",
+      "issues": [46],
+      "command": ["inference-lab", "biollm-protocol", "--out", "runs/validation/issue-46-biollm-protocol"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "727eda74d13c4184db5e5c6afae206c147aa61f191219050b3d5f7423980300e",
+        "results.json": "509407a61ead056baefe5900bcd98632482134a4051a0da6a4cec33e6b27a61e",
+        "summary.md": "8cc74a2381b03c7e971b63780990c219d3a06a3e9d915136f70dc721643c1bda",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

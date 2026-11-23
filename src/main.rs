@@ -8,12 +8,15 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, batch2, batch3, batch4, deepseek_ref, deepseek_spark, diffusion, djev_protocol,
-    drafting, expert_placement, flash_topk, ggml_ops, graphical_sampling, hetero_rollout,
-    kernel_opt, kv_compression, kv_routing, learned_compiler, lifecycle, macaq_r, mla_comparison,
-    mtp_decoder, nvfp4_mxfp8, power, proof_completion, qwen38_qsa, qwen38_quant, related_work,
-    rsi_bench, rwkv_ggml, rwkv_leaf, seed, serving_bench, spark_engines, sparse_moe, stage,
-    structured_read, tokenizer, trace, vision_infusion,
+    adaptive_spec, batch2, batch3, batch4, batch5, biollm_protocol, compact_hybrids,
+    cpu_contention, deepseek_ref, deepseek_spark, diffusion, djev_protocol, drafting,
+    expert_placement, flash_topk, ggml_ops, graphical_sampling, hetero_rollout, inkling_residuals,
+    intervention_replay, kernel_opt, kv_compression, kv_routing, learned_compiler, lifecycle,
+    macaq_r, mla_comparison, mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8,
+    phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval, qwen38_qsa,
+    qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf, seed, serving_bench,
+    spark_engines, sparse_moe, split_m2_p150, stage, structured_read, tiered_eval, tokenizer,
+    trace, vision_infusion,
 };
 
 const HELP: &str = "\
@@ -71,6 +74,21 @@ Batch 4 commands (#22-#31):
   qwen38-qsa          Issue #31 Qwen3.8-27B 4-token block QSA vs dense 2x2 matrix & long-context tasks
   batch4-suite        Run all Batch 4 harnesses (#22-#31) with SHA-256 manifest.json & COMPLETE last
 
+Batch 5 commands (#32-#39, #42, #44-#46):
+  qsa-state-coherence     Issue #32 QSA cache reuse & target/indexer/GDN/MTP state coherence
+  inkling-residuals       Issue #33 Inkling 6-layer block attention residuals & dynamic/static sinks
+  phoenix-nano            Issue #34 Phoenix nano gpu_arch(), SID codec, resume & gRPC retrieve->rank
+  nemotron-spark          Issue #35 Nemotron 3.5 Lightning & Bolt DGX Spark serving profiles
+  compact-hybrids         Issue #36 Compact hybrid recurrent profile (Granite/Jamba2/Falcon H1)
+  native-recurrent-bench  Issue #37 Native recurrent-state bench (RWKV-7, Mamba-3 SISO, xLSTM)
+  tiered-eval             Issue #38 Tiered persistent-engine evaluation with cold final replay
+  cpu-contention          Issue #39 Host CPU contention, topology placement & Blink-comparable ratios
+  split-m2-p150           Issue #42 M2 Ultra + P150/P150x2 dense & disjoint-MoE split qualification
+  quark-eval              Issue #44 Quark Base/Zero local-window/global-KV parity & context costs
+  intervention-replay     Issue #45 Reproducible activation intervention & deterministic replay harness
+  biollm-protocol         Issue #46 Equal-budget 5-arm BioLLM adapter protocol & matched controls
+  batch5-suite            Run all Batch 5 harnesses (#32-#39, #42, #44-#46) with manifest & COMPLETE last
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -121,6 +139,19 @@ enum Command {
     VisionInfusion(PathBuf),
     Qwen38Qsa(PathBuf),
     Batch4Suite(PathBuf),
+    QsaStateCoherence(PathBuf),
+    InklingResiduals(PathBuf),
+    PhoenixNano(PathBuf),
+    NemotronSpark(PathBuf),
+    CompactHybrids(PathBuf),
+    NativeRecurrentBench(PathBuf),
+    TieredEval(PathBuf),
+    CpuContention(PathBuf),
+    SplitM2P150(PathBuf),
+    QuarkEval(PathBuf),
+    InterventionReplay(PathBuf),
+    BioLlmProtocol(PathBuf),
+    Batch5Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -169,6 +200,19 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "vision-infusion" => Ok(Command::VisionInfusion(out)),
                 "qwen38-qsa" => Ok(Command::Qwen38Qsa(out)),
                 "batch4-suite" => Ok(Command::Batch4Suite(out)),
+                "qsa-state-coherence" => Ok(Command::QsaStateCoherence(out)),
+                "inkling-residuals" => Ok(Command::InklingResiduals(out)),
+                "phoenix-nano" => Ok(Command::PhoenixNano(out)),
+                "nemotron-spark" => Ok(Command::NemotronSpark(out)),
+                "compact-hybrids" => Ok(Command::CompactHybrids(out)),
+                "native-recurrent-bench" => Ok(Command::NativeRecurrentBench(out)),
+                "tiered-eval" => Ok(Command::TieredEval(out)),
+                "cpu-contention" => Ok(Command::CpuContention(out)),
+                "split-m2-p150" => Ok(Command::SplitM2P150(out)),
+                "quark-eval" => Ok(Command::QuarkEval(out)),
+                "intervention-replay" => Ok(Command::InterventionReplay(out)),
+                "biollm-protocol" => Ok(Command::BioLlmProtocol(out)),
+                "batch5-suite" => Ok(Command::Batch5Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -260,6 +304,33 @@ fn publish_batch3_suite(path: &Path, bundle: &batch3::Batch3Bundle) -> Result<()
 }
 
 fn publish_batch4_suite(path: &Path, bundle: &batch4::Batch4Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch5_suite(path: &Path, bundle: &batch5::Batch5Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -601,6 +672,107 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch4_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::QsaStateCoherence(path) => {
+            let report = qsa_state_coherence::run_default_harness()?;
+            let inputs = qsa_state_coherence::inputs_json(&report);
+            let results = qsa_state_coherence::results_json(&report);
+            let summary = qsa_state_coherence::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::InklingResiduals(path) => {
+            let report = inkling_residuals::run_default_harness()?;
+            let inputs = inkling_residuals::inputs_json(&report);
+            let results = inkling_residuals::results_json(&report);
+            let summary = inkling_residuals::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::PhoenixNano(path) => {
+            let report = phoenix_nano::run_default_harness()?;
+            let inputs = phoenix_nano::inputs_json(&report);
+            let results = phoenix_nano::results_json(&report);
+            let summary = phoenix_nano::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::NemotronSpark(path) => {
+            let report = nemotron_spark::run_default_harness()?;
+            let inputs = nemotron_spark::inputs_json(&report);
+            let results = nemotron_spark::results_json(&report);
+            let summary = nemotron_spark::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::CompactHybrids(path) => {
+            let report = compact_hybrids::run_default_harness()?;
+            let inputs = compact_hybrids::inputs_json(&report);
+            let results = compact_hybrids::results_json(&report);
+            let summary = compact_hybrids::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::NativeRecurrentBench(path) => {
+            let report = native_recurrent_bench::run_default_harness()?;
+            let inputs = native_recurrent_bench::inputs_json(&report);
+            let results = native_recurrent_bench::results_json(&report);
+            let summary = native_recurrent_bench::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::TieredEval(path) => {
+            let report = tiered_eval::run_default_harness()?;
+            let inputs = tiered_eval::inputs_json(&report);
+            let results = tiered_eval::results_json(&report);
+            let summary = tiered_eval::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::CpuContention(path) => {
+            let report = cpu_contention::run_default_harness()?;
+            let inputs = cpu_contention::inputs_json(&report);
+            let results = cpu_contention::results_json(&report);
+            let summary = cpu_contention::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SplitM2P150(path) => {
+            let report = split_m2_p150::run_default_harness()?;
+            let inputs = split_m2_p150::inputs_json(&report);
+            let results = split_m2_p150::results_json(&report);
+            let summary = split_m2_p150::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::QuarkEval(path) => {
+            let report = quark_eval::run_default_harness()?;
+            let inputs = quark_eval::inputs_json(&report);
+            let results = quark_eval::results_json(&report);
+            let summary = quark_eval::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::InterventionReplay(path) => {
+            let report = intervention_replay::run_default_harness()?;
+            let inputs = intervention_replay::inputs_json(&report);
+            let results = intervention_replay::results_json(&report);
+            let summary = intervention_replay::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::BioLlmProtocol(path) => {
+            let report = biollm_protocol::run_default_harness()?;
+            let inputs = biollm_protocol::inputs_json(&report);
+            let results = biollm_protocol::results_json(&report);
+            let summary = biollm_protocol::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch5Suite(path) => {
+            let bundle = batch5::run_all()?;
+            publish_batch5_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -673,6 +845,19 @@ mod tests {
             "vision-infusion",
             "qwen38-qsa",
             "batch4-suite",
+            "qsa-state-coherence",
+            "inkling-residuals",
+            "phoenix-nano",
+            "nemotron-spark",
+            "compact-hybrids",
+            "native-recurrent-bench",
+            "tiered-eval",
+            "cpu-contention",
+            "split-m2-p150",
+            "quark-eval",
+            "intervention-replay",
+            "biollm-protocol",
+            "batch5-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

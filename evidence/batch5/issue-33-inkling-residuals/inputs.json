@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.inkling-residuals.inputs.v1",
+  "issue": 33,
+  "execution_class": "bounded_contract_harness",
+  "block_layers": 6,
+  "total_layers": 12,
+  "sliding_window": 3,
+  "equations_digest": {"algorithm":"sha256","hex":"6c282da73bc172d6cae2a755ad83efc7e31648157657e73192c3b13b7f96f8dd"},
+  "non_gating_related_work": {"inkling_2_mini_commit":"6e7c8248f75265bdd4fbab5273304243b5d8c2cb","mini_serving_issue":57,"goodfire_looped_probes_issue":45},
+  "synthetic_contract_fixture": true
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.phoenix-nano.inputs.v1",
+  "issue": 34,
+  "execution_class": "bounded_contract_harness",
+  "pinned_upstream_commit": "30647a85a20cbdd114169beb9973680c4dc4f401",
+  "workload_transport": "native_grpc_retrieve_rank",
+  "non_gating_ingress_note": "Cloudflare 19 Nov 2026 Containers TCP/gRPC beta out of scope; local wrangler port 8788 is not Spectrum evidence",
+  "synthetic_contract_fixture": true
+}

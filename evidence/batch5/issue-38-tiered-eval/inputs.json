@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.tiered-eval.inputs.v1",
+  "issue": 38,
+  "execution_class": "bounded_contract_harness",
+  "non_gating_motivation": "arXiv:2611.14681v1",
+  "tkcc_assumed_available": false,
+  "synthetic_contract_fixture": true
+}

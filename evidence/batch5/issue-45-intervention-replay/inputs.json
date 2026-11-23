@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.intervention-replay.inputs.v1",
+  "issue": 45,
+  "execution_class": "bounded_contract_harness",
+  "first_slice_backend": "qwen_transformer",
+  "expected_task_target_token": 6,
+  "non_gating_related_work": "Goodfire Inkling 2 Mini study & NDIF Looped Lens Challenge deferred; local replay receipts required on admitted host",
+  "synthetic_contract_fixture": true
+}

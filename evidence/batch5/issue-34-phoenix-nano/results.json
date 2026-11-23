@@ -1,0 +1,14 @@
+{
+  "schema": "inference-lab.phoenix-nano.results.v1",
+  "issue": 34,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"One-node qualified GPU (A100/H100/H200/GB200/GB300) JAX/CUDA + Rust gRPC Phoenix serve","status":"unavailable_hardware_runtime","reason":"Pure-Rust contract harness verifies gpu_arch(), SID codec, checkpoint resume, and gRPC retrieve->rank invariants; physical GPU training/serving did not run locally"},
+  "synthetic_contract_fixture": true,
+  "one_node_outcome": "UNSUPPORTED_OR_UNAVAILABLE_LOCALLY",
+  "checkpoint_resume_max_err": 0.0,
+  "direct_vs_grpc_served_max_err": 0.0,
+  "retrieved_and_ranked_count": 4,
+  "synthetic_loss_proves_rec_quality": false,
+  "device_matrix": [{"device":"GB300","status":"unavailable_hardware_runtime","note":"recognized GPU architecture but no physical JAX/CUDA device executed locally"},{"device":"GB10","status":"unsupported","note":"rejected by upstream gpu_arch() cohort (only A100/H100/H200/GB200/GB300 recognized)"},{"device":"RTX 5080","status":"unsupported","note":"rejected by upstream gpu_arch() cohort (only A100/H100/H200/GB200/GB300 recognized)"}],
+  "negative_controls": [{"case_id":"nc1_shifted_wire_vs_model_sid_detected","outcome":"invalid","detail":"wire SID 0 maps to model SID 1; model SID 0 stays strictly reserved for missing"},{"case_id":"nc2_out_of_range_sid_rejected","outcome":"invalid","detail":"wire SID >= codebook_size fails codec validation"},{"case_id":"nc3_codebook_digest_mismatch_rejected","outcome":"invalid","detail":"mismatched codebook digest refused at fresh-process restore"},{"case_id":"nc4a_dropped_optimizer_state_only_on_resume","outcome":"invalid","detail":"dropping AdaGrad/AdamW optimizer state with intact cursor caused 1.039e-1 drift"},{"case_id":"nc4b_stale_data_cursor_on_resume","outcome":"invalid","detail":"resetting data cursor on checkpoint resume fails continuation check"},{"case_id":"nc5_gpu_arch_name_override_rejected","outcome":"invalid","detail":"device-name override rejected: overriding gpu_arch() is not kernel-correctness evidence"},{"case_id":"nc6_candidate_attention_isolation_leak","outcome":"invalid","detail":"cross-candidate leakage shifted scores by 3.239e-2"},{"case_id":"nc7_direct_vs_served_score_mismatch","outcome":"invalid","detail":"served gRPC score discrepancy against direct inference retained and rejected"},{"case_id":"nc8_readiness_only_without_retrieve_rank","outcome":"invalid","detail":"process readiness alone cannot pass without completed retrieve->rank request"}]
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.biollm-protocol.inputs.v1",
+  "issue": 46,
+  "execution_class": "bounded_contract_harness",
+  "protocol_digest": {"algorithm":"sha256","hex":"ad9863d9b7dc9d7cb62e389f80b9a406b26c5e294b0ac09636bc9953a8adef15"},
+  "assumes_biollm_8b_benchmarks_exist": false,
+  "synthetic_contract_fixture": true
+}

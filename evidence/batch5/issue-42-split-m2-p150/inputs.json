@@ -1,0 +1,9 @@
+{
+  "schema": "inference-lab.split-m2-p150.inputs.v1",
+  "issue": 42,
+  "execution_class": "bounded_contract_harness",
+  "reuses_stage_issue": 41,
+  "pinned_sidecar_commit": "c59a276a1ce5fc3c2e12e05f070a0180550cb619",
+  "contract_digest": {"algorithm":"sha256","hex":"8c74065e224a32b7cfe2d4af4c59b93f9078eef0602e559610f3939425a8d900"},
+  "synthetic_contract_fixture": true
+}

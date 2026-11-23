@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.cpu-contention.inputs.v1",
+  "issue": 39,
+  "execution_class": "bounded_contract_harness",
+  "host_class": "dgx-spark-gb10-arm64-template",
+  "physical_cores": 20,
+  "asymmetric_core_classes": true,
+  "requested_mask": "0-7",
+  "effective_mask": "0-7",
+  "blink_reference": "arXiv:2604.07609",
+  "blink_interference_workload_reproducible": false,
+  "synthetic_contract_fixture": true
+}

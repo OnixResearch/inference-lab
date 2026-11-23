@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.nemotron-spark.inputs.v1",
+  "issue": 35,
+  "execution_class": "bounded_contract_harness",
+  "license_lightning": "OpenMDW-1.1",
+  "reasoning_parser": "nemotron_v3",
+  "tool_call_parser": "qwen3_coder",
+  "upstream_benchmark_tables_gating": false,
+  "synthetic_contract_fixture": true
+}

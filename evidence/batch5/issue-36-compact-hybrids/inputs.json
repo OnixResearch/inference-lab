@@ -1,0 +1,7 @@
+{
+  "schema": "inference-lab.compact-hybrids.inputs.v1",
+  "issue": 36,
+  "execution_class": "bounded_contract_harness",
+  "candidate_profiles": [{"profile_id":"ibm-granite-4.0-h-tiny-spark-v1","model":"IBM Granite 4.0 H-Tiny","architecture_family":"hybrid_mamba_attention","state_visibility":"opaque_endpoint","license":"Apache-2.0"},{"profile_id":"ai21-jamba2-3b-spark-v1","model":"AI21 Jamba2 3B","architecture_family":"hybrid_mamba_attention","state_visibility":"opaque_endpoint","license":"Apache-2.0"},{"profile_id":"tii-falcon-h1-3b-spark-v1","model":"TII Falcon H1 3B","architecture_family":"hybrid_mamba_attention","state_visibility":"opaque_endpoint","license":"Falcon-LLM-License"}],
+  "synthetic_contract_fixture": true
+}

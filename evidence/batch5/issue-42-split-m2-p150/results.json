@@ -1,0 +1,17 @@
+{
+  "schema": "inference-lab.split-m2-p150.results.v1",
+  "issue": 42,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"Mac Pro Apple M2 Ultra + internal PCIe Tenstorrent P150 / P150x2","status":"unavailable_hardware_runtime","reason":"Reuses #41 dense stage parity and verifies disjoint MoE split & cohort/memory rules on CPU; physical M2 Ultra + P150 execution blocked on TT-Onix #48/#49/#50/#51"},
+  "synthetic_contract_fixture": true,
+  "stage_contract_reused_checks": 4,
+  "dense_split_max_err": 0.0,
+  "moe_disjoint_split_max_err": 0.0,
+  "logical_payload_1tok_bytes": 16384,
+  "logical_payload_4096tok_bytes": 67108864,
+  "derived_logical_payload_not_measured_throughput": true,
+  "apple_memory_total_bytes_planned": 31756000000,
+  "p150_memory_total_bytes_planned": 26256000000,
+  "profile_verdicts": [{"profile_id":"m2-ultra-p150x1-dense-linux-asahi","cohort":"mac_pro_internal_pcie_linux_asahi","p150_count":1,"is_moe":false,"verdict":"UNAVAILABLE_HARDWARE_RUNTIME","blocker":"blocked on TT-Onix #48 (Asahi/ARM Linux PCIe host gate) and #50 (contiguous TT partition)"},{"profile_id":"m2-ultra-p150x1-dense-macos-metal","cohort":"mac_pro_internal_pcie_macos_metal","p150_count":1,"is_moe":false,"verdict":"UNAVAILABLE_HARDWARE_RUNTIME","blocker":"blocked on TT-Onix #49 (Darwin DriverKit/native-kernel gate)"},{"profile_id":"m2-ultra-p150x2-dense","cohort":"mac_pro_internal_pcie_linux_asahi","p150_count":2,"is_moe":false,"verdict":"UNAVAILABLE_HARDWARE_RUNTIME","blocker":"independent second-card qualification gated on P150x1 correctness + observed TT links"},{"profile_id":"m2-ultra-p150x1-moe-static-placement","cohort":"mac_pro_internal_pcie_linux_asahi","p150_count":1,"is_moe":true,"verdict":"UNAVAILABLE_HARDWARE_RUNTIME","blocker":"independent MoE checkpoint qualification gated on TT-Onix #51"}],
+  "negative_controls": [{"case_id":"nc1_network_prototype_not_internal_pcie","outcome":"invalid","detail":"reference/simulator/network/conventional-Linux prototype cannot substitute for internal-PCIe Mac Pro"},{"case_id":"nc2_unified_plus_gddr_not_coherent_pool","outcome":"invalid","detail":"Apple unified memory and P150 GDDR are distributed capacity, not one coherent pool"},{"case_id":"nc3_performance_before_numerical_acceptance","outcome":"invalid","detail":"numerical and continuation acceptance must precede any performance claim"},{"case_id":"nc4_quant_translation_not_exact_parity","outcome":"invalid","detail":"changed quantization across stage boundary is numerical translation, not exact parity"},{"case_id":"nc5_dense_pass_not_borrowed_for_moe","outcome":"invalid","detail":"MoE split requires independent checkpoint and routing qualification; cannot borrow dense pass"},{"case_id":"nc6_p150x1_not_inherited_by_p150x2","outcome":"invalid","detail":"P150x2 requires independent link/parallelism qualification; cannot inherit P150x1 pass"},{"case_id":"nc7_overlapping_moe_expert_assignment","outcome":"invalid","detail":"duplicate expert 2 across Apple and P150 rejected"},{"case_id":"nc8_incomplete_moe_expert_partition","outcome":"invalid","detail":"missing expert 5 in split partition rejected"}]
+}

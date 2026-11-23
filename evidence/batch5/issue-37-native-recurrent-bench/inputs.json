@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.native-recurrent-bench.inputs.v1",
+  "issue": 37,
+  "execution_class": "bounded_contract_harness",
+  "cohort": ["rwkv7","mamba3_siso","xlstm_mlstm"],
+  "non_gating_related_work": {"latent_lattice_commit":"23876839517155db4333fb08d26b8b118a3db2e1","tracked_issue":60},
+  "synthetic_contract_fixture": true
+}

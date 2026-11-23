@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.quark-eval.inputs.v1",
+  "issue": 44,
+  "execution_class": "bounded_contract_harness",
+  "min_transformers_version": "5.23",
+  "local_layers_fixture": 2,
+  "local_window_fixture": 4,
+  "global_attention_layers_real": 4,
+  "synthetic_contract_fixture": true
+}
