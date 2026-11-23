@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.expert-placement.inputs.v1",
+  "issue": 29,
+  "upstream_source_review_commit": "a39d9e57e79d165201864f0de13304117d4e2129",
+  "upstream_unverified_benchmark_note": "64.6 vs 48.6 tok/s warm (41-46 alt continuation; 24.3 vs 47.5 first 4K) on RTX 3060 12GB (1.2.1 notes; non-gating)",
+  "custom_license_summary": "Custom LICENSE.md: commercial apps allowed; engine-resale restriction, attribution, and same-license terms for substantial portions (evaluate externally before vendoring)",
+  "rtx5080_strix_spark_supported_in_upstream_table": false,
+  "target_gguf_name": "flint-UD-Q5_K_XL.gguf",
+  "synthetic_gguf_digest": {"algorithm":"sha256","hex":"1f7b62f80082648ae718b5c67a68041ae8b37fd466bb0e5aee2e1786f286b2c8"},
+  "execution_class": "bounded_contract_harness"
+}

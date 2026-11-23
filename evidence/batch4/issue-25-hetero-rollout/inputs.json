@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.hetero-rollout.inputs.v1",
+  "issue": 25,
+  "upstream_pins": {"miles_pr3690_commit":"c4d5aa11a637debd0af63c3d0d7bbbf01831a3c3","sglang_miles_rev":"f8d0201","review_date":"2026-11-14","transport_mode":"tensors"},
+  "preserves_issue_11_sequential_baseline": true,
+  "substitutes_for_rsi_87_stateful_qualification": false,
+  "execution_class": "bounded_contract_harness"
+}

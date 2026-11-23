@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.qwen38-qsa.inputs.v1",
+  "issue": 31,
+  "upstream": {"engine_commit":"864934c78136ad75274f202b8eb1e7c751d81fb1","paper":"https://arxiv.org/abs/2608.30320","unverified_related_work_claim":"1.793x decode and 2.921x cold-prefill at 261,120 tokens on 2x32GB sm70 Q8_0 FP16 KV MTP draft2 (non-gating)"},
+  "block_size_tokens": 4,
+  "context_matrix_targets": ["8k","64k","128k","261k_bounded_optional"],
+  "flashtopk_issue_23_is_dropin": false,
+  "gsq_rco_attributed_to_original_artifact": false,
+  "execution_class": "bounded_contract_harness",
+  "fixture_digest": {"algorithm":"sha256","hex":"99ea3a79c0a7bc433a2fc58f4f1d7d168856e42c81b41d7f4f74eb4813369508"}
+}

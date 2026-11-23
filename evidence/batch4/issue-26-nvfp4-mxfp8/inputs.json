@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.nvfp4-mxfp8.inputs.v1",
+  "issue": 26,
+  "upstream_pins": {"transformer_engine":"4f5c08e48b3e190d27c731c1f9515f021dec255a","cutlass":"b2f249acd20392beeb16f5e5a31f4f1a4e38b3bd","model_optimizer":"ef893e77084198c161cc908eb91380b3a47eccad"},
+  "unverified_comparison_recipes": ["fouroversix:2512.02010","quartet-ii:2601.22813v2","tetrajet-v2:2510.27527"],
+  "execution_class": "bounded_contract_harness",
+  "sample_budget": 64,
+  "practical_bias_margin": 0.08,
+  "ci_containing_zero_proves_unbiasedness": false,
+  "simulated_timing_is_native_fp4_throughput": false
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.kv-compression.inputs.v1",
+  "issue": 28,
+  "upstream_pins": {"kvpress":"0cb673acf9e0bcb5e7f42e38997a7f2e736bbf3a","ruler":"db43f92ff634bbce1c33d1fb15858aec4bba509a"},
+  "separate_from_issue_5_cache_routing": true,
+  "memory_lab_retrieval_held_fixed": true,
+  "fixture_digest": {"algorithm":"sha256","hex":"8ad7d295ce752606ea71fc4aae45607f3db0775c0754abf61c4f9b510d85d1c9"},
+  "max_allowed_accuracy_drop": 0.05,
+  "execution_class": "bounded_contract_harness"
+}

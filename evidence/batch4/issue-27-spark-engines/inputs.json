@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.spark-engines.inputs.v1",
+  "issue": 27,
+  "upstream_pins": {"spark_nixos":"1abf9f9efa56ba097d3728a2ecb2362d4746675f","hyperflare":"333b11ec43f975461fb38b897b3201d0e125d42a","tensorrt_edge_llm":"513dcd18291e587c80928911a480761352f3c2d8"},
+  "lifecycle_phases": ["prepare_export_tuning","cold_load","graph_capture","readiness","warmup","steady_exec"],
+  "production_engine_migration_added": false,
+  "execution_class": "bounded_contract_harness"
+}

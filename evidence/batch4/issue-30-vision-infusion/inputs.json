@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.vision-infusion.inputs.v1",
+  "issue": 30,
+  "paper_ref": "https://arxiv.org/html/2611.17334v1",
+  "unverified_related_work_claim": "Appendix H.3/Table 36 eager H200 TTFT: 210ms separate, 171ms FFN in-fusion, 182ms full in-fusion; 3x is training compute (non-gating)",
+  "matched_principal_vision_params": 1024,
+  "text_branch_inactivity_proves_post_training_retention": false,
+  "lower_ttft_alone_proves_faster_completed_tasks": false,
+  "execution_class": "bounded_contract_harness",
+  "fixture_digest": {"algorithm":"sha256","hex":"005c40d295fa4fb77d15108691e31b4f0a0b378997e39b3215f74173ba86d5ed"}
+}

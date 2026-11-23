@@ -8,10 +8,12 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, batch2, batch3, deepseek_ref, deepseek_spark, diffusion, djev_protocol,
-    drafting, ggml_ops, graphical_sampling, kernel_opt, kv_routing, learned_compiler, lifecycle,
-    mla_comparison, power, proof_completion, qwen38_quant, related_work, rsi_bench, rwkv_ggml,
-    rwkv_leaf, seed, serving_bench, sparse_moe, stage, structured_read, tokenizer, trace,
+    adaptive_spec, batch2, batch3, batch4, deepseek_ref, deepseek_spark, diffusion, djev_protocol,
+    drafting, expert_placement, flash_topk, ggml_ops, graphical_sampling, hetero_rollout,
+    kernel_opt, kv_compression, kv_routing, learned_compiler, lifecycle, macaq_r, mla_comparison,
+    mtp_decoder, nvfp4_mxfp8, power, proof_completion, qwen38_qsa, qwen38_quant, related_work,
+    rsi_bench, rwkv_ggml, rwkv_leaf, seed, serving_bench, spark_engines, sparse_moe, stage,
+    structured_read, tokenizer, trace, vision_infusion,
 };
 
 const HELP: &str = "\
@@ -56,6 +58,19 @@ Batch 3 commands (#12-#21):
   sparse-moe          Issue #21 sparse MoE dispatch vs dense/tiny reference & analytical gradients
   batch3-suite        Run all Batch 3 harnesses (#12-#21) with SHA-256 manifest.json & COMPLETE last
 
+Batch 4 commands (#22-#31):
+  mtp-decoder         Issue #22 small MTP draft-and-verify decoder, poisoned caches & stochastic parity
+  flash-topk          Issue #23 FlashTopK sparse-indexer reference, SM90/100 gate & recovery checks
+  macaq-r             Issue #24 MACaQ-R native MoE K-quant refinement, artifact inspection & rescoring
+  hetero-rollout      Issue #25 heterogeneous rollout serving, versioned HTTP LoRA & fleet reconciliation
+  nvfp4-mxfp8         Issue #26 NVFP4 fwd / MXFP8 bwd numerics, TE SM120/121 gate & Fabric #6 codec
+  spark-engines       Issue #27 Hyperflare & TensorRT Edge-LLM Spark matrix & KV+recurrent continuation
+  kv-compression      Issue #28 KVPress long-context compression, RULER diagnostics & grounded end task
+  expert-placement    Issue #29 RustingStrata vs llama.cpp expert placement, warm states & paired reducer
+  vision-infusion     Issue #30 matched-capacity vision encoders vs early in-fusion & packed parity
+  qwen38-qsa          Issue #31 Qwen3.8-27B 4-token block QSA vs dense 2x2 matrix & long-context tasks
+  batch4-suite        Run all Batch 4 harnesses (#22-#31) with SHA-256 manifest.json & COMPLETE last
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -95,6 +110,17 @@ enum Command {
     MlaComparison(PathBuf),
     SparseMoe(PathBuf),
     Batch3Suite(PathBuf),
+    MtpDecoder(PathBuf),
+    FlashTopK(PathBuf),
+    MacaqR(PathBuf),
+    HeteroRollout(PathBuf),
+    Nvfp4Mxfp8(PathBuf),
+    SparkEngines(PathBuf),
+    KvCompression(PathBuf),
+    ExpertPlacement(PathBuf),
+    VisionInfusion(PathBuf),
+    Qwen38Qsa(PathBuf),
+    Batch4Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -132,6 +158,17 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "mla-comparison" => Ok(Command::MlaComparison(out)),
                 "sparse-moe" => Ok(Command::SparseMoe(out)),
                 "batch3-suite" => Ok(Command::Batch3Suite(out)),
+                "mtp-decoder" => Ok(Command::MtpDecoder(out)),
+                "flash-topk" => Ok(Command::FlashTopK(out)),
+                "macaq-r" => Ok(Command::MacaqR(out)),
+                "hetero-rollout" => Ok(Command::HeteroRollout(out)),
+                "nvfp4-mxfp8" => Ok(Command::Nvfp4Mxfp8(out)),
+                "spark-engines" => Ok(Command::SparkEngines(out)),
+                "kv-compression" => Ok(Command::KvCompression(out)),
+                "expert-placement" => Ok(Command::ExpertPlacement(out)),
+                "vision-infusion" => Ok(Command::VisionInfusion(out)),
+                "qwen38-qsa" => Ok(Command::Qwen38Qsa(out)),
+                "batch4-suite" => Ok(Command::Batch4Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -196,6 +233,33 @@ fn publish_batch2_suite(path: &Path, bundle: &batch2::Batch2Bundle) -> Result<()
 }
 
 fn publish_batch3_suite(path: &Path, bundle: &batch3::Batch3Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch4_suite(path: &Path, bundle: &batch4::Batch4Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -452,6 +516,91 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch3_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::MtpDecoder(path) => {
+            let report = mtp_decoder::run_default_harness()?;
+            let inputs = mtp_decoder::inputs_json(&report);
+            let results = mtp_decoder::results_json(&report);
+            let summary = mtp_decoder::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::FlashTopK(path) => {
+            let report = flash_topk::run_default_harness()?;
+            let inputs = flash_topk::inputs_json(&report);
+            let results = flash_topk::results_json(&report);
+            let summary = flash_topk::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::MacaqR(path) => {
+            let report = macaq_r::run_default_harness()?;
+            let inputs = macaq_r::inputs_json(&report);
+            let results = macaq_r::results_json(&report);
+            let summary = macaq_r::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::HeteroRollout(path) => {
+            let report = hetero_rollout::run_default_harness()?;
+            let inputs = hetero_rollout::inputs_json(&report);
+            let results = hetero_rollout::results_json(&report);
+            let summary = hetero_rollout::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Nvfp4Mxfp8(path) => {
+            let report = nvfp4_mxfp8::run_default_harness()?;
+            let inputs = nvfp4_mxfp8::inputs_json(&report);
+            let results = nvfp4_mxfp8::results_json(&report);
+            let summary = nvfp4_mxfp8::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SparkEngines(path) => {
+            let report = spark_engines::run_default_harness()?;
+            let inputs = spark_engines::inputs_json(&report);
+            let results = spark_engines::results_json(&report);
+            let summary = spark_engines::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::KvCompression(path) => {
+            let report = kv_compression::run_default_harness()?;
+            let inputs = kv_compression::inputs_json(&report);
+            let results = kv_compression::results_json(&report);
+            let summary = kv_compression::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::ExpertPlacement(path) => {
+            let report = expert_placement::run_default_harness()?;
+            let inputs = expert_placement::inputs_json(&report);
+            let results = expert_placement::results_json(&report);
+            let summary = expert_placement::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::VisionInfusion(path) => {
+            let report = vision_infusion::run_default_harness()?;
+            let inputs = vision_infusion::inputs_json(&report);
+            let results = vision_infusion::results_json(&report);
+            let summary = vision_infusion::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Qwen38Qsa(path) => {
+            let report = qwen38_qsa::run_default_harness()?;
+            let inputs = qwen38_qsa::inputs_json(&report);
+            let results = qwen38_qsa::results_json(&report);
+            let summary = qwen38_qsa::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch4Suite(path) => {
+            let bundle = batch4::run_all()?;
+            publish_batch4_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -513,6 +662,17 @@ mod tests {
             "mla-comparison",
             "sparse-moe",
             "batch3-suite",
+            "mtp-decoder",
+            "flash-topk",
+            "macaq-r",
+            "hetero-rollout",
+            "nvfp4-mxfp8",
+            "spark-engines",
+            "kv-compression",
+            "expert-placement",
+            "vision-infusion",
+            "qwen38-qsa",
+            "batch4-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

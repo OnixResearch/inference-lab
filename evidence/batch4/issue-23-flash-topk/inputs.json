@@ -1,0 +1,8 @@
+{
+  "schema": "inference-lab.flash-topk.inputs.v1",
+  "issue": 23,
+  "upstream": {"repo":"Tencent-Hunyuan/FlashTopK","commit":"090902abad86e5bb3324519124a680122fff91a1","license":"Apache-2.0 (preserve LICENSE and NOTICE)","unverified_related_work_claim":"5317ms -> 1623ms for 1M-token causal prefill on SM100 FP8 GLM-5.1 topk=2048 (non-gating)"},
+  "execution_class": "bounded_contract_harness",
+  "linked_consumers": ["dsv41-1017#1","inference-lab#4","inference-lab#7","inference-lab#8","inference-lab#19"],
+  "hyscale_training_follow_up_separate": true
+}

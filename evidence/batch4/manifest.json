@@ -1,0 +1,143 @@
+{
+  "schema": "inference-lab.batch4-evidence.v1",
+  "issues": [22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+  "digest_algorithm": "sha256",
+  "top_level_artifact_sha256": {
+    "inputs.json": "ae960931ac5b463a82490d21be0dd8220548bcb28b16933dea5771f4625dc4e0",
+    "results.json": "0c19caa9b7e0e465c0f20047a97757e3627ed1912d98a4ea814aec3bdda62477",
+    "summary.md": "4c3cb608acf431e4ebca4b428eb69a871e4f3e936c02f1db66693c87385eaca4",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "suites": [
+    {
+      "subdir": "issue-22-mtp-decoder",
+      "issues": [22],
+      "command": ["inference-lab", "mtp-decoder", "--out", "runs/validation/issue-22-mtp-decoder"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "b98eeac869a7af108286d927c58ba686d70e3fba32c38727868ff6567129bee6",
+        "results.json": "63deda2c34cfe27a94427f13d6727e55b71baf546f210a50046cea996619b60b",
+        "summary.md": "4ec4ea097929746e9a50bbabf6409028cf8149c471172528c7dd28d1e9660d01",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-23-flash-topk",
+      "issues": [23],
+      "command": ["inference-lab", "flash-topk", "--out", "runs/validation/issue-23-flash-topk"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "ca106c6e9b4522e5f8c53ca8738a6ce00d90e7b7bd1df79aa761d3916ab52ba0",
+        "results.json": "3a89271f10cd12a35f6d0e355805a45b29647107a50960b51f14a119744cc666",
+        "summary.md": "aa803dcdff6b64ff1e341ada9a0f5a74350355ea9916bc769d43a13688bb3917",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-24-macaq-r",
+      "issues": [24],
+      "command": ["inference-lab", "macaq-r", "--out", "runs/validation/issue-24-macaq-r"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "50596d503c63e3847dc07e83d85e1b1a65ecc90e3c18e403d17e31a0f4d5cc39",
+        "results.json": "25887769f37a24817c23f66c2aaa12f0a9c2d1616c9063045f46741ae6bb36ee",
+        "summary.md": "b63d4fae19ee5d9d7002e39633d57afa0ff0f5ae0364c6a93874dcecd9c3dd85",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-25-hetero-rollout",
+      "issues": [25],
+      "command": ["inference-lab", "hetero-rollout", "--out", "runs/validation/issue-25-hetero-rollout"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "a03e407ccd6ce4ce34637d92c1791494c7693177ffe45d0360fc8c2fd28c87ab",
+        "results.json": "37b7ac0b102afd705c4f87ce4198cb3207c77cb7f737676f8a7379b9b31ff645",
+        "summary.md": "fe2042e3466f2b5f90dfba8470fcdc24800af4c82f7192f3384e2dc1059cf099",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-26-nvfp4-mxfp8",
+      "issues": [26],
+      "command": ["inference-lab", "nvfp4-mxfp8", "--out", "runs/validation/issue-26-nvfp4-mxfp8"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "05c2b610e53fbfa8ff8aaeda65d2ea8d3a3a920638e1ae6339fdb42dbc45eda1",
+        "results.json": "521979d6b750e3f5633427f014725b8fa1d7b9124348cc032ad1a591e08e238e",
+        "summary.md": "d8393be478d99f6e20ec1d81bed1d937f9d32a0cf30e144fe40fa958231c470c",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-27-spark-engines",
+      "issues": [27],
+      "command": ["inference-lab", "spark-engines", "--out", "runs/validation/issue-27-spark-engines"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "a9e15b6d2e994ad706a359c0e80bb464fdd5701068570a47cad79a2b9dffc670",
+        "results.json": "5346d2267b62901a12fb85a3a686e5a2c8a0484b5e6fe0eb38caa8d28bc63a54",
+        "summary.md": "73f19f9c8262d85a4e24f6b6f24062d496c9f91f244a46abce97412a0f645e95",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-28-kv-compression",
+      "issues": [28],
+      "command": ["inference-lab", "kv-compression", "--out", "runs/validation/issue-28-kv-compression"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "94b91bbda8ce13e553c5149cab13e549350aed4ff099f642decf7520634ddd1f",
+        "results.json": "637157383e9ccb8000de967c1ccf8a3f8a43e0501452f8961e68d5e303756f94",
+        "summary.md": "3208c15f8b7d757cf9a4ef41d34e1a5ed250d71f21987ebbce7b33b29faef428",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-29-expert-placement",
+      "issues": [29],
+      "command": ["inference-lab", "expert-placement", "--out", "runs/validation/issue-29-expert-placement"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "c2c9575b964d09bb0e0e1a1606c3001abba7f91df2a03fd43a3e2715d2221808",
+        "results.json": "9f95903a45cb4b5ae85f75e758ece568c0f811b4bbadb73cad929ef9f95d0166",
+        "summary.md": "700d8c279c422d7e526118b624c4b66fd1f2e95ce4795d0f94b8044ec6ed7d55",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-30-vision-infusion",
+      "issues": [30],
+      "command": ["inference-lab", "vision-infusion", "--out", "runs/validation/issue-30-vision-infusion"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "61c8db71e21fc3f9229948591b33542325f7e41f880b96ab6a981e353281ba9b",
+        "results.json": "41f2895c75aa494a2b791a6236a22deb6dc02bcad5fb51e7c624041bb937c3e1",
+        "summary.md": "5a603c3a2f844dbc62ccd7d8c61f309aea77e29960b3feac8bc90d3f4c56cc53",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-31-qwen38-qsa",
+      "issues": [31],
+      "command": ["inference-lab", "qwen38-qsa", "--out", "runs/validation/issue-31-qwen38-qsa"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "1f9e450d385736fb86b741206ecc335253377dd3f150e8f3d27fe49a4cb341d3",
+        "results.json": "8407e9823249e6a1f611695fb2ddd7fc49b86a77502d2388494887bf60f88d0e",
+        "summary.md": "62ea5adb4d2bfd74bb6140491549d6d1759b171d3bb6da86e3759abb8a431d87",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

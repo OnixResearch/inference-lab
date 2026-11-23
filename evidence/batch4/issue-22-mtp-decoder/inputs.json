@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.mtp-decoder.inputs.v1",
+  "issue": 22,
+  "upstream_reference": {"repo":"Vaibhaav-Tiwari/deepseek-v3-jax","commit":"6901be60941b98dc654ed542465290db9e8bafa6","paper":"https://arxiv.org/html/2412.19437v2#S2.SS2"},
+  "execution_class": "bounded_contract_harness",
+  "model_digest": {"algorithm":"sha256","hex":"867e580cc4c3b7c5e4df58d3a9735b1cd39e809d4c253c80233d35fa24c0b61f"},
+  "vocab_size": 8,
+  "max_ctx": 24,
+  "eos_token": 0,
+  "poison_sentinel": 1000000.0,
+  "stochastic_profile": {"mode":"stochastic_rejection_v1","temperature":0.8,"top_k":4,"top_p":0.95,"empirical_samples":4000,"empirical_tolerance":0.03},
+  "routing_bias_frozen": true
+}

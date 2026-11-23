@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.macaq-r.inputs.v1",
+  "issue": 24,
+  "upstream": {"repo":"huawei-csl/MACaQ","commit":"3810efca0b9e819c8eb51addd93c3c87225b7476","unverified_related_work_claim":"Qwen3.6-35B-A3B KL 0.015731 -> 0.013367, 22.36 GB GGUF, 122B full-MACaQ W4A4 (non-gating)"},
+  "target_recipe": "Qwen3.6-35B-A3B / Unsloth UD-Q4_K_XL (separate from #18 Qwen3.8-27B)",
+  "isolated_from_issue_18_qwen38_27b_dense": true,
+  "execution_class": "bounded_contract_harness",
+  "original_synthetic_digest": {"algorithm":"sha256","hex":"d7287d67a6df4d0f12397edd02edf665b333e631b354251e51121aadfa3f8ad1"},
+  "refined_synthetic_digest": {"algorithm":"sha256","hex":"32bb56ad79dc223d8df2bead6ebe711aa46083caace86c0bc49e1f84d02ecbf9"}
+}

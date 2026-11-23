@@ -1,0 +1,20 @@
+{
+  "schema": "inference-lab.macaq-r.results.v1",
+  "issue": 24,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"physical_node_qwen36_35b_macaq_r_llamacpp","status":"unavailable_hardware_runtime","reason":"Synthetic MoE K-quant refinement and artifact/rescoring contracts verified on CPU; 22.36 GB Qwen3.6-35B-A3B creation and standard llama.cpp serving remain unexecuted locally"},
+  "decision": "INCONCLUSIVE_PHYSICAL_NODE_CREATION_AND_SERVE_REQUIRED",
+  "unchanged_format_implies_identical_process_memory": false,
+  "refined_tensor_count": 3,
+  "original_total_gguf_bytes": 606,
+  "refined_total_gguf_bytes": 734,
+  "original_tensor_payload_bytes": 94,
+  "refined_tensor_payload_bytes": 94,
+  "synthetic_calib_kl_before": 0.018246368581,
+  "synthetic_calib_kl_after": 0.000652542659,
+  "synthetic_heldout_kl_before": 0.009427390927,
+  "synthetic_heldout_kl_after": 0.001496161769,
+  "creation_receipt": {"synthetic_contract_fixture":true,"total_creation_wall_ms":5000,"interrupted_wall_ms":1200,"resumed_wall_ms":3800,"peak_host_ram_gib":64,"peak_device_vram_gib":24,"peak_working_disk_gib":110},
+  "paired_rescore": [{"synthetic_contract_fixture":true,"arm_name":"original_gguf","planned":4,"accepted":2,"non_accepted":2,"total_cost_ms":2220.0,"cost_per_accepted_task_ms":1110.0,"amortized_cost_per_accepted_100_uses_ms":1110.0},{"synthetic_contract_fixture":true,"arm_name":"macaq_r_refined_gguf","planned":4,"accepted":3,"non_accepted":1,"total_cost_ms":2225.0,"cost_per_accepted_task_ms":741.666666666667,"amortized_cost_per_accepted_100_uses_ms":758.333333333333},{"synthetic_contract_fixture":true,"arm_name":"zero_accepted_control","planned":2,"accepted":0,"non_accepted":2,"total_cost_ms":620.0,"cost_per_accepted_task_ms":null,"amortized_cost_per_accepted_100_uses_ms":null}],
+  "negative_controls": [{"case_id":"mutated_block_scale_rejected","outcome":"invalid","detail":"block scale or activation basis mutated on `blk.0.ffn_gate_exps.weight` (MACaQ-R must preserve native scales/basis)"},{"case_id":"modified_out_of_scope_tensor_rejected","outcome":"invalid","detail":"out-of-scope tensor `token_embd.weight` was modified"},{"case_id":"unsupported_split_gguf_and_iq4xs_rejected","outcome":"unsupported","detail":"split_err=true, iq4xs_err=true"},{"case_id":"calibration_heldout_contamination_rejected","outcome":"invalid","detail":"held-out contamination detected in calibration split"},{"case_id":"stale_resume_receipt_rejected","outcome":"invalid","detail":"stale or mismatched resume state identity rejected"},{"case_id":"mismatched_serving_mtp_setting_rejected","outcome":"invalid","detail":"MTP must stay off for matched serving arms (violation on t1)"},{"case_id":"creation_time_dependency_at_serve_rejected","outcome":"invalid","detail":"refined artifact cannot require creation-time HF/teacher/calibration deps at serve time"},{"case_id":"zero_accepted_tasks_cost_undefined","outcome":"invalid","detail":"cost_per_accepted_task=null when accepted=0"}]
+}
