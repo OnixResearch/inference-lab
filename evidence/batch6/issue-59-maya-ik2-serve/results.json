@@ -1,0 +1,17 @@
+{
+  "schema": "inference-lab.maya-ik2-serve.results.v1",
+  "issue": 59,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"Linux host with 24 GB sm_86 GPU (RTX 3090 class), CUDA 12.8, and pinned Unsloth UD-Q4_K_XL GGUF","status":"unavailable_hardware_runtime","reason":"Strict host gate, separated X-post vs README non-gating notes, packed 4-bit register-unpack parity, and FP16 full-vocab KL verified on CPU; maya-ik2 binary and UD-Q4_K_XL GGUF did not run locally"},
+  "synthetic_contract_fixture": true,
+  "default_enabled": false,
+  "distinct_from_issue_57": true,
+  "installs_gpu_unlock": false,
+  "exact_register_unpack_max_abs_err": 0.0,
+  "exact_register_unpack_outcome": "accepted",
+  "fp16_register_unpack_max_abs_err": 0.001130459016,
+  "fp16_full_vocab_kl_divergence": 0.000000038056,
+  "fp16_greedy_top1_agreement": 1.0,
+  "local_host_gate_decision": {"admitted_host_requirements":false,"gpu_unlock_present_recorded":false,"installs_gpu_unlock":false,"outcome":"unsupported","reason":"maya-ik2 requires sm_86 GPU (host local-cpu-contract-runner reports \"none\")"},
+  "negative_controls": [{"case_id":"nc1_windows_os_unsupported","outcome":"unsupported","detail":"maya-ik2 requires Linux (host win-rtx3090 reports OS \"windows\")"},{"case_id":"nc2_non_sm86_arch_unsupported","outcome":"unsupported","detail":"maya-ik2 requires sm_86 GPU (host linux-rtx4090-sm89 reports \"sm_89\")"},{"case_id":"nc3_vram_below_24gb_unsupported","outcome":"unsupported","detail":"maya-ik2 requires >=24 GB VRAM (host linux-rtx3080-12gb has 12 GB)"},{"case_id":"nc4_cuda_not_12_8_unsupported","outcome":"unsupported","detail":"maya-ik2 requires CUDA 12.8 (host linux-rtx3090-cuda124 has 12.4)"},{"case_id":"nc5_non_ud_q4_k_xl_gguf_unsupported","outcome":"unsupported","detail":"maya-ik2 reads only Unsloth UD-Q4_K_XL GGUF (got \"Q8_0\")"},{"case_id":"nc6_swapped_nibble_register_unpack_caught","outcome":"invalid","detail":"swapped nibble order caused 1.102e0 logit divergence"},{"case_id":"nc7_corrupted_block_scale_kl_spike","outcome":"invalid","detail":"corrupted block scale raised full-vocab KL to 9.879e-1"},{"case_id":"nc8_non_finite_activation_rejected","outcome":"invalid","detail":"NaN activation cleanly rejected in FP16 register-unpack path"}]
+}

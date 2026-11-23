@@ -1,0 +1,15 @@
+{
+  "schema": "inference-lab.serving-hill-climb.inputs.v1",
+  "issue": 53,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "skill_repo": "sybil-solutions/inference-optimisation-skill",
+  "skill_commit": "fda968e7fc1996aa23c67139c755fe541c9d4be0",
+  "skill_license": "MIT",
+  "reuses_issue": 7,
+  "min_decode_samples": 6,
+  "max_secondary_regression_pct": 3.0,
+  "protocol_digest": {"algorithm":"sha256","hex":"56c40102488e3e37887ed1faf60e77ad476c31afb26090cdb6f9dc6c752eda35"},
+  "workload_identity": {"schema_version":"onix.qwen38-benchmark.v1","profile_id":"qwen38-p150x2-compat-v1","workload_digest":{"algorithm":"sha256","hex":"754a1c8adf1f915d14080b24f3bc51021c93719dd82ec8475fe2c7367db37e2b"},"model_id":"Qwen/Qwen3.8-27B-pinned","checkpoint_digest":{"algorithm":"sha256","hex":"3eaacfebd58a50ffebba295cbf497bcc02e2fd80e1ad022fe1bdb2bedfa8e6f9"},"tokenizer_digest":{"algorithm":"sha256","hex":"d3029454444784caf6a6bc5673a912268b2ca76922abdd5f0af88d3b0c2e4059"},"chat_template_digest":{"algorithm":"sha256","hex":"41c677d7ddd45c311fae58edc06cf55e1a3fa4473a2ad1427a469e8b4d551ee8"},"precision":"bf16-reference-pinned","backend_revision":"tt-onix@5ed5e90cdd265443fa2f9b73e4ce46aeaa71837a","hardware_label":"device_free_contract_fixture","cache_policy":"server_cache_unknown_client_only"},
+  "synthetic_contract_fixture": true
+}

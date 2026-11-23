@@ -1,0 +1,156 @@
+{
+  "schema": "inference-lab.batch6-evidence.v1",
+  "issues": [47, 48, 49, 50, 51, 53, 54, 55, 57, 59, 61],
+  "digest_algorithm": "sha256",
+  "top_level_artifact_sha256": {
+    "inputs.json": "50453023b8e3949c065e59e7faa8885c17e2f3388bc8484dc913173329a762bc",
+    "results.json": "3d33746687904074441a0b970cdcccef5cc3aaef351cc19c6a2d061303526444",
+    "summary.md": "3dd49b06ffdb9f7d1744dec6b89fa70a532231dda4ca4b5fde2e89021c82def1",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "suites": [
+    {
+      "subdir": "issue-47-adv-spec-reasoning",
+      "issues": [47],
+      "command": ["inference-lab", "adv-spec-reasoning", "--out", "runs/validation/issue-47-adv-spec-reasoning"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "11564929ffe858158eda70e2c77f17fa75c3939b44e0b334b1e3d29af6decc16",
+        "results.json": "cbdcd741a078ca862fba06cc8873f88bae96c8f4433f67348c7240751edf96ea",
+        "summary.md": "61a005d89338e57f45013acc19da80e684e0a1bbf0e52940bed72691af3d4d24",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-48-nvme-coalescing",
+      "issues": [48],
+      "command": ["inference-lab", "nvme-coalescing", "--out", "runs/validation/issue-48-nvme-coalescing"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "0d9aa17231d77cbe9259e630a13266bc37af25b613fa27de2d06968497686e77",
+        "results.json": "53cd9e2e40cea6b12acfc19abce51a91e5cb695aff08d1000af9e8209a84006d",
+        "summary.md": "3a15f4f916924348458bd4bf513d2f46ad3828c09d4c32345762ba38c943b76a",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-49-harness-lora-compare",
+      "issues": [49],
+      "command": ["inference-lab", "harness-lora-compare", "--out", "runs/validation/issue-49-harness-lora-compare"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "95a8353203b13a3f1c1c86dc2be4efb5f8b46a7a1e53270fd2423dc76a92f24f",
+        "results.json": "b30d94e79e697f925103f4d45a0d861318d881127c2c190e561ddf0d527e3979",
+        "summary.md": "c481876c284fc8acd5e657a34805a9bc9490d863acfe7f0786cdcd1d5c09f671",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-50-latent-feedback",
+      "issues": [50],
+      "command": ["inference-lab", "latent-feedback", "--out", "runs/validation/issue-50-latent-feedback"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "980d3aa2271c68993e697ef0e3413c7bf4942072bce1d9f94a64e284131051cf",
+        "results.json": "168119e856d2c62f4f16e2d0e0912c9b477d89b6d0222e21958faa547ce1a1d6",
+        "summary.md": "7d6c8526e071e2fae1d1d3fcfd0e45512cd8563c086496db83a23bcc130ed85b",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-51-simplehc-mhc",
+      "issues": [51],
+      "command": ["inference-lab", "simplehc-mhc", "--out", "runs/validation/issue-51-simplehc-mhc"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "d6d1aa68dbd490bab40a9bc0db59d923aec0964098c76d5942e84fd51965aeb6",
+        "results.json": "ea381c349d8f9b3d6b4e9479e35e22e601e710bb05889d189003336daea13ef3",
+        "summary.md": "8535b018c72ca7e6637c24c2d2406ec767b3d1a9c637902601aca8350f4c00a6",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-53-serving-hill-climb",
+      "issues": [53],
+      "command": ["inference-lab", "serving-hill-climb", "--out", "runs/validation/issue-53-serving-hill-climb"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "c5c6c4ddd1bb573ef07e18c1682304a9c783104ddd65e27b1a8596008a4fa255",
+        "results.json": "d3c645f820dce610ee8e882c26a1b510523a6a56e7531fb2e7c7e81f9f380cba",
+        "summary.md": "e9cee8921cdcb7f216fa63311a7d322fbf73ae7d663a97c7b7b29f81edf4f0a4",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-54-tufazip-online-codec",
+      "issues": [54],
+      "command": ["inference-lab", "tufazip-online-codec", "--out", "runs/validation/issue-54-tufazip-online-codec"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "ab9af25ddb65bb1b7f27f7d9428da02d1f285a1fafd7fbf10d0bc586f8834bfe",
+        "results.json": "bbfa70e00eefac0e0d8741f76757c95d604393f8bfbf10226c7150dcb15c2d34",
+        "summary.md": "cbdc9402e9b15d5589361dbd6a35a995d79279914f353771443bc4585fa8d95e",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-55-clairic-extraction",
+      "issues": [55],
+      "command": ["inference-lab", "clairic-extraction", "--out", "runs/validation/issue-55-clairic-extraction"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "faa80c5bd2287e15cd42fff98b62c395805c257f4d8fc8c449347621e30d31df",
+        "results.json": "3e752877950b4cf7522709bdfa5bd0eea10635b2c5de24868fed6d159fbea5a8",
+        "summary.md": "0d49d80f63020d3ffbe042c96ef094afb8b2beaf30aa1352c083e1b562bf6714",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-57-inkling-mini-serve",
+      "issues": [57],
+      "command": ["inference-lab", "inkling-mini-serve", "--out", "runs/validation/issue-57-inkling-mini-serve"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "fca53526dfcea825bf0120369b8ad4beaba2bb2a6d02689491251c72ad20fe22",
+        "results.json": "1a2c8426881d363c92ec58988f338db02192aa130ba0fa3a9a9065ea3b593695",
+        "summary.md": "eacff33786d06fe960e61ef89cd94753d862160a9d84818a520a78ab6f244948",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-59-maya-ik2-serve",
+      "issues": [59],
+      "command": ["inference-lab", "maya-ik2-serve", "--out", "runs/validation/issue-59-maya-ik2-serve"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "019fcd55e5778c213d8dc0244f13c36006b61d9778dd29b707ace35dfbc65a9e",
+        "results.json": "aa0777040811443031dccd12c6752b0209dcdf605e8963bc80dcf409dee31d33",
+        "summary.md": "793e5bc15c1cec70eef4680fcacb228e7872a3c01799f3451ae16692639334a6",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-61-decode-megakernels",
+      "issues": [61],
+      "command": ["inference-lab", "decode-megakernels", "--out", "runs/validation/issue-61-decode-megakernels"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "e8c2bcbd99c757176f8177bd411dcbe256173e302564e39ab8c28b8475396705",
+        "results.json": "8af91808fcbff333630ad72e180e60a190ee31bec6fcf164dc77cb3b6cefa652",
+        "summary.md": "8b78ed3e815a973ebd1d9541896335e7342cebd98fa080dfa045c9ff4f6afe16",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

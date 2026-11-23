@@ -1,0 +1,15 @@
+{
+  "schema": "inference-lab.decode-megakernels.inputs.v1",
+  "issue": 61,
+  "execution_class": "bounded_contract_harness",
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "https://github.com/dangxingyu/megakernel-zoo",
+  "upstream_x_post": "https://x.com/xingyudang/status/2123278497879634173",
+  "pin_status": "repo_url_only_commit_unpinned_offline",
+  "upstream_commit": null,
+  "complements": ["inference-lab#4","inference-lab#39"],
+  "batch_sizes": [1,4,8],
+  "decode_steps": 12,
+  "logit_equivalence_tolerance": 0.000000000001,
+  "author_unverified_non_gating_notes": "megakernel-zoo 1.77x (and 2.05x with model-specific tricks) across 8 models (8B-594B) vs vLLM/SGLang are unverified author claims, not acceptance gates"
+}

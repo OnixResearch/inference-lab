@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.nvme-coalescing.inputs.v1",
+  "issue": 48,
+  "related_issues": [35, 39, 43],
+  "execution_class": "bounded_contract_harness",
+  "source_bookmark": "https://x.com/wrldsuksgo2mars/status/2105216239056589131",
+  "nvme_probe_command": "nvme get-feature /dev/nvme0 -f 8 -H",
+  "systemd_unit": "nvidia-nvme-interrupt-coalescing.service",
+  "mutates_host_service": false,
+  "storage_latency_is_not_tok_s_claim": true,
+  "fixture_digest": {"algorithm":"sha256","hex":"477bcd391f7db289e9e23e9420a1f6bccb5e4b67de0451fd15cd2cf24d549a6f"},
+  "synthetic_contract_fixture": true
+}

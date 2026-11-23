@@ -1,0 +1,18 @@
+{
+  "schema": "inference-lab.clairic-extraction.inputs.v1",
+  "issue": 55,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "starts_issue_10_extraction": false,
+  "scores_are_pass_gates": false,
+  "synthetic_contract_fixture": true,
+  "license": "Apache-2.0",
+  "official_local_runtime": "pytorch+transformers+xgrammar",
+  "pins": {
+    "clairic_27b": {"repo": "Cloudflare/clairic", "commit": "2c161be5cc71bacd6605b99a8c07547e58cfa434"},
+    "clairic_flash_9b": {"repo": "Cloudflare/clairic-flash", "commit": "36ad68b999560f56b57ef16a22180f8cb83c6d77", "preferred_on_declared_hardware": true}
+  },
+  "fixture_digest": {"algorithm":"sha256","hex":"54df8b7c9f1edbfd09ce9677388f29215a7fb45fa93d18b91e48eb5264c141cf"},
+  "rejected_preview_claim": "single_forward_pass_2026_10_19",
+  "author_unverified_non_gating_notes": "Cloudflare 18 Nov directional internal evals (335/336 fresh, 221/226 mixed, 1263/1263 tracked, 576/576 receipts; 358/736ms 27B, 155/328ms flash) are unverified and not acceptance gates"
+}

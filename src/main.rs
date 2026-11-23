@@ -8,15 +8,17 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, batch2, batch3, batch4, batch5, biollm_protocol, compact_hybrids,
-    cpu_contention, deepseek_ref, deepseek_spark, diffusion, djev_protocol, drafting,
-    expert_placement, flash_topk, ggml_ops, graphical_sampling, hetero_rollout, inkling_residuals,
-    intervention_replay, kernel_opt, kv_compression, kv_routing, learned_compiler, lifecycle,
-    macaq_r, mla_comparison, mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8,
+    adaptive_spec, adv_spec_reasoning, batch2, batch3, batch4, batch5, batch6, biollm_protocol,
+    clairic_extraction, compact_hybrids, cpu_contention, decode_megakernels, deepseek_ref,
+    deepseek_spark, diffusion, djev_protocol, drafting, expert_placement, flash_topk, ggml_ops,
+    graphical_sampling, harness_lora_compare, hetero_rollout, inkling_mini_serve,
+    inkling_residuals, intervention_replay, kernel_opt, kv_compression, kv_routing,
+    latent_feedback, learned_compiler, lifecycle, macaq_r, maya_ik2_serve, mla_comparison,
+    mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8, nvme_coalescing,
     phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval, qwen38_qsa,
     qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf, seed, serving_bench,
-    spark_engines, sparse_moe, split_m2_p150, stage, structured_read, tiered_eval, tokenizer,
-    trace, vision_infusion,
+    serving_hill_climb, simplehc_mhc, spark_engines, sparse_moe, split_m2_p150, stage,
+    structured_read, tiered_eval, tokenizer, trace, tufazip_online_codec, vision_infusion,
 };
 
 const HELP: &str = "\
@@ -89,6 +91,20 @@ Batch 5 commands (#32-#39, #42, #44-#46):
   biollm-protocol         Issue #46 Equal-budget 5-arm BioLLM adapter protocol & matched controls
   batch5-suite            Run all Batch 5 harnesses (#32-#39, #42, #44-#46) with manifest & COMPLETE last
 
+Batch 6 commands (#47-#51, #53-#55, #57, #59, #61):
+  adv-spec-reasoning      Issue #47 Adversarial speculative reasoning drafts vs unbiased drafts & slot noise
+  nvme-coalescing         Issue #48 NVMe interrupt coalescing controlled host variable for SSD-paged tables
+  harness-lora-compare    Issue #49 Harness-specific LoRA vs base/prompt/harness & overlap contamination audit
+  latent-feedback         Issue #50 Data-limited latent feedback vs matched-FLOP extra-epoch control
+  simplehc-mhc            Issue #51 SimpleHC vs DeepSeek mHC (Sinkhorn-Knopp) overhead & loss beside #33
+  serving-hill-climb      Issue #53 Default-off ceiling-first, interleaved-control serving hill-climb
+  tufazip-online-codec    Issue #54 Default-off tufazip online range codec & 2xB200 CUDA 13.0 hardware gate
+  clairic-extraction      Issue #55 Default-off pinned Clairic/Clairic-flash typed extraction vs baseline
+  inkling-mini-serve      Issue #57 Default-off pinned Inkling 2 Mini local serve & 48-layer looped MoE parity
+  maya-ik2-serve          Issue #59 Default-off pinned maya-ik2 24 GB sm_86 serve & packed 4-bit unpack parity
+  decode-megakernels      Issue #61 Persistent decode megakernels vs multi-launch reference & batch scaling
+  batch6-suite            Run all Batch 6 harnesses (#47-#51, #53-#55, #57, #59, #61) with manifest & COMPLETE last
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -152,6 +168,18 @@ enum Command {
     InterventionReplay(PathBuf),
     BioLlmProtocol(PathBuf),
     Batch5Suite(PathBuf),
+    AdvSpecReasoning(PathBuf),
+    NvmeCoalescing(PathBuf),
+    HarnessLoraCompare(PathBuf),
+    LatentFeedback(PathBuf),
+    SimpleHcMhc(PathBuf),
+    ServingHillClimb(PathBuf),
+    TufazipOnlineCodec(PathBuf),
+    ClairicExtraction(PathBuf),
+    InklingMiniServe(PathBuf),
+    MayaIk2Serve(PathBuf),
+    DecodeMegakernels(PathBuf),
+    Batch6Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -213,6 +241,18 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "intervention-replay" => Ok(Command::InterventionReplay(out)),
                 "biollm-protocol" => Ok(Command::BioLlmProtocol(out)),
                 "batch5-suite" => Ok(Command::Batch5Suite(out)),
+                "adv-spec-reasoning" => Ok(Command::AdvSpecReasoning(out)),
+                "nvme-coalescing" => Ok(Command::NvmeCoalescing(out)),
+                "harness-lora-compare" => Ok(Command::HarnessLoraCompare(out)),
+                "latent-feedback" => Ok(Command::LatentFeedback(out)),
+                "simplehc-mhc" => Ok(Command::SimpleHcMhc(out)),
+                "serving-hill-climb" => Ok(Command::ServingHillClimb(out)),
+                "tufazip-online-codec" => Ok(Command::TufazipOnlineCodec(out)),
+                "clairic-extraction" => Ok(Command::ClairicExtraction(out)),
+                "inkling-mini-serve" => Ok(Command::InklingMiniServe(out)),
+                "maya-ik2-serve" => Ok(Command::MayaIk2Serve(out)),
+                "decode-megakernels" => Ok(Command::DecodeMegakernels(out)),
+                "batch6-suite" => Ok(Command::Batch6Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -331,6 +371,33 @@ fn publish_batch4_suite(path: &Path, bundle: &batch4::Batch4Bundle) -> Result<()
 }
 
 fn publish_batch5_suite(path: &Path, bundle: &batch5::Batch5Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch6_suite(path: &Path, bundle: &batch6::Batch6Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -773,6 +840,99 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch5_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::AdvSpecReasoning(path) => {
+            let report = adv_spec_reasoning::run_default_harness()?;
+            let inputs = adv_spec_reasoning::inputs_json(&report);
+            let results = adv_spec_reasoning::results_json(&report);
+            let summary = adv_spec_reasoning::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::NvmeCoalescing(path) => {
+            let report = nvme_coalescing::run_default_harness()?;
+            let inputs = nvme_coalescing::inputs_json(&report);
+            let results = nvme_coalescing::results_json(&report);
+            let summary = nvme_coalescing::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::HarnessLoraCompare(path) => {
+            let report = harness_lora_compare::run_default_harness()?;
+            let inputs = harness_lora_compare::inputs_json(&report);
+            let results = harness_lora_compare::results_json(&report);
+            let summary = harness_lora_compare::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::LatentFeedback(path) => {
+            let report = latent_feedback::run_default_harness()?;
+            let inputs = latent_feedback::inputs_json(&report);
+            let results = latent_feedback::results_json(&report);
+            let summary = latent_feedback::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SimpleHcMhc(path) => {
+            let report = simplehc_mhc::run_default_harness()?;
+            let inputs = simplehc_mhc::inputs_json(&report);
+            let results = simplehc_mhc::results_json(&report);
+            let summary = simplehc_mhc::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::ServingHillClimb(path) => {
+            let report = serving_hill_climb::run_default_harness()?;
+            let inputs = serving_hill_climb::inputs_json(&report);
+            let results = serving_hill_climb::results_json(&report);
+            let summary = serving_hill_climb::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::TufazipOnlineCodec(path) => {
+            let report = tufazip_online_codec::run_default_harness()?;
+            let inputs = tufazip_online_codec::inputs_json(&report);
+            let results = tufazip_online_codec::results_json(&report);
+            let summary = tufazip_online_codec::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::ClairicExtraction(path) => {
+            let report = clairic_extraction::run_default_harness()?;
+            let inputs = clairic_extraction::inputs_json(&report);
+            let results = clairic_extraction::results_json(&report);
+            let summary = clairic_extraction::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::InklingMiniServe(path) => {
+            let report = inkling_mini_serve::run_default_harness()?;
+            let inputs = inkling_mini_serve::inputs_json(&report);
+            let results = inkling_mini_serve::results_json(&report);
+            let summary = inkling_mini_serve::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::MayaIk2Serve(path) => {
+            let report = maya_ik2_serve::run_default_harness()?;
+            let inputs = maya_ik2_serve::inputs_json(&report);
+            let results = maya_ik2_serve::results_json(&report);
+            let summary = maya_ik2_serve::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::DecodeMegakernels(path) => {
+            let report = decode_megakernels::run_default_harness()?;
+            let inputs = decode_megakernels::inputs_json(&report);
+            let results = decode_megakernels::results_json(&report);
+            let summary = decode_megakernels::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch6Suite(path) => {
+            let bundle = batch6::run_all()?;
+            publish_batch6_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -858,6 +1018,18 @@ mod tests {
             "intervention-replay",
             "biollm-protocol",
             "batch5-suite",
+            "adv-spec-reasoning",
+            "nvme-coalescing",
+            "harness-lora-compare",
+            "latent-feedback",
+            "simplehc-mhc",
+            "serving-hill-climb",
+            "tufazip-online-codec",
+            "clairic-extraction",
+            "inkling-mini-serve",
+            "maya-ik2-serve",
+            "decode-megakernels",
+            "batch6-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

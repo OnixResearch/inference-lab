@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.adv-spec-reasoning.inputs.v1",
+  "issue": 47,
+  "extends_issues": [3, 6, 22],
+  "execution_class": "bounded_contract_harness",
+  "non_gating_paper": "arXiv:2611.05345",
+  "source_bookmark": "https://x.com/LijieyYang/status/2118068274512703652",
+  "matched_seed": 47202611,
+  "num_draft_slots": 4,
+  "fixture_digest": {"algorithm":"sha256","hex":"51cb33f0243707154ba771d72cd34af805be887bbd191af83cde6c0ed2fa9485"},
+  "synthetic_contract_fixture": true
+}

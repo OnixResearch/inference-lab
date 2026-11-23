@@ -1,0 +1,20 @@
+{
+  "schema": "inference-lab.inkling-mini-serve.results.v1",
+  "issue": 57,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"Admitted host (DGX Spark / >=32GB Apple Silicon / >=32GB VRAM GPU) with pinned Inkling 2 Mini checkpoint and an authors-listed runtime","status":"unavailable_hardware_runtime","reason":"Host/runtime gate, 24-stored/48-applied looped 8-of-128 MoE parity, NVFP4/MXFP8 layer split, and optional varloop sweep verified on CPU; 26.4B Inkling 2 Mini weights were not downloaded or served locally"},
+  "synthetic_contract_fixture": true,
+  "default_enabled": false,
+  "stored_layers": 24,
+  "unrolled_layer_applications": 48,
+  "looped_layer_applications": 48,
+  "moe_routed_experts": 8,
+  "moe_total_experts": 128,
+  "nvfp4_stored_layers": 20,
+  "mxfp8_stored_layers": 4,
+  "unrolled_vs_looped_max_abs_err": 0.0,
+  "parity_outcome": "accepted",
+  "varloop_optional_research_only": true,
+  "varloop_sweep": [{"loop_count":1,"layer_applications":24,"active_expert_evaluations":192,"output_l2_norm":1.1050501465,"max_diff_vs_3x":0.14922689289},{"loop_count":2,"layer_applications":36,"active_expert_evaluations":288,"output_l2_norm":1.067770580931,"max_diff_vs_3x":0.075357117441},{"loop_count":3,"layer_applications":48,"active_expert_evaluations":384,"output_l2_norm":1.04217267672,"max_diff_vs_3x":0.0},{"loop_count":4,"layer_applications":60,"active_expert_evaluations":480,"output_l2_norm":1.035742470388,"max_diff_vs_3x":0.083174970807}],
+  "negative_controls": [{"case_id":"nc1_gpu_below_32gb_floor_unsupported","outcome":"unsupported","detail":"host rtx-3090-24gb below #57 floor (requires DGX Spark, >=32GB Apple Silicon, or >=32GB VRAM GPU)"},{"case_id":"nc2_apple_silicon_below_32gb_unsupported","outcome":"unsupported","detail":"host mac-16gb below #57 floor (requires DGX Spark, >=32GB Apple Silicon, or >=32GB VRAM GPU)"},{"case_id":"nc3_maya_ik2_unlisted_for_issue_57","outcome":"unsupported","detail":"runtime \"maya-ik2\" is not on Thinking Machines' runtime list for #57 (maya-ik2 belongs strictly to #59)"},{"case_id":"nc4_unpinned_hf_tip_rejected","outcome":"invalid","detail":"checkpoint thinkingmachines/Inkling-2-Mini@main does not match pinned Inkling 2 Mini or varloop SHA"},{"case_id":"nc5_missing_local_runtime_reports_unavailable","outcome":"unavailable_hardware_runtime","detail":"host dgx-spark-offline meets floor and runtime sglang is admitted, but local runtime/weights are not present"},{"case_id":"nc6_loop_count_mismatch_detected","outcome":"invalid","detail":"loop_count=2 (36 apps) diverged 7.536e-2 from 48-app reference"},{"case_id":"nc7_wrong_moe_topk_routing_detected","outcome":"invalid","detail":"4-of-128 MoE routing diverged 4.720e-2 from 8-of-128 reference"},{"case_id":"nc8_non_finite_activation_rejected","outcome":"invalid","detail":"NaN activation caught before MoE routing"}]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.latent-feedback.results.v1",
+  "issue": 50,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"GPU small-model training cluster (60M–778M parameter scale) for data-limited Transformer vs latent-feedback runs","status":"unavailable_hardware_runtime","reason":"Miniature pure-Rust matched-FLOP sequence learner, FD gradient check, and causal invariance verified on CPU; 60M–778M GPU training did not execute locally and large-scale stability remains open_untested"},
+  "synthetic_contract_fixture": true,
+  "large_scale_stability_status": "open_untested",
+  "grad_check_max_abs_err": 0.000000000335,
+  "causal_invariance_max_err": 0.0,
+  "flop_ratio_feedback_over_control": 1.012240481504,
+  "arms": [{"variant":"standard_extra_epoch_control","epochs_run":31,"unique_train_tokens":100,"parameter_count":272,"forward_flops":1272240,"backward_flops":2276640,"total_flops":3548880,"initial_train_loss":2.088199508032,"final_train_loss":1.777617121608,"train_accuracy":0.244444444444,"heldout_loss":1.984899133336,"heldout_accuracy":0.111111111111},{"variant":"latent_feedback","epochs_run":24,"unique_train_tokens":100,"parameter_count":336,"forward_flops":1246080,"backward_flops":2346240,"total_flops":3592320,"initial_train_loss":2.086072335361,"final_train_loss":1.264268639379,"train_accuracy":0.488888888889,"heldout_loss":1.643205109243,"heldout_accuracy":0.277777777778}],
+  "negative_controls": [{"case_id":"nc1_unmatched_flop_budget_rejected","outcome":"invalid","detail":"2x FLOP disparity between arms violates matched-FLOP control"},{"case_id":"nc2_train_heldout_overlap_rejected","outcome":"invalid","detail":"duplicate sequence across train and held-out splits is refused"},{"case_id":"nc3_future_token_leakage_caught","outcome":"invalid","detail":"injected future-token leak caused 1.172e-2 causal perturbation"},{"case_id":"nc4_corrupted_gradient_caught_by_fd","outcome":"invalid","detail":"corrupted analytical gradient diverged by 2.500e-1 vs FD"},{"case_id":"nc5_large_scale_stability_claim_rejected","outcome":"invalid","detail":"large-scale stability must remain explicitly open_untested"},{"case_id":"nc6_nan_learning_rate_rejected","outcome":"invalid","detail":"non-finite learning rate or loss fails finite check"},{"case_id":"nc7_zero_flop_budget_guarded","outcome":"invalid","detail":"zero FLOP count is rejected before ratio division"},{"case_id":"nc8_paper_savings_not_pass_gate","outcome":"invalid","detail":"arXiv:2611.20404 48% compute / 47% data claims are unverified, never pass gates"}]
+}

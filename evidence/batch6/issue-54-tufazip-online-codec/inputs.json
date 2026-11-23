@@ -1,0 +1,14 @@
+{
+  "schema": "inference-lab.tufazip-online-codec.inputs.v1",
+  "issue": 54,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "enwik9_full_run_attempted": false,
+  "upstream_repo": "Tufalabs/tufazip",
+  "upstream_commit": "b9d678db3a0f726e117c8cab51927975830395ac",
+  "upstream_license": "MIT",
+  "source_bookmark": "https://x.com/tufalabs/status/2123350647273631907",
+  "input_prefix_bytes": 2223,
+  "input_sha256": {"algorithm":"sha256","hex":"67a98f6e7c6b949a0682c9806f0d4463a59bacd9efa7d3a92a14634aa0415c7f"},
+  "synthetic_contract_fixture": true
+}

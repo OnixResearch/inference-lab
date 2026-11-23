@@ -1,0 +1,38 @@
+# Batch 6: Adversarial speculative reasoning, NVMe coalescing, harness LoRA comparison, latent feedback, SimpleHC vs mHC, serving hill-climb, tufazip online codec, Clairic extraction, Inkling 2 Mini & maya-ik2 serve qualification, and persistent decode megakernels
+
+## Why
+
+Batches 1–5 established `OnixResearch/inference-lab` with a deterministic, dependency-free pure-Rust core (`unsafe_code = "forbid"`), offline Nix tooling (Rust 1.85.1), and bounded contract harnesses covering 50 of 61 tracked issues (`#1`–`#46`, `#52`, `#56`, `#58`, `#60`). Batch 6 completes the final eleven tracked issues (`#47`, `#48`, `#49`, `#50`, `#51`, `#53`, `#54`, `#55`, `#57`, `#59`, `#61`) to bring the repository to full 61/61 coverage:
+
+- `#47` (`adv-spec-reasoning`): Extend `#3`/`#6`/`#22` drafting with adversarial speculative reasoning drafts (`arXiv:2611.05345`, unverified) comparing slot-0 target reference vs multi-slot numerical rounding noise and unbiased vs decision-point-rejecting adversarial drafts under matched seeds.
+- `#48` (`nvme-coalescing`): Add NVMe interrupt coalescing (`nvme get-feature /dev/nvme0 -f 8 -H`, `nvidia-nvme-interrupt-coalescing.service`) as a controlled host variable for SSD-backed Engram/PLE tables on DGX Spark (`#35`/`#39`/`#43`), strictly separating 4K QD1 storage latency from decode tok/s claims.
+- `#49` (`harness-lora-compare`): Compare a harness-specific LoRA (`harness-hub/Qwen3.8-27B-pi-adapted`) against unadapted base, prompt-only change, and harness-only change on a frozen agent task set with independent checkers (`#18`/`#25`), tool-call-inclusive cost accounting (`accepted == 0 -> None`), and benchmark-overlap contamination auditing.
+- `#50` (`latent-feedback`): Test token-to-token top-layer latent feedback (`arXiv:2611.20404`) against a matched-FLOP extra-epoch standard Transformer control on a real miniature pure-Rust sequence learner with exact FLOP accounting and finite-difference gradient verification, keeping large-scale stability explicitly `open_untested`.
+- `#51` (`simplehc-mhc`): Measure SimpleHC vs DeepSeek mHC (iterative Sinkhorn-Knopp doubly-stochastic manifold projection) training/step op overhead and loss quality beside `#33` block attention residuals at matched model size and tokens, recording `primary_source_pin_status: "post_only_unlocated_paper_repo"`.
+- `#53` (`serving-hill-climb`): Default-off ceiling-first, interleaved-control serving hill-climb pinning `sybil-solutions/inference-optimisation-skill@fda968e7fc1996aa23c67139c755fe541c9d4be0` (MIT), reusing `#7` conventions, enforcing measured ceilings before lever search, `Control-Candidate-Control` medians (`>= 6` samples, `<= 3%` secondary regression bound), server-usage/tokenizer token accounting, unified-memory residency, needle/soak/greedy gates, and clean-rebuild rechecks.
+- `#54` (`tufazip-online-codec`): Default-off bounded online Transformer compressor pinning `Tufalabs/tufazip@b9d678db3a0f726e117c8cab51927975830395ac` (MIT), recording the 2×B200 CUDA 13.0 hardware gate, and implementing a real pure-Rust online-learning fixed-point range codec (initialized from a quantized offline prior with decoder-side relearning and zero transferred online weights) verified for bit-exact SHA-256 round-trip against a conventional LZ77 baseline on a pinned small prefix.
+- `#55` (`clairic-extraction`): Default-off pinned `Cloudflare/clairic@2c161be5cc71bacd6605b99a8c07547e58cfa434` (27B, Apache-2.0) and `Cloudflare/clairic-flash@36ad68b999560f56b57ef16a22180f8cb83c6d77` (9B preferred), explicitly rejecting the outdated "single forward pass" preview claim, modeling the 18 Nov parallel slot-autoregressive + typed-head path, checking schema validity, independent ground-truth value agreement, character-span grounding, and non-gating `p_null`/confidence scores against a structured-output baseline.
+- `#57` (`inkling-mini-serve`): Default-off local serve qualification pinning `thinkingmachines/Inkling-2-Mini@6e7c8248f75265bdd4fbab5273304243b5d8c2cb`, `thinkingmachines/TML-d24-varloop-research@767c9d0250aa2938e289e50ca6db5f1b39ebae74`, and `thinking-machines-lab/tinker-cookbook@37261cae3d3ff11f08573b2a84a4d44c809c38f3` (Apache-2.0 + Model AUP), qualifying admitted host floors (`DGX Spark` / `>=32 GB` Apple Silicon / `>=32 GB` VRAM) and official runtimes, verifying miniature 24-stored-layer (middle 12 looped 3× = 48 applications, 8-of-128 MoE, NVFP4/MXFP8) unrolled-vs-looped numerical equivalence (`<= 1e-12`), and covering the optional varloop slice.
+- `#59` (`maya-ik2-serve`): Default-off qualification pinning `alesha-pro/maya-inkling-mini@c520fd14de3b21d67ddc6b7e7348b761aad26d52` (MIT), `ggml-org/llama.cpp@34ff2e047ce520b1d83bd274bf3ff0bfbc72a69b` (`b12590`), and `unsloth/Inkling-2-Mini-GGUF@ae9327c5fbc7333116ba32eee78bb5d2bbefae4f` (`Inkling-2-Mini-UD-Q4_K_XL.gguf`, Apache-2.0), kept strictly distinct from `#57`, separating X post claims from later README claims, enforcing Linux + 24 GB `sm_86` + CUDA 12.8 host gate (recording `gpu_unlock` without installing it), and verifying packed 4-bit expert register-unpack parity vs scalar reference.
+- `#61` (`decode-megakernels`): Persistent-decode megakernel benchmark contract pinning `dangxingyu/megakernel-zoo` (with explicit offline commit-pin status), complementing `#4` and `#39`, comparing an independent multi-launch reference decode loop against a fused persistent-kernel decode loop with equivalence-before-timing enforcement, batch-scaling survival (`batch = 1, 4, 8`), latency percentiles, host-sync reduction, and an agent kernel-build ledger.
+
+## Change
+
+1. Add eleven pure-Rust, dependency-free contract and numerical-reference modules (`unsafe_code = "forbid"`) without touching `Cargo.toml`, `Cargo.lock`, `flake.nix`, `flake.lock`, or `evidence/{bootstrap,batch1,batch2,batch3,batch4,batch5}/`:
+   - `#47` (`src/adv_spec_reasoning.rs`)
+   - `#48` (`src/nvme_coalescing.rs`)
+   - `#49` (`src/harness_lora_compare.rs`)
+   - `#50` (`src/latent_feedback.rs`)
+   - `#51` (`src/simplehc_mhc.rs`)
+   - `#53` (`src/serving_hill_climb.rs`)
+   - `#54` (`src/tufazip_online_codec.rs`)
+   - `#55` (`src/clairic_extraction.rs`)
+   - `#57` (`src/inkling_mini_serve.rs`)
+   - `#59` (`src/maya_ik2_serve.rs`)
+   - `#61` (`src/decode_megakernels.rs`)
+2. Add `src/batch6.rs` and extend `src/lib.rs` and `src/main.rs` with 11 per-issue CLI subcommands plus `batch6-suite`, emitting deterministic artifacts, SHA-256 `manifest.json`, and empty 0-byte `COMPLETE` markers last.
+3. Add comprehensive unit and integration tests covering every Batch 6 invariant, finite-float/zero-divisor guard, independent reference parity check, and negative control; update `README.md`; and generate two-run byte-identical retained evidence under `evidence/batch6/`.
+
+## Scope and limitations
+
+All executable harnesses in Batch 6 run deterministically on CPU as `bounded_contract_harness` checks (`synthetic_contract_fixture: true`). Physical GPUs (DGX Spark GB10, 2× NVIDIA B200 CUDA 13.0, 24 GB RTX 3090 `sm_86` CUDA 12.8, >=32 GB Apple Silicon / VRAM hosts), physical NVMe drives (`nvme get-feature` / `nvidia-nvme-interrupt-coalescing.service`), live OpenAI-compatible servers, official `tufazip`/`enwik9`, `Cloudflare/clairic` weights, `Inkling-2-Mini` / `TML-d24-varloop-research` / `UD-Q4_K_XL` GGUF checkpoints, `harness-hub/Qwen3.8-27B-pi-adapted` weights, unlocated SimpleHC paper/repo artifacts, and `megakernel-zoo` GPU builds are explicitly recorded as `unavailable_hardware_runtime` or `blocked_on_artifacts`. All external X posts, blog posts, READMEs, and papers remain strictly unverified non-gating references.

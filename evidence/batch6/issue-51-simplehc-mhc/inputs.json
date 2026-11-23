@@ -1,0 +1,14 @@
+{
+  "schema": "inference-lab.simplehc-mhc.inputs.v1",
+  "issue": 51,
+  "execution_class": "bounded_contract_harness",
+  "source_bookmark_post_id": "2119613538515960212",
+  "primary_source_pin_status": "post_only_unlocated_paper_repo",
+  "related_issues": [33],
+  "n_streams": 4,
+  "d_model": 6,
+  "num_layers": 4,
+  "sinkhorn_iters": 20,
+  "fixture_digest": {"algorithm":"sha256","hex":"569c9ed34985f45c1fe90e25325904d6cb5ec1165c30d9fe9e801fbcdd951aa9"},
+  "synthetic_contract_fixture": true
+}

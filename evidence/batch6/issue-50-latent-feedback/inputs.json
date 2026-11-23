@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.latent-feedback.inputs.v1",
+  "issue": 50,
+  "related_issues": [33, 36, 37],
+  "execution_class": "bounded_contract_harness",
+  "non_gating_paper": "arXiv:2611.20404",
+  "source_bookmark": "https://x.com/rosinality/status/2122676232701579652",
+  "large_scale_stability_status": "open_untested",
+  "fixture_digest": {"algorithm":"sha256","hex":"c483815504b9d46af88b66b4c2828245ad18b237cea7b428bb01ca321e9ea7ae"},
+  "synthetic_contract_fixture": true
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "inference-lab.maya-ik2-serve.inputs.v1",
+  "issue": 59,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "distinct_from_issue_57": true,
+  "installs_gpu_unlock": false,
+  "synthetic_contract_fixture": true,
+  "pins": {
+    "maya_inkling_mini": {"repo": "alesha-pro/maya-inkling-mini", "commit": "c520fd14de3b21d67ddc6b7e7348b761aad26d52", "license": "MIT"},
+    "llama_cpp_baseline": {"repo": "ggml-org/llama.cpp", "tag": "b12590", "commit": "34ff2e047ce520b1d83bd274bf3ff0bfbc72a69b"},
+    "unsloth_gguf": {"repo": "unsloth/Inkling-2-Mini-GGUF", "commit": "ae9327c5fbc7333116ba32eee78bb5d2bbefae4f", "file": "Inkling-2-Mini-UD-Q4_K_XL.gguf", "license": "Apache-2.0"}
+  },
+  "x_post_unverified_claims": {"source_id":"x_post_2026_11_21","source_ref":"https://x.com/superalesha/status/2124102269138346409","claimed_launches_per_token":781,"claimed_plain_decode_tok_s":128.7,"claimed_http_or_drafter_note":"129.5 HTTP tok/s vs 57.0 llama.cpp (7350 launches); 62.3 tok/s at 340K / 23.57 GiB; 74/96 GSM8K vs 73/96 scalar; 5.7e-5 KL (unverified author claim)","verified_by_lab":false,"is_acceptance_gate":false},
+  "readme_unverified_claims": {"source_id":"pinned_readme_c520fd14","source_ref":"alesha-pro/maya-inkling-mini@c520fd14de3b21d67ddc6b7e7348b761aad26d52/README.md","claimed_launches_per_token":757,"claimed_plain_decode_tok_s":128.0,"claimed_http_or_drafter_note":"128 plain tok/s, 150-210 tok/s with Thinking Machines DSpark drafter; 74 plain / 77 drafter GSM8K (unverified author claim)","verified_by_lab":false,"is_acceptance_gate":false}
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.harness-lora-compare.inputs.v1",
+  "issue": 49,
+  "related_issues": [18, 25],
+  "execution_class": "bounded_contract_harness",
+  "adapter_repo": "harness-hub/Qwen3.8-27B-pi-adapted",
+  "source_bookmark": "https://x.com/yb2698/status/2122685012969398369",
+  "fixture_digest": {"algorithm":"sha256","hex":"2a1f063eca5b57f3bdbc9a9f168cb2eeaff9ef061474407b3b50f34fe2e96ad3"},
+  "synthetic_contract_fixture": true
+}

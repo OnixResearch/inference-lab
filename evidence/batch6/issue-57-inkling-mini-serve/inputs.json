@@ -1,0 +1,17 @@
+{
+  "schema": "inference-lab.inkling-mini-serve.inputs.v1",
+  "issue": 57,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "license": "Apache-2.0 + Model Acceptable Use Policy",
+  "model_aup_url": "https://thinkingmachines.ai/model-acceptable-use-policy/",
+  "pins": {
+    "inkling_2_mini": {"repo": "thinkingmachines/Inkling-2-Mini", "commit": "6e7c8248f75265bdd4fbab5273304243b5d8c2cb"},
+    "tml_d24_varloop_research": {"repo": "thinkingmachines/TML-d24-varloop-research", "commit": "767c9d0250aa2938e289e50ca6db5f1b39ebae74"},
+    "tinker_cookbook": {"repo": "thinking-machines-lab/tinker-cookbook", "commit": "37261cae3d3ff11f08573b2a84a4d44c809c38f3"}
+  },
+  "authors_runtime_list": ["sglang","vllm","ollama","unsloth","nvidia-dynamo","tokenspeed","llama.cpp"],
+  "distinct_related_issues": ["inference-lab#33","inference-lab#26","inference-lab#35","inference-lab#18","rsi-lab#88","inference-lab#59"],
+  "author_unverified_non_gating_notes": "Thinking Machines DeepSWE/Vals/SWE-bench/AA Index tables and 614 GB/s BF16 theoretical ceiling are unverified author claims, not acceptance gates"
+}
