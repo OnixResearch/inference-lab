@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "id": "qwen38-prefill-interference-v1",
+  "description": "Frozen deterministic prefill-interference workload: two bounded long-lived decode victim streams overlapped by a seeded burst of four long prompts, compared against a matched short-prompt or idle control on the same endpoint and settings. Change any field and every result digest changes.",
+  "seed": 20261124,
+  "system_prompt": "You are a careful systems engineer. Reply directly with concise, structured plain text and no filler.",
+  "victim_streams": [
+    {
+      "stream_id": "victim-0",
+      "dispatch_offset_seconds": 0.0,
+      "max_tokens": 128,
+      "prompt": "Write a concise step-by-step checklist for validating deterministic streaming HTTP clients, covering connection setup, monotonic clocks, SSE framing, bounded trace buffers, and fail-closed completion checks."
+    },
+    {
+      "stream_id": "victim-1",
+      "dispatch_offset_seconds": 0.05,
+      "max_tokens": 128,
+      "prompt": "Explain the difference between per-call mean inter-token latency, maximum inter-event gap, and cumulative per-token deadline compliance under bursty delivery, using a concrete four-token example."
+    }
+  ],
+  "burst_schedule": {
+    "burst_offset_seconds": 0.2,
+    "jitter_window_seconds": 0.05,
+    "long_prompts": [
+      {
+        "burst_id": "prefill-burst-0",
+        "relative_offset_seconds": 0.0,
+        "max_tokens": 16,
+        "prompt": "Summarize the three highest-priority failure modes from this deterministic systems design log in two sentences.\n\nSection 1 - Queue Admission and Backpressure: The ingress proxy maintains a fixed ring buffer of 256 pending inference requests partitioned across four priority lanes. When prefill work arrives in synchronized waves, head-of-line blocking can delay active decode steps unless prefill chunking or explicit admission budgets bound per-step compute. Each request carries a monotonic client dispatch timestamp, a declared token budget, and an explicit cancellation handle. Dropping timed-out or truncated streams from summary denominators conceals tail latency regressions and creates false SLO compliance. Every offered request must therefore remain in the evaluation population with a mutually exclusive terminal outcome: completed, rejected, timed_out, incomplete, or unobservable.\n\nSection 2 - Streaming Observation Boundaries: Client harnesses observe TCP socket reads and Server-Sent Events frame boundaries rather than accelerator kernel timestamps. Heartbeat comments prefixed with a colon, role-only deltas, empty deltas, usage-only trailing frames, and [DONE] markers must be counted separately from content-bearing deltas. Because servers or proxies may coalesce multiple tokens into a single SSE data frame, equating one SSE delta with one token or linearly interpolating timestamps inside a multi-token chunk fabricates timing evidence. Cumulative per-token deadline checks of the form TTFT_SLO + (i - 1) * TBT_SLO are valid only when the endpoint supplies an explicit, verified token-to-event mapping such as per-event token IDs or strictly monotonic cumulative completion token counts matching final usage.\n\nSection 3 - Bounded Memory and Overflow Semantics: Unbounded per-event timestamp arrays risk client memory growth during long generations or misbehaving streams. Bounding trace capture to a fixed per-stream limit keeps client overhead predictable, provided overflow is never silent. Whenever a stream exceeds the configured event cap, the harness must record trace_truncated=true, overflow=true, and the dropped event count, and must invalidate both max-gap and cumulative-deadline compliance for that request. Similarly, non-monotonic or non-finite timestamps must fail closed as invalid_timing rather than clamping negative gaps to zero.\n\nSection 4 - Controlled Interference Comparison: To test whether long-prompt prefill bursts stall ongoing decode streams, a benchmark must pair a frozen burst schedule with an identical victim workload run under an idle or short-prompt control on the same endpoint, model, and decoding settings. Without server-side instrumentation, the client can report arrival offsets, TTFT, inter-event gaps, deadline compliance, and task latency, but must mark server-side prefill-vs-decode phase attribution as unavailable."
+      },
+      {
+        "burst_id": "prefill-burst-1",
+        "relative_offset_seconds": 0.015,
+        "max_tokens": 16,
+        "prompt": "Identify the exact accounting invariants required by this deterministic serving telemetry specification in two sentences.\n\nPart A - Population Denominators: Let N_offered denote the total number of requests scheduled in a measured run. No request may vanish between dispatch and aggregation. Every request is assigned exactly one terminal category: completed (HTTP 200, non-empty content, positive usage.completion_tokens, valid finish_reason and [DONE] termination, non-truncated trace, valid monotonic timestamps), rejected (HTTP 4xx/5xx or explicit JSON error frame), timed_out (connect, write, or read timeout), incomplete (premature EOF without valid termination, connection reset, empty content, missing usage, or client cancellation), or unobservable (completed payload with trace overflow, invalid timing metadata, or non-stream transport). The sum completed + rejected + timed_out + incomplete + unobservable must equal N_offered in every run and summary.\n\nPart B - Aggregation Weighting: Within-stream inter-event gaps can be summarized either event-weighted (pooling every inter-event gap across all observable completed streams) or request-weighted (reducing each stream to its per-request maximum gap or per-request p95 gap before taking quantiles across streams). Event-weighted quantiles emphasize long outputs with many SSE frames, whereas request-weighted quantiles treat every user request equally regardless of output length. Publishing both weightings with explicit sample counts and excluded/unobservable request counts prevents silent distortion when short and long streams are mixed.\n\nPart C - Distinct Stall and Deadline SLOs: A per-gap ceiling (max_gap <= max_gap_slo) rejects any single freeze exceeding the threshold even if earlier tokens arrived well ahead of schedule. By contrast, a cumulative per-token deadline schedule d_i = TTFT_SLO + (i - 1) * TBT_SLO allows early token delivery to build positive slack that absorbs a brief jitter spike as long as every token i arrives by d_i. Both metrics capture distinct user-experience requirements and must never be conflated under a single boolean flag.\n\nPart D - Provenance and Reproducibility: Every benchmark artifact must hash the canonical workload specification, record whether runs were closed-loop or interference-burst, include warmup count and run duration, preserve donor fixture digests for legacy corpora, and omit raw response text and authorization secrets from serialized JSON outputs."
+      },
+      {
+        "burst_id": "prefill-burst-2",
+        "relative_offset_seconds": 0.03,
+        "max_tokens": 16,
+        "prompt": "State the two main risks of relying solely on per-call mean inter-token latency from this deterministic benchmark review note in two sentences.\n\nReview Note 1 - The Stall-and-Burst Equivalence Witness: Consider two five-token streams measured from request dispatch in seconds. The smooth stream delivers tokens at [0.10, 0.35, 0.60, 0.85, 1.10]. The bursty stream delivers token 1 at 0.10, stalls for 0.97 seconds, and flushes tokens 2 through 5 at [1.07, 1.08, 1.09, 1.10]. Both streams share the exact same TTFT of 0.10 seconds, the exact same final delivery time of 1.10 seconds, and the exact same per-call mean ITL of (1.10 - 0.10) / 4 = 0.25 seconds. Under an SLO of TTFT_SLO = 0.20 seconds and TBT_SLO = 0.30 seconds, the cumulative deadlines are [0.20, 0.50, 0.80, 1.10, 1.40]. The smooth stream satisfies every deadline with maximum gap 0.25 seconds. The bursty stream suffers a 0.97-second freeze and misses tokens 2 and 3 by 0.57 and 0.28 seconds respectively, yet passes any gate that checks only TTFT and mean ITL.\n\nReview Note 2 - Multi-Token Chunk Coalescing: HTTP reverse proxies, TLS record buffers, and speculative or batched decoding engines frequently emit multiple generated tokens in a single SSE data payload. When a stream reports completion_tokens = 32 across only 8 SSE content frames, the client observes 7 inter-event gaps rather than 31 inter-token intervals. Dividing each event gap evenly across four tokens would invent arrival times earlier than the bytes ever reached the client socket. Labeling event-level gaps explicitly as content_event_gaps and marking token_deadline_compliance as unavailable unless the server provides explicit per-event token boundaries keeps every claim faithful to observed evidence.\n\nReview Note 3 - Edge Cases in Stream Termination: Single-token responses have zero inter-event gaps and no defined mean ITL, yet still have a valid TTFT and a token-1 deadline check when mapped. Streams terminated by abrupt socket close before finish_reason or [DONE] may still have produced partial text, so counting them as completed or dropping them from the denominator would corrupt both throughput and compliance reporting. Explicit outcome classification preserves these edge cases deterministically."
+      },
+      {
+        "burst_id": "prefill-burst-3",
+        "relative_offset_seconds": 0.045,
+        "max_tokens": 16,
+        "prompt": "List the control requirements for evaluating prefill interference on an OpenAI-compatible serving endpoint from this deterministic protocol memo in two sentences.\n\nMemo 1 - Matched Control Design: Measuring an interference burst in isolation cannot separate baseline decode jitter from prefill-induced stalls. Each measured repetition must therefore execute both a control phase and an interference phase against the same target base URL, model identifier, temperature, streaming mode, timeout, and trace-event cap. The victim streams are dispatched at identical relative offsets in both phases, while the burst lane injects either frozen long prompts (interference phase) or matched short prompts / no traffic (control phase). Recording planned_dispatch_offset_seconds alongside actual_dispatch_offset_seconds exposes client scheduling lag if the host itself becomes overloaded.\n\nMemo 2 - Non-Overclaiming Diagnostics: When a victim stream experiences elevated max_gap_seconds during the long-prompt burst compared to the short-prompt control, the client harness has direct evidence of client-visible delivery stalls correlated with the injected burst. However, without synchronized server-side scheduler traces, the client cannot determine whether the stall occurred in prefill execution, KV-cache eviction, host tokenization, HTTP buffering, or OS network queuing. The report must therefore set server_side_phase_attribution.status to unavailable and explain that endpoint-only observation does not establish internal server phase attribution.\n\nMemo 3 - Fail-Closed Verification and Tamper Checks: Every serialized interference report must carry canonical SHA-256 digests of the frozen workload definition and the full execution configuration. An offline validator must recompute all control, interference, population, and delta summaries from the raw per-stream records and reject any artifact whose stored summaries, counts, or digests disagree with the retained records."
+      }
+    ],
+    "short_control_prompts": [
+      {
+        "burst_id": "control-short-0",
+        "relative_offset_seconds": 0.0,
+        "max_tokens": 16,
+        "prompt": "Reply with one concise confirmation sentence for control slot 0."
+      },
+      {
+        "burst_id": "control-short-1",
+        "relative_offset_seconds": 0.015,
+        "max_tokens": 16,
+        "prompt": "Reply with one concise confirmation sentence for control slot 1."
+      },
+      {
+        "burst_id": "control-short-2",
+        "relative_offset_seconds": 0.03,
+        "max_tokens": 16,
+        "prompt": "Reply with one concise confirmation sentence for control slot 2."
+      },
+      {
+        "burst_id": "control-short-3",
+        "relative_offset_seconds": 0.045,
+        "max_tokens": 16,
+        "prompt": "Reply with one concise confirmation sentence for control slot 3."
+      }
+    ]
+  }
+}

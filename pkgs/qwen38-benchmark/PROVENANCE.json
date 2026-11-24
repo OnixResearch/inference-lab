@@ -11,8 +11,10 @@
   "imported_files": {
     "pkgs/qwen38-benchmark/qwen38_benchmark.py": {
       "donor_path": "pkgs/qwen38-benchmark/qwen38_benchmark.py",
-      "sha256": "42a054d03b2555d7d4f933759efcf9b4cc53c060cc2f84609f0c1b6aebe21fd3",
-      "byte_identical_to_donor": true
+      "donor_sha256": "42a054d03b2555d7d4f933759efcf9b4cc53c060cc2f84609f0c1b6aebe21fd3",
+      "sha256": "b4440c56079923725a2976038d2fedf3b548d1a194156830b5475becf488291e",
+      "byte_identical_to_donor": false,
+      "derived_by": "https://github.com/OnixResearch/tt-onix/issues/17"
     },
     "pkgs/qwen38-benchmark/corpus.json": {
       "donor_path": "pkgs/qwen38-benchmark/corpus.json",
@@ -26,14 +28,38 @@
     },
     "pkgs/qwen38-benchmark/default.nix": {
       "donor_path": "pkgs/qwen38-benchmark/default.nix",
-      "sha256": "d2c2e6bbf91d728c6bed388e27849556141ce4d128851257a56753229a2649db",
-      "byte_identical_to_donor": true
+      "donor_sha256": "d2c2e6bbf91d728c6bed388e27849556141ce4d128851257a56753229a2649db",
+      "sha256": "e926046278556d00d471f82d99046fd796bb8aa0d0b431f13982be593d4ffa00",
+      "byte_identical_to_donor": false,
+      "derived_by": "https://github.com/OnixResearch/tt-onix/issues/17"
     }
   },
   "portable_docs": {
     "docs/qwen38-benchmark.md": {
       "donor_path": "docs/qwen38-benchmark.md",
       "donor_sha256": "9f8aa170ca575ec1937f4f64ba5efb8e648cd2c29b42e578fbefe530b8e010ec"
+    }
+  },
+  "derived_extensions": {
+    "stream_deadline_extension": {
+      "issue": "https://github.com/OnixResearch/tt-onix/issues/17",
+      "openspec_change": "openspec/changes/qwen38-benchmark-stream-deadlines/",
+      "stream_observation_schema": "onix.qwen38-stream-deadlines.v1",
+      "prefill_interference_schema": "onix.qwen38-prefill-interference.v1",
+      "added_files": {
+        "pkgs/qwen38-benchmark/prefill_interference.json": {
+          "sha256": "cc04e300599e0f08529fb93626874b0d2a0e3f87dc59fda43850bee714754177"
+        }
+      },
+      "modified_files": [
+        "pkgs/qwen38-benchmark/qwen38_benchmark.py",
+        "pkgs/qwen38-benchmark/default.nix",
+        "docs/qwen38-benchmark.md"
+      ],
+      "preserved_donor_fixtures": [
+        "pkgs/qwen38-benchmark/corpus.json",
+        "pkgs/qwen38-benchmark/agentic_trace.json"
+      ]
     }
   }
 }

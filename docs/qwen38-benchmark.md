@@ -234,6 +234,79 @@ method. `--power-boundary` and `--watts` must be supplied together; otherwise
 Cache mode is operator-declared; the client cannot observe or reset a server's
 cache. Record exact server-side flags in `--note`.
 
+## Stream-stall and per-token deadline semantics (`tt-onix#17`)
+
+Every streaming request in `run`, `agentic`, and `interference` attaches a
+versioned `stream_observation` (`onix.qwen38-stream-deadlines.v1`) alongside
+the legacy `onix.qwen38-benchmark.v1` / `onix.qwen38-agentic-benchmark.v1`
+mean-ITL fields:
+
+- **Bounded per-stream event capture**: monotonic relative arrival offsets (from
+  request dispatch) are recorded only for content-bearing SSE events, separated
+  from SSE comment heartbeats (`:...`), role-only deltas, usage-only chunks,
+  empty deltas, and `[DONE]` markers (`event_counts`). Capture is bounded by
+  `--max-trace-events` (default `4096`). Exceeding the bound sets
+  `trace_truncated: true` and `overflow: true`, records `dropped_trace_events`,
+  and invalidates gap and deadline compliance (`status: "invalid_truncated"`,
+  never passing). Only SHA-256 content hashes and character counts are stored —
+  never raw response text or credentials.
+- **Chunk-vs-token separation**: client-observed inter-event gaps are labeled
+  explicitly as `content_event_gaps` (`event_gap_seconds_p50/p95/p99/max/mean`)
+  under `timestamp_domain: "client_sse_delivery_monotonic_seconds"` and
+  `generation_time_attribution: "client_delivery_only_not_device_generation_time"`.
+  Cumulative per-token deadline checks (`TTFT_SLO + (i - 1) * TBT_SLO`) run
+  **only** when the endpoint supplies an explicit, validated token-to-event
+  mapping (`endpoint_token_ids` via `choices[0].token_ids` /
+  `choices[0].delta.token_ids`, or `endpoint_cumulative_tokens` via
+  `choices[0].cumulative_completion_tokens` / per-event `usage.completion_tokens`)
+  whose total matches `usage.completion_tokens`. Multi-token chunks are never
+  interpolated backward, and SSE chunk counts are never equated with token
+  counts. Without an explicit mapping, `token_deadline_compliance.status` is
+  `"unavailable"` and `every_token_meets_deadline` is `null`.
+- **Distinct max-gap vs cumulative-deadline SLOs & weighting**: summaries report
+  both `event_weighted` (pooled inter-event gaps) and `request_weighted`
+  (per-request max-gap and p95-gap distributions) with explicit sample counts,
+  and keep `max_gap_slo_compliance` (`max_gap_within_budget`) strictly separate
+  from `cumulative_token_deadline_compliance` (`every_token_meets_deadline`),
+  since early token delivery builds slack under cumulative deadlines.
+- **Full failure retention**: mode and run summaries retain every offered
+  request in `population_outcomes`: `offered`, `admitted` (`"unknown"` when
+  endpoint-only), `completed`, `rejected`, `timed_out`, `incomplete` (with
+  explicit `cancelled` count), and `unobservable` (trace overflow or invalid
+  timing), with `completed + rejected + timed_out + incomplete + unobservable == offered`.
+  Failure and unobservable rates, goodput, `arrival_mode`, duration, offered
+  load, warmup count, SLO denominators, and fail-closed `run_status`
+  (`passed`, `failed_slo`, `failed_population`, or `incomplete_slo_unavailable`)
+  are recorded without dropping failed or truncated streams.
+
+## Prefill-interference mode (`interference`)
+
+The original eight-call `pkgs/qwen38-benchmark/agentic_trace.json` and
+`pkgs/qwen38-benchmark/corpus.json` remain byte-identical to donor
+`tt-onix@5ed5e90c`. For controlled prefill-vs-decode interference testing,
+`pkgs/qwen38-benchmark/prefill_interference.json` provides a frozen, seeded
+workload with two bounded long-lived victim streams overlapped by four frozen
+long prompts, paired with a matched `short_prompt` (default) or `idle` control
+on the same endpoint and settings:
+
+```sh
+nix run .#qwen38-benchmark -- interference \
+  --label onix \
+  --base-url http://127.0.0.1:8000 \
+  --control-mode short_prompt \
+  --ttft-slo 0.5 \
+  --tbt-slo 0.1 \
+  --max-gap-slo 0.25 \
+  --output onix-interference.json
+```
+
+Each run emits `onix.qwen38-prefill-interference.v1`, recording planned and
+actual dispatch offsets, TTFT, content-event gaps, max-gap and cumulative
+token-deadline compliance, task latency, full population outcomes, and
+side-by-side interference-vs-control victim deltas and ratios. Because the
+harness is endpoint-only, `server_side_phase_attribution` is always marked
+`"unavailable"`.
+
 ## Non-claims
 
 - Not an admission receipt and not a substitute for backend-owned hardware
