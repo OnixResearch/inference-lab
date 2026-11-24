@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.knowledgator-sys1-extract.inputs.v1",
+  "issue": 87,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "knowledgator_x_post": "https://x.com/knowledgator/status/2123851865821700260",
+  "knowledgator_blog": "https://knowledgator.com/blog/system-one-model",
+  "knowledgator_video": "https://x.com/knowledgator/status/2123851865821700260/video/1",
+  "knowledgator_pin_status": "external_checkpoint_pin_required_default_off",
+  "companion_issue": 55,
+  "fixture_digest": {"algorithm":"sha256","hex":"977a1abd3c4a7582c1504d038947834732c250caa8d3bf503687967512d620f0"}
+}

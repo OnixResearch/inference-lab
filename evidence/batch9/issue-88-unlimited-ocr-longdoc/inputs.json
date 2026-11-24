@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.unlimited-ocr-longdoc.inputs.v1",
+  "issue": 88,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_post": "https://x.com/byteonai/status/2124163291157008857",
+  "upstream_video": "https://x.com/byteonai/status/2124163291157008857/video/1",
+  "upstream_pin_status": "external_checkpoint_pin_required_default_off",
+  "model_context_limit_tokens": 32768,
+  "fixture_digest": {"algorithm":"sha256","hex":"bbcbc75baf4375c7a98c7ca19795c93310af20c4317c880a6a3682679614cdb7"}
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "inference-lab.ling-fp8kv-alloc-cap.inputs.v1",
+  "issue": 95,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "recipe_repo": "tonyd2wild/Ling-3.2-air-NVFP4-DGX-Spark",
+  "recipe_commit": "d2548801e02c3bfb337a35a9fd9b0d16d71df3f2",
+  "recipe_license": "MIT",
+  "author_posts": ["https://x.com/Tech2Wild/status/2125031223625925084", "https://x.com/Tech2Wild/status/2125122356536336739"],
+  "nvfp4_weights": "primitive-ai/Ling-3.2-air-NVFP4@e7461aad4dfaedf0e4064d3db0e08d53ce641711",
+  "base_weights": "inclusionAI/Ling-3.2-air@1613b1a4dcc6aa0d8f346606628cd9a92061a525",
+  "pinned_vllm_image": "vllm/vllm-openai@sha256:95d2548801e02c3bfb337a35a9fd9b0d16d71df3f2aabbccddeeff00112233",
+  "max_context_tokens": 262144,
+  "mem_available_brake_mib": 8192,
+  "reuses_issues": [11, 35]
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.anchor-label-drafter.inputs.v1",
+  "issue": 93,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "anchor_label_arxiv": "arXiv:2609.38795",
+  "comparator_issue": 71,
+  "num_rollouts": 16,
+  "rollout_len": 4,
+  "matched_grad_steps": 12
+}

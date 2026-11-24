@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.mit-qda-quant.inputs.v1",
+  "issue": 86,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_posts": ["https://x.com/songhan_mit/status/2123621155756036191", "https://twitter.com/xyli_bruce/status/2123613817129116038"],
+  "upstream_pin_status": "post_only_unlocated_paper_repo",
+  "complements_issues": [18, 24],
+  "matched_bpw_budget": 4.5
+}

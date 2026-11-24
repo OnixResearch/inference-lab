@@ -1,0 +1,17 @@
+{
+  "schema": "inference-lab.parasite-feature-control.results.v1",
+  "issue": 94,
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate": {"target_hardware":"Physical-model steering/intervention runs (out of scope per issue #94 until #77 physical fixture runs)","status":"unavailable_hardware_runtime","reason":"Bounded CPU subspace interchange, projection ablation, 16-random-subspace necessity test, planted parasite control, and #45 Qwen replay receipts verified locally"},
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "planted_parasite_eval": {"control_id":"planted_parasite_rank2_span_e0_e1","subspace_rank":2,"interchange_sufficiency_rate":1.0,"sufficiency_passed":true,"clean_task_accuracy":1.0,"ablated_task_accuracy":1.0,"target_ablation_accuracy_drop":0.0,"random_subspace_count":16,"random_subspace_rank":2,"random_ablation_mean_drop":0.0625,"random_ablation_std_drop":0.170782512766,"random_ablation_max_drop":0.5,"necessity_passed":false,"classification":"sufficient_not_necessary"},
+  "positive_mechanism_eval": {"control_id":"positive_control_true_task_dir_e2","subspace_rank":1,"interchange_sufficiency_rate":1.0,"sufficiency_passed":true,"clean_task_accuracy":1.0,"ablated_task_accuracy":0.5,"target_ablation_accuracy_drop":0.5,"random_subspace_count":16,"random_subspace_rank":1,"random_ablation_mean_drop":0.0390625,"random_ablation_std_drop":0.126809814946,"random_ablation_max_drop":0.5,"necessity_passed":true,"classification":"found_mechanism"},
+  "qwen_interchange_manifest_digest": {"algorithm":"sha256","hex":"e9f2e1dd764cb9898d4ec1de451e064e4ec15f1e23d7227a07b33487de67e57d"},
+  "qwen_interchange_replay_exact": true,
+  "qwen_ablation_manifest_digest": {"algorithm":"sha256","hex":"1cf70143802fe211bae06d1a7e40c8dbb45aeab0299537b3f39bc11c76dd3f79"},
+  "qwen_ablation_replay_exact": true,
+  "qwen_positive_control_sufficient": true,
+  "qwen_positive_control_necessary": true,
+  "negative_controls": [{"case_id":"nc1_planted_parasite_caught_sufficient_not_necessary","outcome":"invalid","detail":"rank-2 parasite span(e0,e1) passes interchange (1.0) but fails necessity (0.0 drop vs random) -> sufficient_not_necessary"},{"case_id":"nc2_rank_mismatch_rejected","outcome":"invalid","detail":"declared rank=2 with 1 basis vector rejected"},{"case_id":"nc3_non_orthonormal_basis_rejected","outcome":"invalid","detail":"non-orthonormal basis (dot != 0 / norm != 1) rejected"},{"case_id":"nc4_random_subspace_wrong_rank_rejected","outcome":"invalid","detail":"rank-1 random subspaces supplied for rank-2 necessity check rejected"},{"case_id":"nc5_fewer_than_10_random_subspaces_rejected","outcome":"invalid","detail":"only 5 random subspaces (< 10 required) rejected"},{"case_id":"nc6_tampered_subspace_replay_digest_rejected","outcome":"invalid","detail":"re-execution against tampered SHA-256 trace digest fails replay check"},{"case_id":"nc7_nonfinite_basis_element_rejected","outcome":"invalid","detail":"NaN subspace basis coordinate rejected"},{"case_id":"nc8_mutable_model_revision_rejected","outcome":"invalid","detail":"floating `:latest` revision rejected in subspace manifest"},{"case_id":"nc9_unlicensed_reference_repo_no_code_copied","outcome":"blocked_on_artifacts","detail":"dounick/parasite-features@1df61727 has no license file; reference reading only, zero code copied"}]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "inference-lab.parasite-feature-control.inputs.v1",
+  "issue": 94,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "extends_issue": 45,
+  "paper_arxiv": "arXiv:2611.26711",
+  "reference_repo": "dounick/parasite-features",
+  "reference_commit": "1df61727bb2f502b882d334eb7f2ca1a38e05712",
+  "reference_license_status": "missing_license_reference_only_no_code_copied",
+  "author_posts": ["https://x.com/SashaBoguraev/status/2124892195740340581", "https://x.com/tpimentelms/status/2124933776568463364"],
+  "coordination_note": "Coordinate with inference-lab#77 and rsi-lab#172: report necessity_passed and classification next to any steering or behavioral-specificity metric.",
+  "min_random_subspaces": 10,
+  "used_random_subspaces": 16
+}

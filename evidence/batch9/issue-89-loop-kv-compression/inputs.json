@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.loop-kv-compression.inputs.v1",
+  "issue": 89,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "related_work_papers": ["KAIST ResidualQuant (Oct 2026)", "LoopVQ (Nov 2026)", "Looping Deeper Without Growing the KV Cache (Nov 2026)"],
+  "complements_issues": [28, 69],
+  "stored_layers": 2,
+  "num_loops": 4,
+  "seq_len": 16,
+  "head_dim": 8
+}

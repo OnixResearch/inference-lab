@@ -1,0 +1,156 @@
+{
+  "schema": "inference-lab.batch9-evidence.v1",
+  "issues": [85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95],
+  "digest_algorithm": "sha256",
+  "top_level_artifact_sha256": {
+    "inputs.json": "84a8a605551a66c896cee87ebbb8424ee41df287203072da0a99e8b644fffcaf",
+    "results.json": "e2dcc9518bec10dc6b9d6370501f34d7cb177189b6e4a414d3a0e6fd5094d563",
+    "summary.md": "6a332e7cd6296f17866961cea6e7bf2170eec668c1c2af889943d86bd70b7040",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "suites": [
+    {
+      "subdir": "issue-85-link-sparse-attention",
+      "issues": [85],
+      "command": ["inference-lab", "link-sparse-attention", "--out", "runs/validation/issue-85-link-sparse-attention"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "eddc04120373b32634d439af4db366bcec763d4613902d6c65fc603b83bfc8b6",
+        "results.json": "40031b2d5ef7832e1af7e348f631b9748a41aff0b04bd197743721483f3e286e",
+        "summary.md": "41d3a9c79a3d924c225c6d11ac401b594aad77815b0fecb9c808694f7e2b2d72",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-86-mit-qda-quant",
+      "issues": [86],
+      "command": ["inference-lab", "mit-qda-quant", "--out", "runs/validation/issue-86-mit-qda-quant"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "f1650ed64d0319a9c72379f80442fabeafaf420eb70f0916dec2a499e91d409c",
+        "results.json": "d1cc0ed261d055672c37fea0cbd74ee74bded198c37945b0e12ab9f495d8848c",
+        "summary.md": "92aa44d5c6eae1a4e736a50cce1a29a1176a85ceb8910dd05ca6fe355c023426",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-87-knowledgator-sys1-extract",
+      "issues": [87],
+      "command": ["inference-lab", "knowledgator-sys1-extract", "--out", "runs/validation/issue-87-knowledgator-sys1-extract"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "2a4cc709d5fa7b9697e2708108f7d59e1a21e0624a8510c7bc339ef9c9313ffb",
+        "results.json": "ab3d02f074e7bc65a29e8c441118cc0283258a91c923ba7f5d8ae974264cc8d6",
+        "summary.md": "75a79b41a830f1841ac0463f435e9951eee4b105c9e8bb0a1034e2dd5c89c631",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-88-unlimited-ocr-longdoc",
+      "issues": [88],
+      "command": ["inference-lab", "unlimited-ocr-longdoc", "--out", "runs/validation/issue-88-unlimited-ocr-longdoc"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "536b9277f9c0c3a1116e6f69bc07479d785c27ba734b18726419c3aa76fc5383",
+        "results.json": "bb0fa936084aed8316de0f185ee22253c3ac8f38ea0f0b65b0b783ef0ae6a646",
+        "summary.md": "c9af6c0bcfb9bc01b80a5fce025110e7cc3a3ce148ad896641cfa9616dfe0b35",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-89-loop-kv-compression",
+      "issues": [89],
+      "command": ["inference-lab", "loop-kv-compression", "--out", "runs/validation/issue-89-loop-kv-compression"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "4bc299e3843e2259863345b7daaeea9b7e42c81595ed41cd4bf60123b27f7d4a",
+        "results.json": "70a968daf423219a9e6930a60867af361fa29d45d1b96224e157b09e4a72824a",
+        "summary.md": "7c262d2c3be70377e7cf04b0ca00dd7a1359f7ddbf9b9cb917a9fd993888ca7f",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-90-alora-prefix-cache",
+      "issues": [90],
+      "command": ["inference-lab", "alora-prefix-cache", "--out", "runs/validation/issue-90-alora-prefix-cache"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "ce8f391e84c45cda3dadd9ba85e7a49a887b28e8c63e172709fbd62d3bf0724a",
+        "results.json": "d88d8f5f5a07ad29f215d7aa411ba2465348efb8b0c25eea901e7befb4c0b632",
+        "summary.md": "88b1b3c0bf10c4553c091820e19577314229c84f51f6294207601e9f5bc41b1b",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-91-perseus-mpk-rdma",
+      "issues": [91],
+      "command": ["inference-lab", "perseus-mpk-rdma", "--out", "runs/validation/issue-91-perseus-mpk-rdma"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "4b02ae48e1c946a692eac49c4560b9323e0253a4e9a54a3afece69822b7aef6b",
+        "results.json": "91165e8219d279898cc01c53287db544f085ed853b025fe71a4b234674f8a446",
+        "summary.md": "a24c19ac23e7cc2b481120ef8812e043fcba8cc6da88f8bdc2ee4cf31ac3ab67",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-92-moe-spec-roofline",
+      "issues": [92],
+      "command": ["inference-lab", "moe-spec-roofline", "--out", "runs/validation/issue-92-moe-spec-roofline"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "b4c452dff551ec56e649a34b67700ec4cd2d423c2aa68b896aa3fdcc7564e630",
+        "results.json": "4824484c41e33d993018e940f0a6a063aab3ca9466bd4a8cd7aab9b5c83ccac0",
+        "summary.md": "9333dfa479ca67b77096d7975c5759dcf66ded51ef6840eb3ce693a824cdaf8f",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-93-anchor-label-drafter",
+      "issues": [93],
+      "command": ["inference-lab", "anchor-label-drafter", "--out", "runs/validation/issue-93-anchor-label-drafter"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "1f8e98619edc5fed6a25efe322db9281188c8dd329df1a5a07309d52e2530486",
+        "results.json": "1aa2ef25ce3c636fdab4d0745c52f151554c7ecc4fffea9f88fc96c7e9ea6c44",
+        "summary.md": "f7c56b3a7389ac6bc52d505cb587d3523a570d6c1d44e7163bb489ee0e9034d4",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-94-parasite-feature-control",
+      "issues": [94],
+      "command": ["inference-lab", "parasite-feature-control", "--out", "runs/validation/issue-94-parasite-feature-control"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "3fae8fdeeaf95126abfd9c8875c65189ceff3cbacbff23e90970ba9a3437cc06",
+        "results.json": "9803bf8aa338a1fba9f747263331c8682efdebc992f55578c28afe45eab37dd3",
+        "summary.md": "3b1082b97faa31ff8016f66ba92c29d6d9030113c2e5506a68454a1be1b9710e",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-95-ling-fp8kv-alloc-cap",
+      "issues": [95],
+      "command": ["inference-lab", "ling-fp8kv-alloc-cap", "--out", "runs/validation/issue-95-ling-fp8kv-alloc-cap"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "5abca89ad1a0208c2ced7dbe3c520980bf2c78e86ce9c3c3acdaf893381ca14e",
+        "results.json": "7bb5911a70525d5f509dfe90691f38d531b864258a581c84625a06e73ab77ac6",
+        "summary.md": "42022f290444f1fb3f4ab43a29a9dcea2a268c3274e43eea919ae851f86ab0f4",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

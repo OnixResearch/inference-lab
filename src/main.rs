@@ -8,23 +8,25 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, adv_spec_reasoning, apple_nvidia_sidecar, batch2, batch3, batch4, batch5,
-    batch6, batch7, batch8, biollm_protocol, blink_cpu_free_serving, clairic_extraction,
-    compact_hybrids, cpu_contention, decode_megakernels, deepseek_ref, deepseek_spark, diffusion,
-    disagg_kv_transfer, djev_protocol, drafter_opd_replay, drafting, exl3_longctx_quant,
-    expert_placement, flash_topk, ggml_ops, graphical_sampling, harness_lora_compare,
-    hetero_rollout, hnet_byte_modeling, hypertune_kv_adapters, inkling_mini_serve,
-    inkling_residuals, intervention_replay, k2_uno_mova, kernel_opt, kv_compression, kv_routing,
-    latent_feedback, learned_compiler, lfm3_d1_decision, lifecycle, linquant_recurrent, macaq_r,
-    maya_ik2_serve, mimo_hysparse2_kv, mla_comparison, mtp_decoder, native_recurrent_bench,
-    nemotron_spark, nvfp4_mxfp8, nvme_coalescing, pdl_breakable_graphs, phoenix_nano, power,
-    proof_completion, qsa_state_coherence, quark_eval, qwen35_neuron_steering, qwen38_longbook_gdn,
-    qwen38_qsa, qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf, saber_dflash2_power,
-    seed, serving_bench, serving_hill_climb, silicon_codesign_audit, simplehc_mhc,
-    spark_copydrafter, spark_engines, spark_kv_checkpoint, spark_rdma_tp, sparse_moe,
-    split_m2_p150, stage, structured_read, tensorlean_kernel_verify, tiered_eval,
-    tkcc_hillclimb_profile, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec,
-    varloop_budget_protocol, vision_infusion,
+    adaptive_spec, adv_spec_reasoning, alora_prefix_cache, anchor_label_drafter,
+    apple_nvidia_sidecar, batch2, batch3, batch4, batch5, batch6, batch7, batch8, batch9,
+    biollm_protocol, blink_cpu_free_serving, clairic_extraction, compact_hybrids, cpu_contention,
+    decode_megakernels, deepseek_ref, deepseek_spark, diffusion, disagg_kv_transfer, djev_protocol,
+    drafter_opd_replay, drafting, exl3_longctx_quant, expert_placement, flash_topk, ggml_ops,
+    graphical_sampling, harness_lora_compare, hetero_rollout, hnet_byte_modeling,
+    hypertune_kv_adapters, inkling_mini_serve, inkling_residuals, intervention_replay, k2_uno_mova,
+    kernel_opt, knowledgator_sys1_extract, kv_compression, kv_routing, latent_feedback,
+    learned_compiler, lfm3_d1_decision, lifecycle, ling_fp8kv_alloc_cap, link_sparse_attention,
+    linquant_recurrent, loop_kv_compression, macaq_r, maya_ik2_serve, mimo_hysparse2_kv,
+    mit_qda_quant, mla_comparison, moe_spec_roofline, mtp_decoder, native_recurrent_bench,
+    nemotron_spark, nvfp4_mxfp8, nvme_coalescing, parasite_feature_control, pdl_breakable_graphs,
+    perseus_mpk_rdma, phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval,
+    qwen35_neuron_steering, qwen38_longbook_gdn, qwen38_qsa, qwen38_quant, related_work, rsi_bench,
+    rwkv_ggml, rwkv_leaf, saber_dflash2_power, seed, serving_bench, serving_hill_climb,
+    silicon_codesign_audit, simplehc_mhc, spark_copydrafter, spark_engines, spark_kv_checkpoint,
+    spark_rdma_tp, sparse_moe, split_m2_p150, stage, structured_read, tensorlean_kernel_verify,
+    tiered_eval, tkcc_hillclimb_profile, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec,
+    unlimited_ocr_longdoc, varloop_budget_protocol, vision_infusion,
 };
 
 const HELP: &str = "\
@@ -140,6 +142,20 @@ Batch 8 commands (#74-#84):
   silicon-codesign-audit  Issue #84 arXiv:2611.18859 ML/silicon co-design pre-silicon roofline/energy audit
   batch8-suite            Run all Batch 8 harnesses (#74-#84) with SHA-256 manifest & COMPLETE last
 
+Batch 9 commands (#85-#95):
+  link-sparse-attention   Issue #85 Constructor AGI Link learned sparse attention & 4M retrieval/end-task boundary
+  mit-qda-quant           Issue #86 MIT QDA mixed-precision recipe vs pinned manual/GGUF/NVFP4 baselines
+  knowledgator-sys1-extract Issue #87 Knowledgator System 1 extraction alongside Clairic (#55) & LLM baseline
+  unlimited-ocr-longdoc   Issue #88 Unlimited-OCR (3B) multi-page PDF edit distance & cross-page preservation
+  loop-kv-compression     Issue #89 ResidualQuant INT2 & LoopVQ sub-1-bit cross-loop KV compression (#69)
+  alora-prefix-cache      Issue #90 Activated LoRA (aLoRA) delayed-suffix vs Hypertune (#66) prefix caching
+  perseus-mpk-rdma        Issue #91 Perseus decoupled RDMA signaling & MPK persistent kernel beside #61/#63/#76
+  moe-spec-roofline       Issue #92 Sparse-MoE speculative verification roofline & temporal routing overlap
+  anchor-label-drafter    Issue #93 Off-policy Anchor-Label Relabelling vs Draft-OPD & D-PACE (#71)
+  parasite-feature-control Issue #94 Parasite Features subspace interchange, necessity ablation & planted control (#45)
+  ling-fp8kv-alloc-cap    Issue #95 Single-Spark Ling-3.2-air NVFP4 2x2 FP8-KV vs torch allocator cap (262K)
+  batch9-suite            Run all Batch 9 harnesses (#85-#95) with SHA-256 manifest & COMPLETE last
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -240,6 +256,18 @@ enum Command {
     AppleNvidiaSidecar(PathBuf),
     SiliconCoDesignAudit(PathBuf),
     Batch8Suite(PathBuf),
+    LinkSparseAttention(PathBuf),
+    MitQdaQuant(PathBuf),
+    KnowledgatorSys1Extract(PathBuf),
+    UnlimitedOcrLongdoc(PathBuf),
+    LoopKvCompression(PathBuf),
+    AloraPrefixCache(PathBuf),
+    PerseusMpkRdma(PathBuf),
+    MoeSpecRoofline(PathBuf),
+    AnchorLabelDrafter(PathBuf),
+    ParasiteFeatureControl(PathBuf),
+    LingFp8KvAllocCap(PathBuf),
+    Batch9Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -338,6 +366,18 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "apple-nvidia-sidecar" => Ok(Command::AppleNvidiaSidecar(out)),
                 "silicon-codesign-audit" => Ok(Command::SiliconCoDesignAudit(out)),
                 "batch8-suite" => Ok(Command::Batch8Suite(out)),
+                "link-sparse-attention" => Ok(Command::LinkSparseAttention(out)),
+                "mit-qda-quant" => Ok(Command::MitQdaQuant(out)),
+                "knowledgator-sys1-extract" => Ok(Command::KnowledgatorSys1Extract(out)),
+                "unlimited-ocr-longdoc" => Ok(Command::UnlimitedOcrLongdoc(out)),
+                "loop-kv-compression" => Ok(Command::LoopKvCompression(out)),
+                "alora-prefix-cache" => Ok(Command::AloraPrefixCache(out)),
+                "perseus-mpk-rdma" => Ok(Command::PerseusMpkRdma(out)),
+                "moe-spec-roofline" => Ok(Command::MoeSpecRoofline(out)),
+                "anchor-label-drafter" => Ok(Command::AnchorLabelDrafter(out)),
+                "parasite-feature-control" => Ok(Command::ParasiteFeatureControl(out)),
+                "ling-fp8kv-alloc-cap" => Ok(Command::LingFp8KvAllocCap(out)),
+                "batch9-suite" => Ok(Command::Batch9Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -537,6 +577,33 @@ fn publish_batch7_suite(path: &Path, bundle: &batch7::Batch7Bundle) -> Result<()
 }
 
 fn publish_batch8_suite(path: &Path, bundle: &batch8::Batch8Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch9_suite(path: &Path, bundle: &batch9::Batch9Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -1266,6 +1333,99 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch8_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::LinkSparseAttention(path) => {
+            let report = link_sparse_attention::run_default_harness()?;
+            let inputs = link_sparse_attention::inputs_json(&report);
+            let results = link_sparse_attention::results_json(&report);
+            let summary = link_sparse_attention::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::MitQdaQuant(path) => {
+            let report = mit_qda_quant::run_default_harness()?;
+            let inputs = mit_qda_quant::inputs_json(&report);
+            let results = mit_qda_quant::results_json(&report);
+            let summary = mit_qda_quant::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::KnowledgatorSys1Extract(path) => {
+            let report = knowledgator_sys1_extract::run_default_harness()?;
+            let inputs = knowledgator_sys1_extract::inputs_json(&report);
+            let results = knowledgator_sys1_extract::results_json(&report);
+            let summary = knowledgator_sys1_extract::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::UnlimitedOcrLongdoc(path) => {
+            let report = unlimited_ocr_longdoc::run_default_harness()?;
+            let inputs = unlimited_ocr_longdoc::inputs_json(&report);
+            let results = unlimited_ocr_longdoc::results_json(&report);
+            let summary = unlimited_ocr_longdoc::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::LoopKvCompression(path) => {
+            let report = loop_kv_compression::run_default_harness()?;
+            let inputs = loop_kv_compression::inputs_json(&report);
+            let results = loop_kv_compression::results_json(&report);
+            let summary = loop_kv_compression::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::AloraPrefixCache(path) => {
+            let report = alora_prefix_cache::run_default_harness()?;
+            let inputs = alora_prefix_cache::inputs_json(&report);
+            let results = alora_prefix_cache::results_json(&report);
+            let summary = alora_prefix_cache::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::PerseusMpkRdma(path) => {
+            let report = perseus_mpk_rdma::run_default_harness()?;
+            let inputs = perseus_mpk_rdma::inputs_json(&report);
+            let results = perseus_mpk_rdma::results_json(&report);
+            let summary = perseus_mpk_rdma::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::MoeSpecRoofline(path) => {
+            let report = moe_spec_roofline::run_default_harness()?;
+            let inputs = moe_spec_roofline::inputs_json(&report);
+            let results = moe_spec_roofline::results_json(&report);
+            let summary = moe_spec_roofline::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::AnchorLabelDrafter(path) => {
+            let report = anchor_label_drafter::run_default_harness()?;
+            let inputs = anchor_label_drafter::inputs_json(&report);
+            let results = anchor_label_drafter::results_json(&report);
+            let summary = anchor_label_drafter::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::ParasiteFeatureControl(path) => {
+            let report = parasite_feature_control::run_default_harness()?;
+            let inputs = parasite_feature_control::inputs_json(&report);
+            let results = parasite_feature_control::results_json(&report);
+            let summary = parasite_feature_control::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::LingFp8KvAllocCap(path) => {
+            let report = ling_fp8kv_alloc_cap::run_default_harness()?;
+            let inputs = ling_fp8kv_alloc_cap::inputs_json(&report);
+            let results = ling_fp8kv_alloc_cap::results_json(&report);
+            let summary = ling_fp8kv_alloc_cap::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch9Suite(path) => {
+            let bundle = batch9::run_all()?;
+            publish_batch9_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -1388,6 +1548,18 @@ mod tests {
             "apple-nvidia-sidecar",
             "silicon-codesign-audit",
             "batch8-suite",
+            "link-sparse-attention",
+            "mit-qda-quant",
+            "knowledgator-sys1-extract",
+            "unlimited-ocr-longdoc",
+            "loop-kv-compression",
+            "alora-prefix-cache",
+            "perseus-mpk-rdma",
+            "moe-spec-roofline",
+            "anchor-label-drafter",
+            "parasite-feature-control",
+            "ling-fp8kv-alloc-cap",
+            "batch9-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

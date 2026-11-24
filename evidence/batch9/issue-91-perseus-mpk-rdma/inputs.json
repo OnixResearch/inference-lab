@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.perseus-mpk-rdma.inputs.v1",
+  "issue": 91,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "related_work_systems": ["Perseus", "MPK (Mirage Persistent Kernel)", "ForgeMegakernel"],
+  "informs_issues": [61, 63, 76],
+  "num_layers": 8,
+  "num_partitions": 4
+}

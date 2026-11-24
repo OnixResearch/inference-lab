@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.link-sparse-attention.inputs.v1",
+  "issue": 85,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_post": "https://x.com/michaeltgao/status/2123204373773983992",
+  "upstream_video_url": "https://x.com/michaeltgao/status/2123204373773983992/video/1",
+  "upstream_pin_status": "post_only_unlocated_paper_repo",
+  "complements_issues": [23, 31],
+  "fixture_seq_len": 64,
+  "fixture_num_blocks": 16
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "inference-lab.alora-prefix-cache.inputs.v1",
+  "issue": 90,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "alora_arxiv": "arXiv:2512.17910",
+  "fastlibra_elora_arxiv": "arXiv:2505.03756",
+  "hypertune_companion_repo": "Hyperstitioncc/Hypertune",
+  "hypertune_companion_commit": "7aaaf8c2fc88bfb7dfd91019c40428d4528ae121",
+  "complements_issues": [25, 49, 66],
+  "prefix_len": 8,
+  "suffix_len": 4
+}

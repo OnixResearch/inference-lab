@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.moe-spec-roofline.inputs.v1",
+  "issue": 92,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "references": ["arXiv:2610.38981", "arXiv:2502.10424", "MoE-SpeQ"],
+  "informs_issues": [6, 21, 65],
+  "num_experts": 16,
+  "top_k": 2
+}

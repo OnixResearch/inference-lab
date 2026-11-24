@@ -148,6 +148,23 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 | `silicon-codesign-audit` | [#84](https://github.com/OnixResearch/inference-lab/issues/84) | `bounded_contract_harness` | `arXiv:2611.18859` pre-silicon ML/silicon co-design related-work record (`blocked_on_artifacts`), structured workload/precision/bandwidth/energy assumption audit, deterministic roofline & `J/token` comparator against lab hardware baseline envelopes (`#43`), silicon-validation flags, and 8 negative controls |
 | `batch8-suite` | `#74`–`#84` | `bounded_contract_harness` | Runs all 11 Batch 8 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
 
+## Implemented harnesses (Batch 9: `#85`–`#95`)
+
+| Command | Tracked issue(s) | Execution class | Current bounded scope |
+| --- | --- | --- | --- |
+| `link-sparse-attention` | [#85](https://github.com/OnixResearch/inference-lab/issues/85) | `bounded_contract_harness` | Constructor AGI `Link` learned sparse attention related-work record (`blocked_on_artifacts`, +53%/9.9x claims unverified), pure-Rust learned block-router full-read parity (`<= 1e-12`) vs dense attention, default-off `128K`–`4M` retrieval + end-task boundary (`#23`, `#31`), and 8 negative controls |
+| `mit-qda-quant` | [#86](https://github.com/OnixResearch/inference-lab/issues/86) | `bounded_contract_harness` | MIT QDA (Quantization Design Agent) related-work record (`blocked_on_artifacts`), pure-Rust sensitivity-guided mixed-precision quantizer vs pinned uniform GGUF-INT4, NVFP4, and FP64 baselines at matched `4.5`-bpw budget, Spearman KL correlation (`#18`), `cost_per_accepted_task` (`None` at zero), and 8 negative controls |
+| `knowledgator-sys1-extract` | [#87](https://github.com/OnixResearch/inference-lab/issues/87) | `bounded_contract_harness` | Default-off Knowledgator System 1 extraction arm (`blocked_on_artifacts`, ~100x claim unverified) alongside pinned Clairic (`#55`) and structured-output LLM baseline on a frozen 6-doc hierarchical-extraction fixture comparing exact-field F1, schema conformance, span grounding, throughput, and 8 negative controls |
+| `unlimited-ocr-longdoc` | [#88](https://github.com/OnixResearch/inference-lab/issues/88) | `bounded_contract_harness` | Default-off Unlimited-OCR (3B) qualification (`blocked_on_artifacts`, MIT/32K/vLLM+SGLang) vs page-chunked OCR on `12`–`100`-page PDF structure fixtures using exact pure-Rust normalized Levenshtein edit distance, cross-page table/heading preservation, 32K context/memory guards, pages/sec accounting, and 8 negative controls |
+| `loop-kv-compression` | [#89](https://github.com/OnixResearch/inference-lab/issues/89) | `bounded_contract_harness` | KAIST `ResidualQuant INT2` & `LoopVQ` sub-1-bit cross-loop KV compression related-work record beside `#28`/`#69`, pure-Rust cross-loop KV cosine similarity, bit-exact INT2 residual & `0.5`/`0.25`-bpw LoopVQ pack/unpack, zero-residual parity (`<= 1e-12`), attention error, metadata-inclusive byte accounting, and 8 negative controls |
+| `alora-prefix-cache` | [#90](https://github.com/OnixResearch/inference-lab/issues/90) | `bounded_contract_harness` | Activated LoRA (`aLoRA`, `arXiv:2512.17910`) & `FastLibra`/`ELORA` related-work record beside `#66` (`Hypertune`) and standard LoRA, pure-Rust exact prefix-KV invariance (`<= 1e-12`) & delayed-suffix equivalence (`<= 1e-12`), `1`–`128`-adapter shared-prefix TTFT/HBM/accuracy scaling, and 8 negative controls |
+| `perseus-mpk-rdma` | [#91](https://github.com/OnixResearch/inference-lab/issues/91) | `bounded_contract_harness` | `Perseus` decoupled per-destination RDMA signaling, `MPK` (Mirage Persistent Kernel), and `ForgeMegakernel` related-work record beside `#61`/`#63`/`#76`, deterministic 2-node collective value/ordering parity (`<= 1e-12`), NIC fence stall profiling, 2-node RDMA host gate, and 8 negative controls |
+| `moe-spec-roofline` | [#92](https://github.com/OnixResearch/inference-lab/issues/92) | `bounded_contract_harness` | `arXiv:2610.38981`, `QuantSpec` (`arXiv:2502.10424`), and `MoE-SpeQ` beside `#6`/`#21`/`#65`, pure-Rust sparse-MoE temporal expert-routing union & overlap ratios across `gamma = 1..8`, batched verification parity (`<= 1e-12`), analytical bandwidth+KV roofline draft-length governor, and 8 negative controls |
+| `anchor-label-drafter` | [#93](https://github.com/OnixResearch/inference-lab/issues/93) | `bounded_contract_harness` | `arXiv:2609.38795` (*Anchor-Label Relabelling* & *In-Rollout Anchors*) beside `#71` (`Draft-OPD` & `D-PACE`), pure-Rust matched-budget cascade-invalidation recovery, exact analytical rejection-sampling target-distribution losslessness (`<= 1e-12`), 2-sigma noise-floor gating, and 8 negative controls |
+| `parasite-feature-control` | [#94](https://github.com/OnixResearch/inference-lab/issues/94) | `bounded_contract_harness` | *Parasite Features* (`arXiv:2611.26711`, unlicensed `dounick/parasite-features@1df61727` reference-only) extending `#45` with typed rank-k `SubspaceInterchange` & `ProjectionAblation` digests, 16-random-subspace necessity test, planted-parasite negative control (`sufficient_not_necessary`), positive mechanism control, bit-identical replay receipts, `#77`/`rsi-lab#172` notes, and 9 negative controls |
+| `ling-fp8kv-alloc-cap` | [#95](https://github.com/OnixResearch/inference-lab/issues/95) | `bounded_contract_harness` | Default-off pinned single-Spark `Ling-3.2-air` NVFP4 (`tonyd2wild/Ling-3.2-air-NVFP4-DGX-Spark@d2548801`, `MIT`) 2x2 KV-dtype (`bf16`/`fp8`) x allocator-policy (`stock`/`capped`) matrix + MTP stage reusing `#35` digests & `#11` `MemoryCounterObservation` rows under an `8192 MiB` `MemAvailable` brake, multi-depth needle recall (`32K`–`215K+`), full-pool stress, pure-Rust MLA BF16-vs-FP8 & isolated 1-stage decode parity (`<= 1e-12`), MTP throughput noise floor, and 9 negative controls |
+| `batch9-suite` | `#85`–`#95` | `bounded_contract_harness` | Runs all 11 Batch 9 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
+
 ## Ownership boundaries
 
 | Owner | Responsibility retained there |
@@ -179,6 +196,7 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [Batch 6 contract & reference-math evidence (`#47`–`#51`, `#53`–`#55`, `#57`, `#59`, `#61`)](evidence/batch6/README.md)
 - [Batch 7 contract & reference-math evidence (`#62`–`#73`)](evidence/batch7/README.md)
 - [Batch 8 contract & reference-math evidence (`#74`–`#84`)](evidence/batch8/README.md)
+- [Batch 9 contract & reference-math evidence (`#85`–`#95`)](evidence/batch9/README.md)
 - [OpenSpec change record (Batch 1)](openspec/changes/bootstrap-and-batch1-contracts/proposal.md)
 - [OpenSpec change record (Batch 2)](openspec/changes/batch2-drafting-serving-lifecycle/proposal.md)
 - [OpenSpec change record (Batch 3)](openspec/changes/batch3-rwkv-ggml-mla-moe-quant/proposal.md)
@@ -187,6 +205,7 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [OpenSpec change record (Batch 6)](openspec/changes/batch6-speculative-nvme-hillclimb-tufazip-clairic-mini-megakernels/proposal.md)
 - [OpenSpec change record (Batch 7)](openspec/changes/batch7-disagg-kv-linquant-varloop-ternary-uno-lfm3/proposal.md)
 - [OpenSpec change record (Batch 8)](openspec/changes/batch8-pdl-tensorlean-blink-steering-hnet-exl3-saber-hysparse/proposal.md)
+- [OpenSpec change record (Batch 9)](openspec/changes/batch9-link-qda-ocr-loopkv-alora-moespec-parasite-ling/proposal.md)
 - [OpenSpec change record (`qwen38-benchmark` import)](openspec/changes/import-tt-onix-qwen38-benchmark/proposal.md)
 - [OpenSpec change record (`retention-eval` import)](openspec/changes/import-tt-onix-retention-eval/proposal.md)
 - [OpenSpec change record (`http-batch-group` import)](openspec/changes/import-tt-onix-http-batch-group/proposal.md)
