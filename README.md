@@ -128,6 +128,7 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 ## Read next
 
 - [Architecture and boundaries](docs/architecture.md)
+- [Portable Qwen serving benchmark (`qwen38-benchmark`)](docs/qwen38-benchmark.md)
 - [Experiment protocol and non-collapsing outcomes](docs/experiment-protocol.md)
 - [Pinned source review](docs/source-review.md)
 - [Research roadmap](docs/roadmap.md)
@@ -145,4 +146,5 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [OpenSpec change record (Batch 4)](openspec/changes/batch4-mtp-sparse-quant-placement-qsa/proposal.md)
 - [OpenSpec change record (Batch 5)](openspec/changes/batch5-qsa-recurrent-tiered-split-interventions/proposal.md)
 - [OpenSpec change record (Batch 6)](openspec/changes/batch6-speculative-nvme-hillclimb-tufazip-clairic-mini-megakernels/proposal.md)
+- [OpenSpec change record (`qwen38-benchmark` import)](openspec/changes/import-tt-onix-qwen38-benchmark/proposal.md)
 - [Contribution rules](AGENTS.md)

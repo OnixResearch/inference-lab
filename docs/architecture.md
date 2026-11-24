@@ -6,6 +6,7 @@ Inference Lab separates pure deterministic evaluation from all external effects:
 
 - **Pure core (`src/lib.rs` and submodules)**: zero external crate dependencies, `unsafe_code = "forbid"`, no filesystem I/O, no system clock reads, no network sockets, no process spawning, and no device probing. Given explicit inputs, every module produces deterministic structured outputs and SHA-256 content digests.
 - **Explicit imperative shell (`src/main.rs`)**: parses CLI flags, invokes the selected bounded harness, serializes deterministic JSON and Markdown reports, creates a brand-new output directory (refusing to overwrite existing paths), writes `inputs.json`, `results.json`, `summary.md`, and publishes an empty `COMPLETE` marker last.
+- **Imported portable client worker (`pkgs/qwen38-benchmark/`)**: standard-library Python HTTP/SSE benchmark (`LGPL-2.1-only`, imported byte-for-byte from `OnixResearch/tt-onix@5ed5e90cdd265443fa2f9b73e4ce46aeaa71837a` under `#7`) packaged via Nix (`packages.<system>.qwen38-benchmark`, `apps.<system>.qwen38-benchmark`, `checks.<system>.qwen38-benchmark`) with device-free loopback `--self-test`.
 
 ## Module structure
 

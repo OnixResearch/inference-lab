@@ -40,15 +40,21 @@
               mainProgram = "inference-lab";
             };
           };
+          qwen38-benchmark = pkgs.callPackage ./pkgs/qwen38-benchmark { };
         in {
           default = package;
           inference-lab = package;
+          inherit qwen38-benchmark;
         });
 
       apps = forAllSystems (system: {
         default = {
           type = "app";
           program = "${self.packages.${system}.default}/bin/inference-lab";
+        };
+        qwen38-benchmark = {
+          type = "app";
+          program = "${self.packages.${system}.qwen38-benchmark}/bin/qwen38-benchmark";
         };
       });
 
@@ -66,6 +72,7 @@
         let pkgs = pkgsFor system;
         in {
           package-and-tests = self.packages.${system}.default;
+          qwen38-benchmark = self.packages.${system}.qwen38-benchmark;
           rust-quality = pkgs.runCommand "inference-lab-rust-quality" {
             nativeBuildInputs = [ (toolchainFor pkgs) pkgs.stdenv.cc ];
           } ''

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "issue": "https://github.com/OnixResearch/inference-lab/issues/7",
+  "donor_repo": "OnixResearch/tt-onix",
+  "donor_commit": "5ed5e90cdd265443fa2f9b73e4ce46aeaa71837a",
+  "rollback_pin": "OnixResearch/tt-onix@5ed5e90cdd265443fa2f9b73e4ce46aeaa71837a",
+  "license": "LGPL-2.1-only",
+  "license_file": "LICENSES/LGPL-2.1-only.txt",
+  "license_sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331",
+  "legacy_schema": "onix.qwen38-benchmark.v1",
+  "imported_files": {
+    "pkgs/qwen38-benchmark/qwen38_benchmark.py": {
+      "donor_path": "pkgs/qwen38-benchmark/qwen38_benchmark.py",
+      "sha256": "42a054d03b2555d7d4f933759efcf9b4cc53c060cc2f84609f0c1b6aebe21fd3",
+      "byte_identical_to_donor": true
+    },
+    "pkgs/qwen38-benchmark/corpus.json": {
+      "donor_path": "pkgs/qwen38-benchmark/corpus.json",
+      "sha256": "08e682aad384802a0415bd56aa1fb2840b8a8f343acf6eb7b00f2afeb48e2015",
+      "byte_identical_to_donor": true
+    },
+    "pkgs/qwen38-benchmark/agentic_trace.json": {
+      "donor_path": "pkgs/qwen38-benchmark/agentic_trace.json",
+      "sha256": "6c1127cbd528a3ca28b22f236133e6f180307f4cae2f59a30f749a46683e8de3",
+      "byte_identical_to_donor": true
+    },
+    "pkgs/qwen38-benchmark/default.nix": {
+      "donor_path": "pkgs/qwen38-benchmark/default.nix",
+      "sha256": "d2c2e6bbf91d728c6bed388e27849556141ce4d128851257a56753229a2649db",
+      "byte_identical_to_donor": true
+    }
+  },
+  "portable_docs": {
+    "docs/qwen38-benchmark.md": {
+      "donor_path": "docs/qwen38-benchmark.md",
+      "donor_sha256": "9f8aa170ca575ec1937f4f64ba5efb8e648cd2c29b42e578fbefe530b8e010ec"
+    }
+  }
+}
