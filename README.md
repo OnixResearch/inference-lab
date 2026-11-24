@@ -129,6 +129,8 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 
 - [Architecture and boundaries](docs/architecture.md)
 - [Portable Qwen serving benchmark (`qwen38-benchmark`)](docs/qwen38-benchmark.md)
+- [Portable six-passage retention evaluator (`retention-eval`)](docs/retention-eval.md)
+- [Portable HTTP batch-group driver & subagent workload (`http-batch-group`)](docs/http-batch-group.md)
 - [Experiment protocol and non-collapsing outcomes](docs/experiment-protocol.md)
 - [Pinned source review](docs/source-review.md)
 - [Research roadmap](docs/roadmap.md)
@@ -147,4 +149,6 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [OpenSpec change record (Batch 5)](openspec/changes/batch5-qsa-recurrent-tiered-split-interventions/proposal.md)
 - [OpenSpec change record (Batch 6)](openspec/changes/batch6-speculative-nvme-hillclimb-tufazip-clairic-mini-megakernels/proposal.md)
 - [OpenSpec change record (`qwen38-benchmark` import)](openspec/changes/import-tt-onix-qwen38-benchmark/proposal.md)
+- [OpenSpec change record (`retention-eval` import)](openspec/changes/import-tt-onix-retention-eval/proposal.md)
+- [OpenSpec change record (`http-batch-group` import)](openspec/changes/import-tt-onix-http-batch-group/proposal.md)
 - [Contribution rules](AGENTS.md)

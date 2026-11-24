@@ -41,10 +41,20 @@
             };
           };
           qwen38-benchmark = pkgs.callPackage ./pkgs/qwen38-benchmark { };
+          retention-eval = pkgs.callPackage ./pkgs/retention-eval { };
+          retention-eval-full = pkgs.callPackage ./pkgs/retention-eval {
+            withMlDeps = true;
+          };
+          http-batch-group = pkgs.callPackage ./pkgs/http-batch-group { };
         in {
           default = package;
           inference-lab = package;
-          inherit qwen38-benchmark;
+          inherit
+            qwen38-benchmark
+            retention-eval
+            retention-eval-full
+            http-batch-group
+            ;
         });
 
       apps = forAllSystems (system: {
@@ -55,6 +65,18 @@
         qwen38-benchmark = {
           type = "app";
           program = "${self.packages.${system}.qwen38-benchmark}/bin/qwen38-benchmark";
+        };
+        retention-eval = {
+          type = "app";
+          program = "${self.packages.${system}.retention-eval}/bin/retention-eval";
+        };
+        retention-eval-full = {
+          type = "app";
+          program = "${self.packages.${system}.retention-eval-full}/bin/retention-eval";
+        };
+        http-batch-group = {
+          type = "app";
+          program = "${self.packages.${system}.http-batch-group}/bin/http-batch-group";
         };
       });
 
@@ -73,6 +95,8 @@
         in {
           package-and-tests = self.packages.${system}.default;
           qwen38-benchmark = self.packages.${system}.qwen38-benchmark;
+          retention-eval = self.packages.${system}.retention-eval;
+          http-batch-group = self.packages.${system}.http-batch-group;
           rust-quality = pkgs.runCommand "inference-lab-rust-quality" {
             nativeBuildInputs = [ (toolchainFor pkgs) pkgs.stdenv.cc ];
           } ''
