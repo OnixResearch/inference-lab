@@ -1,0 +1,169 @@
+{
+  "schema": "inference-lab.batch7-evidence.v1",
+  "issues": [62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73],
+  "digest_algorithm": "sha256",
+  "top_level_artifact_sha256": {
+    "inputs.json": "0df3b17bfb25dd2ded1a51ac48fbf42e41a5949b15e040569010680807609e2b",
+    "results.json": "ae36d81402ea260440ac300f9d80d5fa6df309ec05ad49fa00998fe805a34e9e",
+    "summary.md": "a359971ea93b588365bbc8529ea43e35c898b7bf1862445e1936b6fca97b4a10",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "suites": [
+    {
+      "subdir": "issue-62-disagg-kv-transfer",
+      "issues": [62],
+      "command": ["inference-lab", "disagg-kv-transfer", "--out", "runs/validation/issue-62-disagg-kv-transfer"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "c7904822b7db07c94d62044f9d2661da4d5f9ca6c609182783159bf2eb839b68",
+        "results.json": "3f7438d298613bb9d9ccd0d393d01b87cce2d610d3dd28dc81396035bc261a38",
+        "summary.md": "9d7a5c5d3a1aea5252f5e005d0bcfb90c0f5b73d159856c359b2babff05558aa",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-63-spark-rdma-tp",
+      "issues": [63],
+      "command": ["inference-lab", "spark-rdma-tp", "--out", "runs/validation/issue-63-spark-rdma-tp"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "c37575298371a7de258ade65eefad23549727f28b6decbbdd026fbdf9b6a49fe",
+        "results.json": "2ac0b2921664f6688b7aebeaf6add7014c3a7588f7ccef43712496aea41348e6",
+        "summary.md": "96ad3d6d3993a5f919940c319072860b49d3484c5f79ef7e863032e8c94fa9c6",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-64-spark-kv-checkpoint",
+      "issues": [64],
+      "command": ["inference-lab", "spark-kv-checkpoint", "--out", "runs/validation/issue-64-spark-kv-checkpoint"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "63b487496a45c966f108813b2c76aae2068b05c79deebed4c70ffebf32c98fed",
+        "results.json": "40718af609cc2a8e69c18fd3c38390f4322b9d96956584878723ccdd16fcf997",
+        "summary.md": "8a18a949d30b3eb81b915a6582b140d036f1563fb8337416e1d5c2bf8d0e911c",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-65-spark-copydrafter",
+      "issues": [65],
+      "command": ["inference-lab", "spark-copydrafter", "--out", "runs/validation/issue-65-spark-copydrafter"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "545e1d67e313f1e15d91ca6188e17af31da208a25c06ec3cf1369e81d0281cc5",
+        "results.json": "e5cdc1ee805de0087579d3d58185178ccbc68c97999becf251146c5ce11dfce9",
+        "summary.md": "4649d1be4915337a420a135400f261a655f174bed9b0a080815363faf6321ae6",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-66-hypertune-kv-adapters",
+      "issues": [66],
+      "command": ["inference-lab", "hypertune-kv-adapters", "--out", "runs/validation/issue-66-hypertune-kv-adapters"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "c874adc4c0b073402229b705439f923c08aa73604ecb5af83503b2e605a0711b",
+        "results.json": "e91548aba0d01bc5598991e6ef5a67cd956661b77df57ec1a29602e533aa09cf",
+        "summary.md": "a5ff74752fc809f0693ae7b302b2e80ac3d288069b13d18bdc70c5d6fc863108",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-67-qwen38-longbook-gdn",
+      "issues": [67],
+      "command": ["inference-lab", "qwen38-longbook-gdn", "--out", "runs/validation/issue-67-qwen38-longbook-gdn"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "03869ff36efc17b29310d88b4ef51600c4eb620ed740c73251a630caf902cc62",
+        "results.json": "0b70d45ebcecbacd7fc48ab76ccde39c4cab246c8ef04df912d5347784caf8bb",
+        "summary.md": "a00557b87464ae58cce5bfac8844bf4f780098cd42c1a33550aa7810b90f9ccf",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-68-linquant-recurrent",
+      "issues": [68],
+      "command": ["inference-lab", "linquant-recurrent", "--out", "runs/validation/issue-68-linquant-recurrent"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "d59b2aaff736b490a22c07be2ec080691d36fa9ad700fd5b8c0c8a832a907dff",
+        "results.json": "b189c0d39f6e2dc5e2b29010c3823237ae76cada2ab384d0b58f0096183177ba",
+        "summary.md": "0a6a20fa8ba33a353068a22dd97df83a533202e60b778a039157f7553838cd4d",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-69-varloop-budget-protocol",
+      "issues": [69],
+      "command": ["inference-lab", "varloop-budget-protocol", "--out", "runs/validation/issue-69-varloop-budget-protocol"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "9b5b35ccb3de866d70c1a7433f1f1e61ff4a4084ad39a54aeeb886ae40ebb128",
+        "results.json": "876feed546b8530a71c8d52595971ef2cff72b33d97d000034212e0f201feb32",
+        "summary.md": "66e2d9498e7253894854005bc90bec2c894106e1ec76c337c0cc39fb0798f5d5",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-70-ttf-ternary-qwen",
+      "issues": [70],
+      "command": ["inference-lab", "ttf-ternary-qwen", "--out", "runs/validation/issue-70-ttf-ternary-qwen"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "8c38193cc7b401ead95ecedb7b4e21638b15dfd84fdaed952e1f0777e3a86834",
+        "results.json": "91afa66a4ad4b14a98933398801872fd14da62b7bcb0158e4d07d1f5b08a0cbc",
+        "summary.md": "b948c5a5d46c55e3192a70121682d74f7047b775431b56c89a5018b5abfae179",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-71-drafter-opd-replay",
+      "issues": [71],
+      "command": ["inference-lab", "drafter-opd-replay", "--out", "runs/validation/issue-71-drafter-opd-replay"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "1234d0e6a637b780ba1bfa8ce3ca00d1ce15bc72b633cc30875defdc5f693306",
+        "results.json": "d5f0872f27a4b86cf89d28fc9867e1947cf0c4fa0b96c36647d5b28445ed6f84",
+        "summary.md": "894d805798eb7a1afbe90dbc24d9725007d8f2643da179122a0c2f43cc0ef4b1",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-72-k2-uno-mova",
+      "issues": [72],
+      "command": ["inference-lab", "k2-uno-mova", "--out", "runs/validation/issue-72-k2-uno-mova"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "45de45c309fef6e209bdc4a22c3906af2402d6e59161983da0878a88b72f51f9",
+        "results.json": "fa7bbd61dbaf8e1f8718789d54ade526ad0b1ae7cd103345767565f764673862",
+        "summary.md": "8135336b72f87fbbb013c339630e2ac20dc5b23aee88dd281ca0e74bbc1a3c21",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-73-lfm3-d1-decision",
+      "issues": [73],
+      "command": ["inference-lab", "lfm3-d1-decision", "--out", "runs/validation/issue-73-lfm3-d1-decision"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "0687788782d59a6f6baa4c3fd5a11a90a3fcccef7eab6d6761eb0e0786e2b4de",
+        "results.json": "8f50da742bb58c53643c9b456ee22eb176ec2fbf3dc24389b5fb297412a02c5f",
+        "summary.md": "277bda33716600a94b5ebc21521a14f4f25a6ba06d6d2a7e6120eed124e13d74",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

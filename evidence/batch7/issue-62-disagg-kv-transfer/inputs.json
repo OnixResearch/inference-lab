@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.disagg-kv-transfer.inputs.v1",
+  "issue": 62,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "wire_format_version": 1,
+  "complements": ["inference-lab#5","inference-lab#42"],
+  "upstream_x_post": "https://x.com/volatilemarkts/status/2096797538888057213",
+  "logit_parity_tolerance": 0.000000000001,
+  "author_unverified_non_gating_notes": "10 KB/tok over 10GbE and 241K DeepSeek-V4-Flash 12m->3m cold / 19s warm TTFT claims are unverified X-post figures, not lab targets"
+}

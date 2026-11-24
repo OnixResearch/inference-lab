@@ -1,0 +1,15 @@
+{
+  "schema": "inference-lab.qwen38-longbook-gdn.inputs.v1",
+  "issue": 67,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "canonical_model_id": "summerAIO/Qwen3.8-27B-Longbook27-v2",
+  "alias_model_id": "summerMC/Qwen3.8-27B-Longbook27-v2",
+  "model_commit": "46319430c16af66860b20f14986ad1032e991796",
+  "model_license": "Apache-2.0",
+  "upstream_x_post": "https://x.com/summerAI_O/status/2113320468287836497",
+  "layer_layout": {"base_gdn":48,"base_full_attn":16,"longbook_gdn":64,"longbook_full_attn":0},
+  "context_sweep": [8192,32768,131072,262144],
+  "author_unverified_non_gating_notes": "Longbook27-v2 all-64-layer GDN conversion recovery claims are unverified author claims, not lab acceptance criteria"
+}

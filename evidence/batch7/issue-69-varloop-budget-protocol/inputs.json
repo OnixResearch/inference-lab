@@ -1,0 +1,23 @@
+{
+  "schema": "inference-lab.varloop-budget-protocol.inputs.v1",
+  "issue": 69,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pins": {
+    "target_repo": "thinkingmachines/TML-d24-varloop-research",
+    "target_2dsd_commit": "657b53ba5da7baefe9ff15dca5cd25f5bd3dbaa2",
+    "target_issue57_commit": "767c9d0250aa2938e289e50ca6db5f1b39ebae74",
+    "target_hf_head_2026_11_24": "c90921bd5f78df6c8168173b9f8a3a850320c594",
+    "two_dsd_repo": "SqueezeAILab/2DSD",
+    "two_dsd_branch": "feat/inkling-dspark",
+    "two_dsd_commit": "962874f303c3142406ab3eecfae2bb51567815c9",
+    "two_dsd_main_no_inkling": "431aade2f1e8ebc98a31158d53c39e554984a83a",
+    "two_dsd_license": "Apache-2.0",
+    "drafter_repo": "minseo25/2dsd-inkling-2-mini-varloop-dspark-drafter",
+    "drafter_commit": "57f09bbe7bc67a1643f541a7e568de34f65b5762",
+    "drafter_license": "Apache-2.0"
+  },
+  "non_goals": ["kv_sharing_stays_in_issue_89","drafter_adaptation_stays_in_issue_71","no_default_on_2dsd"],
+  "author_unverified_non_gating_notes": "Poster claims (1.57x vs no looping, 3.37x/3.54x 2DSD, 92% loop-1 agreement, 64.4%->79.3%) are unverified related work, never lab targets"
+}

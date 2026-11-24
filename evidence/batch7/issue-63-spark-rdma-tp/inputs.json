@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.spark-rdma-tp.inputs.v1",
+  "issue": 63,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_post": "https://x.com/danpacary/status/2123128463737676016",
+  "pin_status": "post_only_unlocated_paper_repo",
+  "context_lengths": [8192,131072,1048576],
+  "q4_attn_max_err_gate": 0.08,
+  "q4_min_task_pass_rate": 0.75,
+  "author_unverified_non_gating_notes": "RLX 4.6 us RDMA + 0.2 us checksum, 31.6 tok/s decode (26.2 at 1M), and ~2000 tok/s prefill are unverified X-post claims, not acceptance targets"
+}

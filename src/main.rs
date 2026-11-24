@@ -8,17 +8,20 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, adv_spec_reasoning, batch2, batch3, batch4, batch5, batch6, biollm_protocol,
-    clairic_extraction, compact_hybrids, cpu_contention, decode_megakernels, deepseek_ref,
-    deepseek_spark, diffusion, djev_protocol, drafting, expert_placement, flash_topk, ggml_ops,
-    graphical_sampling, harness_lora_compare, hetero_rollout, inkling_mini_serve,
-    inkling_residuals, intervention_replay, kernel_opt, kv_compression, kv_routing,
-    latent_feedback, learned_compiler, lifecycle, macaq_r, maya_ik2_serve, mla_comparison,
-    mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8, nvme_coalescing,
-    phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval, qwen38_qsa,
-    qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf, seed, serving_bench,
-    serving_hill_climb, simplehc_mhc, spark_engines, sparse_moe, split_m2_p150, stage,
-    structured_read, tiered_eval, tokenizer, trace, tufazip_online_codec, vision_infusion,
+    adaptive_spec, adv_spec_reasoning, batch2, batch3, batch4, batch5, batch6, batch7,
+    biollm_protocol, clairic_extraction, compact_hybrids, cpu_contention, decode_megakernels,
+    deepseek_ref, deepseek_spark, diffusion, disagg_kv_transfer, djev_protocol, drafter_opd_replay,
+    drafting, expert_placement, flash_topk, ggml_ops, graphical_sampling, harness_lora_compare,
+    hetero_rollout, hypertune_kv_adapters, inkling_mini_serve, inkling_residuals,
+    intervention_replay, k2_uno_mova, kernel_opt, kv_compression, kv_routing, latent_feedback,
+    learned_compiler, lfm3_d1_decision, lifecycle, linquant_recurrent, macaq_r, maya_ik2_serve,
+    mla_comparison, mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8,
+    nvme_coalescing, phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval,
+    qwen38_longbook_gdn, qwen38_qsa, qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf,
+    seed, serving_bench, serving_hill_climb, simplehc_mhc, spark_copydrafter, spark_engines,
+    spark_kv_checkpoint, spark_rdma_tp, sparse_moe, split_m2_p150, stage, structured_read,
+    tiered_eval, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec, varloop_budget_protocol,
+    vision_infusion,
 };
 
 const HELP: &str = "\
@@ -105,6 +108,21 @@ Batch 6 commands (#47-#51, #53-#55, #57, #59, #61):
   decode-megakernels      Issue #61 Persistent decode megakernels vs multi-launch reference & batch scaling
   batch6-suite            Run all Batch 6 harnesses (#47-#51, #53-#55, #57, #59, #61) with manifest & COMPLETE last
 
+Batch 7 commands (#62-#73):
+  disagg-kv-transfer      Issue #62 Disaggregated Spark-CUDA prefill to Apple-Metal decode 10GbE KV transfer
+  spark-rdma-tp           Issue #63 2-node DGX Spark raw-RDMA TP & 4-bit attention vs replicated/layer-split (1M)
+  spark-kv-checkpoint     Issue #64 2-Spark KV sharding & disk-persisted KV checkpoint resume (GLM-5.3-Flash)
+  spark-copydrafter       Issue #65 Pinned spark-ds41f & isolated CopyDrafter lossless speculative drafting
+  hypertune-kv-adapters   Issue #66 Pinned Hypertune soft-prefill paged KV adapters vs heterogeneous batched LoRA
+  qwen38-longbook-gdn     Issue #67 Pinned Qwen3.8-27B-Longbook27-v2 (all-64-layer GDN) vs base Qwen3.8-27B (262K)
+  linquant-recurrent      Issue #68 LinQuant algebraic recurrent prefill rewrite error & throughput on GDN/Mamba-2
+  varloop-budget-protocol Issue #69 Pinned TML-d24-varloop-research & 2DSD equal-cost loop vs thinking protocol
+  ttf-ternary-qwen        Issue #70 Pinned ttf-home 1.6-bpw ternary Qwen3.8-27B vs 4-bit GGUF & FP16 controls
+  drafter-opd-replay      Issue #71 On-policy Draft-OPD & D-PACE rejection weighting on noise-floor-gated replay
+  k2-uno-mova             Issue #72 K2 Horizon Uno draftless lossless adapter & MoVA/softplus gating vs AR/MTP
+  lfm3-d1-decision        Issue #73 Pinned LFM3-1.7B tri-hybrid (256k) & d1-2B single-pass typed decision model
+  batch7-suite            Run all Batch 7 harnesses (#62-#73) with SHA-256 manifest & COMPLETE last
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -180,6 +198,19 @@ enum Command {
     MayaIk2Serve(PathBuf),
     DecodeMegakernels(PathBuf),
     Batch6Suite(PathBuf),
+    DisaggKvTransfer(PathBuf),
+    SparkRdmaTp(PathBuf),
+    SparkKvCheckpoint(PathBuf),
+    SparkCopyDrafter(PathBuf),
+    HypertuneKvAdapters(PathBuf),
+    Qwen38LongbookGdn(PathBuf),
+    LinQuantRecurrent(PathBuf),
+    VarloopBudgetProtocol(PathBuf),
+    TtfTernaryQwen(PathBuf),
+    DrafterOpdReplay(PathBuf),
+    K2UnoMova(PathBuf),
+    Lfm3D1Decision(PathBuf),
+    Batch7Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -253,6 +284,19 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "maya-ik2-serve" => Ok(Command::MayaIk2Serve(out)),
                 "decode-megakernels" => Ok(Command::DecodeMegakernels(out)),
                 "batch6-suite" => Ok(Command::Batch6Suite(out)),
+                "disagg-kv-transfer" => Ok(Command::DisaggKvTransfer(out)),
+                "spark-rdma-tp" => Ok(Command::SparkRdmaTp(out)),
+                "spark-kv-checkpoint" => Ok(Command::SparkKvCheckpoint(out)),
+                "spark-copydrafter" => Ok(Command::SparkCopyDrafter(out)),
+                "hypertune-kv-adapters" => Ok(Command::HypertuneKvAdapters(out)),
+                "qwen38-longbook-gdn" => Ok(Command::Qwen38LongbookGdn(out)),
+                "linquant-recurrent" => Ok(Command::LinQuantRecurrent(out)),
+                "varloop-budget-protocol" => Ok(Command::VarloopBudgetProtocol(out)),
+                "ttf-ternary-qwen" => Ok(Command::TtfTernaryQwen(out)),
+                "drafter-opd-replay" => Ok(Command::DrafterOpdReplay(out)),
+                "k2-uno-mova" => Ok(Command::K2UnoMova(out)),
+                "lfm3-d1-decision" => Ok(Command::Lfm3D1Decision(out)),
+                "batch7-suite" => Ok(Command::Batch7Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -398,6 +442,33 @@ fn publish_batch5_suite(path: &Path, bundle: &batch5::Batch5Bundle) -> Result<()
 }
 
 fn publish_batch6_suite(path: &Path, bundle: &batch6::Batch6Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch7_suite(path: &Path, bundle: &batch7::Batch7Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -933,6 +1004,107 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch6_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::DisaggKvTransfer(path) => {
+            let report = disagg_kv_transfer::run_default_harness()?;
+            let inputs = disagg_kv_transfer::inputs_json(&report);
+            let results = disagg_kv_transfer::results_json(&report);
+            let summary = disagg_kv_transfer::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SparkRdmaTp(path) => {
+            let report = spark_rdma_tp::run_default_harness()?;
+            let inputs = spark_rdma_tp::inputs_json(&report);
+            let results = spark_rdma_tp::results_json(&report);
+            let summary = spark_rdma_tp::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SparkKvCheckpoint(path) => {
+            let report = spark_kv_checkpoint::run_default_harness()?;
+            let inputs = spark_kv_checkpoint::inputs_json(&report);
+            let results = spark_kv_checkpoint::results_json(&report);
+            let summary = spark_kv_checkpoint::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SparkCopyDrafter(path) => {
+            let report = spark_copydrafter::run_default_harness()?;
+            let inputs = spark_copydrafter::inputs_json(&report);
+            let results = spark_copydrafter::results_json(&report);
+            let summary = spark_copydrafter::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::HypertuneKvAdapters(path) => {
+            let report = hypertune_kv_adapters::run_default_harness()?;
+            let inputs = hypertune_kv_adapters::inputs_json(&report);
+            let results = hypertune_kv_adapters::results_json(&report);
+            let summary = hypertune_kv_adapters::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Qwen38LongbookGdn(path) => {
+            let report = qwen38_longbook_gdn::run_default_harness()?;
+            let inputs = qwen38_longbook_gdn::inputs_json(&report);
+            let results = qwen38_longbook_gdn::results_json(&report);
+            let summary = qwen38_longbook_gdn::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::LinQuantRecurrent(path) => {
+            let report = linquant_recurrent::run_default_harness()?;
+            let inputs = linquant_recurrent::inputs_json(&report);
+            let results = linquant_recurrent::results_json(&report);
+            let summary = linquant_recurrent::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::VarloopBudgetProtocol(path) => {
+            let report = varloop_budget_protocol::run_default_harness()?;
+            let inputs = varloop_budget_protocol::inputs_json(&report);
+            let results = varloop_budget_protocol::results_json(&report);
+            let summary = varloop_budget_protocol::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::TtfTernaryQwen(path) => {
+            let report = ttf_ternary_qwen::run_default_harness()?;
+            let inputs = ttf_ternary_qwen::inputs_json(&report);
+            let results = ttf_ternary_qwen::results_json(&report);
+            let summary = ttf_ternary_qwen::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::DrafterOpdReplay(path) => {
+            let report = drafter_opd_replay::run_default_harness()?;
+            let inputs = drafter_opd_replay::inputs_json(&report);
+            let results = drafter_opd_replay::results_json(&report);
+            let summary = drafter_opd_replay::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::K2UnoMova(path) => {
+            let report = k2_uno_mova::run_default_harness()?;
+            let inputs = k2_uno_mova::inputs_json(&report);
+            let results = k2_uno_mova::results_json(&report);
+            let summary = k2_uno_mova::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Lfm3D1Decision(path) => {
+            let report = lfm3_d1_decision::run_default_harness()?;
+            let inputs = lfm3_d1_decision::inputs_json(&report);
+            let results = lfm3_d1_decision::results_json(&report);
+            let summary = lfm3_d1_decision::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch7Suite(path) => {
+            let bundle = batch7::run_all()?;
+            publish_batch7_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -1030,6 +1202,19 @@ mod tests {
             "maya-ik2-serve",
             "decode-megakernels",
             "batch6-suite",
+            "disagg-kv-transfer",
+            "spark-rdma-tp",
+            "spark-kv-checkpoint",
+            "spark-copydrafter",
+            "hypertune-kv-adapters",
+            "qwen38-longbook-gdn",
+            "linquant-recurrent",
+            "varloop-budget-protocol",
+            "ttf-ternary-qwen",
+            "drafter-opd-replay",
+            "k2-uno-mova",
+            "lfm3-d1-decision",
+            "batch7-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

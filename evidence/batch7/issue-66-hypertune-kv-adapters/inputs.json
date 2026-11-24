@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.hypertune-kv-adapters.inputs.v1",
+  "issue": 66,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "Hyperstitioncc/Hypertune",
+  "upstream_commit": "7aaaf8c2fc88bfb7dfd91019c40428d4528ae121",
+  "upstream_license": "MIT",
+  "upstream_x_post": "https://x.com/hyperstition_cc/status/2122808531288256657",
+  "complements": ["inference-lab#25","inference-lab#49"],
+  "author_unverified_non_gating_notes": "Hypertune soft-prefill KV adapter throughput and composition claims are unverified author claims, not lab gates"
+}

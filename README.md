@@ -113,6 +113,24 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 | `decode-megakernels` | [#61](https://github.com/OnixResearch/inference-lab/issues/61) | `bounded_contract_harness` | Persistent-decode megakernel benchmark contract (`dangxingyu/megakernel-zoo`, complementing `#4` & `#39`), independent multi-launch reference vs persistent decode loop enforcing equivalence before timing, batch=1 vs batch>1 scaling (`1, 4, 8`), percentiles, host-sync reduction, agent kernel-build ledger, and 8 negative controls |
 | `batch6-suite` | `#47`–`#51`, `#53`–`#55`, `#57`, `#59`, `#61` | `bounded_contract_harness` | Runs all 11 Batch 6 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
 
+## Implemented harnesses (Batch 7: `#62`–`#73`)
+
+| Command | Tracked issue(s) | Execution class | Current bounded scope |
+| --- | --- | --- | --- |
+| `disagg-kv-transfer` | [#62](https://github.com/OnixResearch/inference-lab/issues/62) | `bounded_contract_harness` | Default-off Spark-CUDA prefill to Apple-Metal decode 10GbE KV prefix-cache wire contract (`disagg-kv-v1`), exact token/logit parity (`<= 1e-12`) vs single-host prefill+decode, cold/warm TTFT & bytes/token accounting, and 8 negative controls |
+| `spark-rdma-tp` | [#63](https://github.com/OnixResearch/inference-lab/issues/63) | `bounded_contract_harness` | RLX related-work pin (`post_only_unlocated_paper_repo`, `blocked_on_artifacts`), 2-rank RDMA TP all-reduce parity (`<= 1e-12`) & 4-bit quantized attention parity gating throughput across `8K`/`128K`/`1M` vs replicated and layer-split baselines, and 8 negative controls |
+| `spark-kv-checkpoint` | [#64](https://github.com/OnixResearch/inference-lab/issues/64) | `bounded_contract_harness` | Default-off pinned `MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104@6c55c20d` (Apache-2.0) 2-Spark head-sharded KV & binary disk checkpoint save/resume exact parity (`<= 1e-12`) vs fresh recomputation, headroom & I/O latency accounting, and 8 negative controls |
+| `spark-copydrafter` | [#65](https://github.com/OnixResearch/inference-lab/issues/65) | `bounded_contract_harness` | Default-off pinned `christopherowen/spark-ds41f@75fb3e72` (Apache-2.0) isolated `CopyDrafter` lossless greedy & exact stochastic rejection-sampling parity (`<= 1e-12`), single-stream vs 16-stream tok/s & 131K–1M TTFT profiles, and 8 negative controls |
+| `hypertune-kv-adapters` | [#66](https://github.com/OnixResearch/inference-lab/issues/66) | `bounded_contract_harness` | Default-off pinned `Hyperstitioncc/Hypertune@7aaaf8c2` (MIT) soft-prefill paged KV adapters vs heterogeneous batched LoRA on exact prefix-KV equivalence (`<= 1e-12`), KV vs weight-bandwidth concurrency scaling, independent co-resident task accuracy, and 8 negative controls |
+| `qwen38-longbook-gdn` | [#67](https://github.com/OnixResearch/inference-lab/issues/67) | `bounded_contract_harness` | Default-off pinned `summerAIO/Qwen3.8-27B-Longbook27-v2@46319430` (alias `summerMC/...`, Apache-2.0, all-64-layer GDN) vs base Qwen3.8-27B under matched serving/quantization from `8K` to `262K`, miniature hybrid vs all-GDN associative-recall tradeoff, and 8 negative controls |
+| `linquant-recurrent` | [#68](https://github.com/OnixResearch/inference-lab/issues/68) | `bounded_contract_harness` | LinQuant related-work pin (`post_only_unlocated_paper_repo`, `blocked_on_artifacts`, cross-linked to `tt-onix#34`), real pure-Rust GDN & Mamba-2 exact FP64 algebraic Hadamard invariance (`<= 1e-12`) BEFORE BF16/FP8/INT8 error & throughput comparison, and 8 negative controls |
+| `varloop-budget-protocol` | [#69](https://github.com/OnixResearch/inference-lab/issues/69) | `bounded_contract_harness` | Default-off pinned `TML-d24-varloop-research@657b53ba`, `SqueezeAILab/2DSD@962874f3` (`feat/inkling-dspark`, Apache-2.0), and DSpark drafter (`57f09bbe`), greedy 2DSD losslessness before timing (`R = 1, 3, 4, 5`), equal-cost filtered/unfiltered columns, shared-vs-separate KV & quant ablations, x86_64 CUDA 13.0 BF16 host gate, and 8 negative controls |
+| `ttf-ternary-qwen` | [#70](https://github.com/OnixResearch/inference-lab/issues/70) | `bounded_contract_harness` | Default-off pinned `oguzeldereli/ttf-home@2f470627` (`NOASSERTION`) pure-Rust 1.6-bpw ternary `{-1, 0, +1}` 5-trits-per-byte quantizer & matvec parity (`<= 1e-12`) vs `Q4_0` and FP64, VRAM/throughput & math/code/agent `cost_per_accepted_task` surfacing code regression, and 8 negative controls |
+| `drafter-opd-replay` | [#71](https://github.com/OnixResearch/inference-lab/issues/71) | `bounded_contract_harness` | Default-off open-loop replay harness with 2-sigma noise-floor gating, lossless vs lossy verdict separation, pure-Rust `Draft-OPD` & `D-PACE` rejection-point weighted adaptation vs frozen baseline with zero target-distribution drift (`<= 1e-12`), and 8 negative controls |
+| `k2-uno-mova` | [#72](https://github.com/OnixResearch/inference-lab/issues/72) | `bounded_contract_harness` | Default-off K2 Horizon (`arXiv:2611.21003`, `blocked_on_artifacts`) pure-Rust MoVA + overflow-safe softplus attention gating vs standard softmax, draftless `Uno` adapter exact lossless token parity (`0` mismatches vs AR), memory & `batch = 1, 4, 8` scaling vs AR/MTP/speculative controls, and 8 negative controls |
+| `lfm3-d1-decision` | [#73](https://github.com/OnixResearch/inference-lab/issues/73) | `bounded_contract_harness` | Default-off `LFM3-1.7B` (miniature tri-hybrid cached-vs-full parity `<= 1e-12` & `8K`–`256K` scaling) and `d1-2B` single-pass typed decision schema conformance, exact ECE/Brier calibration with confidence-independent consumer grading, `LFM3-Audio-2B` exclusion (`audio-lab#2`), and 8 negative controls |
+| `batch7-suite` | `#62`–`#73` | `bounded_contract_harness` | Runs all 12 Batch 7 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
+
 ## Ownership boundaries
 
 | Owner | Responsibility retained there |
@@ -142,12 +160,14 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [Batch 4 contract & reference-math evidence (`#22`–`#31`)](evidence/batch4/README.md)
 - [Batch 5 contract & reference-math evidence (`#32`–`#39`, `#42`, `#44`–`#46`)](evidence/batch5/README.md)
 - [Batch 6 contract & reference-math evidence (`#47`–`#51`, `#53`–`#55`, `#57`, `#59`, `#61`)](evidence/batch6/README.md)
+- [Batch 7 contract & reference-math evidence (`#62`–`#73`)](evidence/batch7/README.md)
 - [OpenSpec change record (Batch 1)](openspec/changes/bootstrap-and-batch1-contracts/proposal.md)
 - [OpenSpec change record (Batch 2)](openspec/changes/batch2-drafting-serving-lifecycle/proposal.md)
 - [OpenSpec change record (Batch 3)](openspec/changes/batch3-rwkv-ggml-mla-moe-quant/proposal.md)
 - [OpenSpec change record (Batch 4)](openspec/changes/batch4-mtp-sparse-quant-placement-qsa/proposal.md)
 - [OpenSpec change record (Batch 5)](openspec/changes/batch5-qsa-recurrent-tiered-split-interventions/proposal.md)
 - [OpenSpec change record (Batch 6)](openspec/changes/batch6-speculative-nvme-hillclimb-tufazip-clairic-mini-megakernels/proposal.md)
+- [OpenSpec change record (Batch 7)](openspec/changes/batch7-disagg-kv-linquant-varloop-ternary-uno-lfm3/proposal.md)
 - [OpenSpec change record (`qwen38-benchmark` import)](openspec/changes/import-tt-onix-qwen38-benchmark/proposal.md)
 - [OpenSpec change record (`retention-eval` import)](openspec/changes/import-tt-onix-retention-eval/proposal.md)
 - [OpenSpec change record (`http-batch-group` import)](openspec/changes/import-tt-onix-http-batch-group/proposal.md)

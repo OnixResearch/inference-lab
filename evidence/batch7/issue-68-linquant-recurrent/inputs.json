@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.linquant-recurrent.inputs.v1",
+  "issue": 68,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_post": "https://x.com/ntumm120/status/2118400198539927994",
+  "pin_status": "post_only_unlocated_paper_repo",
+  "cross_repo_tt_onix_issue": "OnixResearch/tt-onix#34",
+  "grants_blackhole_acceptance": false,
+  "fp64_equivalence_tolerance": 0.000000000001,
+  "author_unverified_non_gating_notes": "LinQuant X-post claims are unverified related work; Tenstorrent Blackhole fused GDN verification remains in OnixResearch/tt-onix#34"
+}

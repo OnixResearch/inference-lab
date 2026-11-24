@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.ttf-ternary-qwen.inputs.v1",
+  "issue": 70,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "oguzeldereli/ttf-home",
+  "upstream_commit": "2f470627050cbb6e163494c2a97eda48c7248d80",
+  "upstream_license": "NOASSERTION",
+  "upstream_x_post": "https://x.com/swarogan/status/2122681494019649868",
+  "extends": "inference-lab#18",
+  "author_unverified_non_gating_notes": "6.74-8.20 GB / 12 GB VRAM, FP16 GSM8K match, and HumanEval 84.1% vs 93.3% are unverified author claims, not lab results"
+}

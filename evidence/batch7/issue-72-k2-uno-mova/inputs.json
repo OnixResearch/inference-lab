@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.k2-uno-mova.inputs.v1",
+  "issue": 72,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "paper_arxiv_id": "arXiv:2611.21003",
+  "upstream_x_post": "https://x.com/IFM_AI/status/2122721434262786095",
+  "pin_status": "arxiv_id_only_artifacts_unverified_offline",
+  "complements": ["inference-lab#6","inference-lab#22"],
+  "author_unverified_non_gating_notes": "K2 Horizon up-to-2.2x Uno lossless decoding speedup across 380 checkpoints / 17 repos is an unverified claim, not a lab gate"
+}

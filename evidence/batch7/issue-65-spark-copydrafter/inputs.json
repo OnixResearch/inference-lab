@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.spark-copydrafter.inputs.v1",
+  "issue": 65,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "christopherowen/spark-ds41f",
+  "upstream_commit": "75fb3e72c657534cb6cf0f7a989e0edb4db64a6f",
+  "upstream_license": "Apache-2.0",
+  "upstream_x_post": "https://x.com/christopherowen/status/2119210831812370771",
+  "complements": ["inference-lab#6","inference-lab#8"],
+  "author_unverified_non_gating_notes": "82.5 tok/s 1-stream, 273.2 tok/s 16-stream, and 3.4s->1.0s TTFT at 131K on 4x DGX Spark are unverified author claims, not lab targets"
+}

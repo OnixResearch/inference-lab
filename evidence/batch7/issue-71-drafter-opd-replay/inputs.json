@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.drafter-opd-replay.inputs.v1",
+  "issue": 71,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_post": "https://x.com/DecagonAI/status/2115511110120120437",
+  "connects": ["inference-lab#6","inference-lab#38","inference-lab#47","inference-lab#53"],
+  "noise_floor_sigma_multiplier": 2.0,
+  "target_drift_tolerance": 0.000000000001,
+  "author_unverified_non_gating_notes": "Decagon AutoResearch 34-65% throughput gains are unverified author claims, not lab acceptance targets"
+}

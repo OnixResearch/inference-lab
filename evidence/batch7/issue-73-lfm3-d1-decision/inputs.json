@@ -1,0 +1,14 @@
+{
+  "schema": "inference-lab.lfm3-d1-decision.inputs.v1",
+  "issue": 73,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_x_post": "https://x.com/liquidai/status/2115128329003303107",
+  "pin_status": "post_only_checkpoints_unpinned_offline",
+  "excludes_audio_model": true,
+  "audio_out_of_scope_issue": "audio-lab#2",
+  "complements": ["inference-lab#36","inference-lab#55"],
+  "ece_bins": 5,
+  "author_unverified_non_gating_notes": "Liquid AI LFM3-1.7B and d1-2B launch claims are unverified related work; LFM3-Audio-2B is tracked separately in audio-lab#2"
+}
