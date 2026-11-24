@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.blink-cpu-free-serving.inputs.v1",
+  "issue": 76,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pin_status": "post_only_unlocated_paper_repo",
+  "upstream_x_post": "https://x.com/thesupermannx/status/2123339605311111649",
+  "related_issues": [39, 40, 61]
+}

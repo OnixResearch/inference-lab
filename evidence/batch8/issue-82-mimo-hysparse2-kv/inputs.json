@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.mimo-hysparse2-kv.inputs.v1",
+  "issue": 82,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pin_status": "post_only_unlocated_paper_repo",
+  "upstream_x_post": "https://x.com/SemiAnalysis_/status/2119142144749293863",
+  "parity_tol": 0.000000000001,
+  "related_issues": [28]
+}

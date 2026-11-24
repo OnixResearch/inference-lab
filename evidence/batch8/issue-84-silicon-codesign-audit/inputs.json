@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.silicon-codesign-audit.inputs.v1",
+  "issue": 84,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_arxiv": "arXiv:2611.18859",
+  "upstream_arxiv_url": "https://arxiv.org/abs/2611.18859",
+  "upstream_x_post": "https://x.com/vithursant19/status/2122697450196730308",
+  "pin_status": "arxiv_id_only_artifacts_unverified_offline",
+  "related_issues": [43]
+}

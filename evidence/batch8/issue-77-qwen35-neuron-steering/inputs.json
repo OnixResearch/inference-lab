@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.qwen35-neuron-steering.inputs.v1",
+  "issue": 77,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "target_model_id": "Qwen3.5-4B",
+  "upstream_x_post": "https://x.com/_lyraaaa_/status/2113833330429083662",
+  "recipe_targets": ["L14 N8949 +1", "L13 N7956 -1"],
+  "scaling_formula": "sign * dose * median(||resid||) / ||W_down[:, n]||",
+  "related_issues": [45]
+}

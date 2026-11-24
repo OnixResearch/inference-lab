@@ -1,0 +1,10 @@
+{
+  "schema": "inference-lab.tkcc-hillclimb-profile.inputs.v1",
+  "issue": 79,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pin_status": "post_only_unlocated_paper_repo",
+  "upstream_x_post": "https://x.com/simran_s_arora/status/2118032475498983540",
+  "related_issues": [53, 61]
+}

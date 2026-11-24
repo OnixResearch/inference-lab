@@ -8,20 +8,23 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, adv_spec_reasoning, batch2, batch3, batch4, batch5, batch6, batch7,
-    biollm_protocol, clairic_extraction, compact_hybrids, cpu_contention, decode_megakernels,
-    deepseek_ref, deepseek_spark, diffusion, disagg_kv_transfer, djev_protocol, drafter_opd_replay,
-    drafting, expert_placement, flash_topk, ggml_ops, graphical_sampling, harness_lora_compare,
-    hetero_rollout, hypertune_kv_adapters, inkling_mini_serve, inkling_residuals,
-    intervention_replay, k2_uno_mova, kernel_opt, kv_compression, kv_routing, latent_feedback,
-    learned_compiler, lfm3_d1_decision, lifecycle, linquant_recurrent, macaq_r, maya_ik2_serve,
-    mla_comparison, mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8,
-    nvme_coalescing, phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval,
-    qwen38_longbook_gdn, qwen38_qsa, qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf,
-    seed, serving_bench, serving_hill_climb, simplehc_mhc, spark_copydrafter, spark_engines,
-    spark_kv_checkpoint, spark_rdma_tp, sparse_moe, split_m2_p150, stage, structured_read,
-    tiered_eval, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec, varloop_budget_protocol,
-    vision_infusion,
+    adaptive_spec, adv_spec_reasoning, apple_nvidia_sidecar, batch2, batch3, batch4, batch5,
+    batch6, batch7, batch8, biollm_protocol, blink_cpu_free_serving, clairic_extraction,
+    compact_hybrids, cpu_contention, decode_megakernels, deepseek_ref, deepseek_spark, diffusion,
+    disagg_kv_transfer, djev_protocol, drafter_opd_replay, drafting, exl3_longctx_quant,
+    expert_placement, flash_topk, ggml_ops, graphical_sampling, harness_lora_compare,
+    hetero_rollout, hnet_byte_modeling, hypertune_kv_adapters, inkling_mini_serve,
+    inkling_residuals, intervention_replay, k2_uno_mova, kernel_opt, kv_compression, kv_routing,
+    latent_feedback, learned_compiler, lfm3_d1_decision, lifecycle, linquant_recurrent, macaq_r,
+    maya_ik2_serve, mimo_hysparse2_kv, mla_comparison, mtp_decoder, native_recurrent_bench,
+    nemotron_spark, nvfp4_mxfp8, nvme_coalescing, pdl_breakable_graphs, phoenix_nano, power,
+    proof_completion, qsa_state_coherence, quark_eval, qwen35_neuron_steering, qwen38_longbook_gdn,
+    qwen38_qsa, qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf, saber_dflash2_power,
+    seed, serving_bench, serving_hill_climb, silicon_codesign_audit, simplehc_mhc,
+    spark_copydrafter, spark_engines, spark_kv_checkpoint, spark_rdma_tp, sparse_moe,
+    split_m2_p150, stage, structured_read, tensorlean_kernel_verify, tiered_eval,
+    tkcc_hillclimb_profile, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec,
+    varloop_budget_protocol, vision_infusion,
 };
 
 const HELP: &str = "\
@@ -123,6 +126,20 @@ Batch 7 commands (#62-#73):
   lfm3-d1-decision        Issue #73 Pinned LFM3-1.7B tri-hybrid (256k) & d1-2B single-pass typed decision model
   batch7-suite            Run all Batch 7 harnesses (#62-#73) with SHA-256 manifest & COMPLETE last
 
+Batch 8 commands (#74-#84):
+  pdl-breakable-graphs    Issue #74 PDL kernel overlap & breakable prefill CUDA graphs on flash-MoE fixture
+  tensorlean-kernel-verify Issue #75 TensorLean formal-verification boundary & seeded kernel-bug coverage
+  blink-cpu-free-serving  Issue #76 Blink CPU-free RDMA serving & host-CPU contention resilience vs vLLM/SGLang
+  qwen35-neuron-steering  Issue #77 Qwen3.5-4B exact two-neuron down_proj steering regression fixture (#45)
+  hnet-byte-modeling      Issue #78 H-Net v2 byte-level dynamic chunking parity & tokenizer-free edge cases
+  tkcc-hillclimb-profile  Issue #79 Together Compiler (TKCC) related work & local hill-climb cycle profiler
+  exl3-longctx-quant      Issue #80 Pinned EXL3 2.25-bpw trellis quantizer & 128K-1M reasoning/coding checks
+  saber-dflash2-power     Issue #81 Pinned saber-engine (Rust) + DFlash2 parity & power-capped tok/s/W (#43)
+  mimo-hysparse2-kv       Issue #82 MiMo HySparse2 causal encoder-decoder KV projection parity & 1M ablation
+  apple-nvidia-sidecar    Issue #83 Pinned apple-nvidia-sidecar Apple-host + NVIDIA eGPU split parity (#42)
+  silicon-codesign-audit  Issue #84 arXiv:2611.18859 ML/silicon co-design pre-silicon roofline/energy audit
+  batch8-suite            Run all Batch 8 harnesses (#74-#84) with SHA-256 manifest & COMPLETE last
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -211,6 +228,18 @@ enum Command {
     K2UnoMova(PathBuf),
     Lfm3D1Decision(PathBuf),
     Batch7Suite(PathBuf),
+    PdlBreakableGraphs(PathBuf),
+    TensorLeanKernelVerify(PathBuf),
+    BlinkCpuFreeServing(PathBuf),
+    Qwen35NeuronSteering(PathBuf),
+    HNetByteModeling(PathBuf),
+    TkccHillclimbProfile(PathBuf),
+    Exl3LongCtxQuant(PathBuf),
+    SaberDFlash2Power(PathBuf),
+    MimoHySparse2Kv(PathBuf),
+    AppleNvidiaSidecar(PathBuf),
+    SiliconCoDesignAudit(PathBuf),
+    Batch8Suite(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -297,6 +326,18 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "k2-uno-mova" => Ok(Command::K2UnoMova(out)),
                 "lfm3-d1-decision" => Ok(Command::Lfm3D1Decision(out)),
                 "batch7-suite" => Ok(Command::Batch7Suite(out)),
+                "pdl-breakable-graphs" => Ok(Command::PdlBreakableGraphs(out)),
+                "tensorlean-kernel-verify" => Ok(Command::TensorLeanKernelVerify(out)),
+                "blink-cpu-free-serving" => Ok(Command::BlinkCpuFreeServing(out)),
+                "qwen35-neuron-steering" => Ok(Command::Qwen35NeuronSteering(out)),
+                "hnet-byte-modeling" => Ok(Command::HNetByteModeling(out)),
+                "tkcc-hillclimb-profile" => Ok(Command::TkccHillclimbProfile(out)),
+                "exl3-longctx-quant" => Ok(Command::Exl3LongCtxQuant(out)),
+                "saber-dflash2-power" => Ok(Command::SaberDFlash2Power(out)),
+                "mimo-hysparse2-kv" => Ok(Command::MimoHySparse2Kv(out)),
+                "apple-nvidia-sidecar" => Ok(Command::AppleNvidiaSidecar(out)),
+                "silicon-codesign-audit" => Ok(Command::SiliconCoDesignAudit(out)),
+                "batch8-suite" => Ok(Command::Batch8Suite(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -469,6 +510,33 @@ fn publish_batch6_suite(path: &Path, bundle: &batch6::Batch6Bundle) -> Result<()
 }
 
 fn publish_batch7_suite(path: &Path, bundle: &batch7::Batch7Bundle) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for suite in &bundle.suites {
+        publish(
+            &path.join(suite.subdir),
+            &suite.inputs_json,
+            &suite.results_json,
+            &suite.summary_md,
+        )?;
+    }
+    for (name, content) in [
+        ("inputs.json", bundle.aggregate_inputs_json.as_str()),
+        ("results.json", bundle.aggregate_results_json.as_str()),
+        ("summary.md", bundle.aggregate_summary_md.as_str()),
+        ("manifest.json", bundle.manifest_json.as_str()),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_batch8_suite(path: &Path, bundle: &batch8::Batch8Bundle) -> Result<(), String> {
     fs::create_dir(path).map_err(|error| {
         format!(
             "cannot create new output directory {}: {error}",
@@ -1105,6 +1173,99 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch7_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::PdlBreakableGraphs(path) => {
+            let report = pdl_breakable_graphs::run_default_harness()?;
+            let inputs = pdl_breakable_graphs::inputs_json(&report);
+            let results = pdl_breakable_graphs::results_json(&report);
+            let summary = pdl_breakable_graphs::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::TensorLeanKernelVerify(path) => {
+            let report = tensorlean_kernel_verify::run_default_harness()?;
+            let inputs = tensorlean_kernel_verify::inputs_json(&report);
+            let results = tensorlean_kernel_verify::results_json(&report);
+            let summary = tensorlean_kernel_verify::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::BlinkCpuFreeServing(path) => {
+            let report = blink_cpu_free_serving::run_default_harness()?;
+            let inputs = blink_cpu_free_serving::inputs_json(&report);
+            let results = blink_cpu_free_serving::results_json(&report);
+            let summary = blink_cpu_free_serving::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Qwen35NeuronSteering(path) => {
+            let report = qwen35_neuron_steering::run_default_harness()?;
+            let inputs = qwen35_neuron_steering::inputs_json(&report);
+            let results = qwen35_neuron_steering::results_json(&report);
+            let summary = qwen35_neuron_steering::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::HNetByteModeling(path) => {
+            let report = hnet_byte_modeling::run_default_harness()?;
+            let inputs = hnet_byte_modeling::inputs_json(&report);
+            let results = hnet_byte_modeling::results_json(&report);
+            let summary = hnet_byte_modeling::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::TkccHillclimbProfile(path) => {
+            let report = tkcc_hillclimb_profile::run_default_harness()?;
+            let inputs = tkcc_hillclimb_profile::inputs_json(&report);
+            let results = tkcc_hillclimb_profile::results_json(&report);
+            let summary = tkcc_hillclimb_profile::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Exl3LongCtxQuant(path) => {
+            let report = exl3_longctx_quant::run_default_harness()?;
+            let inputs = exl3_longctx_quant::inputs_json(&report);
+            let results = exl3_longctx_quant::results_json(&report);
+            let summary = exl3_longctx_quant::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SaberDFlash2Power(path) => {
+            let report = saber_dflash2_power::run_default_harness()?;
+            let inputs = saber_dflash2_power::inputs_json(&report);
+            let results = saber_dflash2_power::results_json(&report);
+            let summary = saber_dflash2_power::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::MimoHySparse2Kv(path) => {
+            let report = mimo_hysparse2_kv::run_default_harness()?;
+            let inputs = mimo_hysparse2_kv::inputs_json(&report);
+            let results = mimo_hysparse2_kv::results_json(&report);
+            let summary = mimo_hysparse2_kv::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::AppleNvidiaSidecar(path) => {
+            let report = apple_nvidia_sidecar::run_default_harness()?;
+            let inputs = apple_nvidia_sidecar::inputs_json(&report);
+            let results = apple_nvidia_sidecar::results_json(&report);
+            let summary = apple_nvidia_sidecar::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::SiliconCoDesignAudit(path) => {
+            let report = silicon_codesign_audit::run_default_harness()?;
+            let inputs = silicon_codesign_audit::inputs_json(&report);
+            let results = silicon_codesign_audit::results_json(&report);
+            let summary = silicon_codesign_audit::summary_markdown(&report);
+            publish(&path, &inputs, &results, &summary)?;
+            Ok(summary)
+        }
+        Command::Batch8Suite(path) => {
+            let bundle = batch8::run_all()?;
+            publish_batch8_suite(&path, &bundle)?;
+            Ok(bundle.aggregate_summary_md)
+        }
     }
 }
 
@@ -1215,6 +1376,18 @@ mod tests {
             "k2-uno-mova",
             "lfm3-d1-decision",
             "batch7-suite",
+            "pdl-breakable-graphs",
+            "tensorlean-kernel-verify",
+            "blink-cpu-free-serving",
+            "qwen35-neuron-steering",
+            "hnet-byte-modeling",
+            "tkcc-hillclimb-profile",
+            "exl3-longctx-quant",
+            "saber-dflash2-power",
+            "mimo-hysparse2-kv",
+            "apple-nvidia-sidecar",
+            "silicon-codesign-audit",
+            "batch8-suite",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

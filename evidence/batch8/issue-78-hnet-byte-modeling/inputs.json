@@ -1,0 +1,11 @@
+{
+  "schema": "inference-lab.hnet-byte-modeling.inputs.v1",
+  "issue": 78,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pin_status": "post_only_unlocated_paper_repo",
+  "upstream_x_post": "https://x.com/_albertgu/status/2115502110578290900",
+  "parity_tol": 0.000000000001,
+  "related_issues": [52]
+}

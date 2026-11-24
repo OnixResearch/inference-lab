@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.saber-dflash2-power.inputs.v1",
+  "issue": 81,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "GGZ14/saber-engine",
+  "upstream_commit": "1da27661b3bf8a702a7532c8d17651de8c635e44",
+  "upstream_license": "Apache-2.0",
+  "upstream_x_post": "https://x.com/QwenAIFans/status/2119100011048767551",
+  "target_model": "Qwen3.8-27B",
+  "related_issues": [3, 43]
+}

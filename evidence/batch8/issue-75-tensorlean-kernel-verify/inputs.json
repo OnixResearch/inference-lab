@@ -1,0 +1,12 @@
+{
+  "schema": "inference-lab.tensorlean-kernel-verify.inputs.v1",
+  "issue": 75,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pin_status": "post_only_unlocated_paper_repo",
+  "upstream_x_post": "https://x.com/RonghuiGu/status/2123786837797773807",
+  "reference_kernel_id": "tiled_causal_gemm_softmax_ref_v1",
+  "diff_tol": 0.000000001,
+  "related_issues": [15, 52]
+}

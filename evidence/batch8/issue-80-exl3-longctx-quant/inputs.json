@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.exl3-longctx-quant.inputs.v1",
+  "issue": 80,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "pepuscz/strix-halo-llm",
+  "upstream_commit": "529935497a97bc61a1d71aea9a8864f81ebc82bb",
+  "upstream_license": "MIT",
+  "upstream_maya_issue": "https://github.com/mw00/project-maya/issues/908",
+  "upstream_x_post": "https://x.com/jgattermayer/status/2119088009895448590",
+  "exact_target_bpw": 2.25
+}

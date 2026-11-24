@@ -1,0 +1,156 @@
+{
+  "schema": "inference-lab.batch8-evidence.v1",
+  "issues": [74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84],
+  "digest_algorithm": "sha256",
+  "top_level_artifact_sha256": {
+    "inputs.json": "c022223f8f1cb4440d5f04350bafd32231bdb0320dad79366561929a67233022",
+    "results.json": "235757418fc2b4b842399823e756a6700025bf79fc69e0447c622c3478a3657a",
+    "summary.md": "a0790fe575b599ab65187a22b9c3858e7490af720233dc4f27c36e8dd8598899",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "suites": [
+    {
+      "subdir": "issue-74-pdl-breakable-graphs",
+      "issues": [74],
+      "command": ["inference-lab", "pdl-breakable-graphs", "--out", "runs/validation/issue-74-pdl-breakable-graphs"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "ee3b036648728caa51b644a18f93a5fff561c6dbb7af9b8834790532288b6dd9",
+        "results.json": "94f933d06cf4888b160c38ef9083da3b465790e1e9ba26dd830ba52187ff16f2",
+        "summary.md": "ef9d7da20e3d0bc2f97f227d774b6d26308355c7209efab9e16714bb1ba90922",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-75-tensorlean-kernel-verify",
+      "issues": [75],
+      "command": ["inference-lab", "tensorlean-kernel-verify", "--out", "runs/validation/issue-75-tensorlean-kernel-verify"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "c24f4dcd98a30a664bba6c570fbb7c344cd78abefe9a1cf45876fe5939deb60a",
+        "results.json": "fe58f0187996add8c3ac8cd6ba911069c8673759cf5bf4763ccece53a214a3f1",
+        "summary.md": "4cae15ee0f7e9d8b1e01fed3511053dbace1ec39dfb13a668c23efd471add41b",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-76-blink-cpu-free-serving",
+      "issues": [76],
+      "command": ["inference-lab", "blink-cpu-free-serving", "--out", "runs/validation/issue-76-blink-cpu-free-serving"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "5cb1d678594476ed43d0f8896d50f90d69cc5db1ab17cb56aa2d1af587d774e8",
+        "results.json": "91820436d90782215677dfe0147ff86c63b09f72ee4743bcf9a97f479f92fde4",
+        "summary.md": "b178dbd116ee483214a6f3288247622c92728f7d01ebaabb36eadea06c903bde",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-77-qwen35-neuron-steering",
+      "issues": [77],
+      "command": ["inference-lab", "qwen35-neuron-steering", "--out", "runs/validation/issue-77-qwen35-neuron-steering"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "57bbdb8cba02b811a51b135cc8c8264fb7f7d14b7cb6e2fbb7a7b077ac7530d0",
+        "results.json": "0bc903dd0171bc860b0b0e515e5e8ff38ada971210f2c9613ec1fb45c841046c",
+        "summary.md": "512facc2dc22ef1eac86caa08f14c13268f23cc1c7e64081e1eacddd072513c1",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-78-hnet-byte-modeling",
+      "issues": [78],
+      "command": ["inference-lab", "hnet-byte-modeling", "--out", "runs/validation/issue-78-hnet-byte-modeling"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "b54ebe6dc04ff115c2f6bb75b806059887ef5b6bba84b252c519db6d7b7a8a53",
+        "results.json": "ed5b4e898122bc28f8f3df04c8854fc69030f1990245fe5a8ff8a96e476c7097",
+        "summary.md": "0f5188518f0b0eb319971dd137c41fa975e74e837a862d62f74661dcb6ae1f88",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-79-tkcc-hillclimb-profile",
+      "issues": [79],
+      "command": ["inference-lab", "tkcc-hillclimb-profile", "--out", "runs/validation/issue-79-tkcc-hillclimb-profile"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "d689e4e68ab645167f258a22e73327d68bfdb0152214830ec676c816ce26fdcd",
+        "results.json": "7b0a8476f8bfbc39938c787a040aeb5d14fd8781ec3ef659959deb18515b2d94",
+        "summary.md": "2a645132d588b59614fcf85f42a2181b37787149db3264d7d0df6aa0ef1668da",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-80-exl3-longctx-quant",
+      "issues": [80],
+      "command": ["inference-lab", "exl3-longctx-quant", "--out", "runs/validation/issue-80-exl3-longctx-quant"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "6eae25379825c7c20aaac08945e0de1a536917c1a89c50668c727beadb56af84",
+        "results.json": "7d34291f62c75de539ec95bff8564f3d05ad396c588b5cd055b273a2fbd6e82a",
+        "summary.md": "00d534e3f223535f6306242be65d71b7580446125a39250af8e704ae957fa8dd",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-81-saber-dflash2-power",
+      "issues": [81],
+      "command": ["inference-lab", "saber-dflash2-power", "--out", "runs/validation/issue-81-saber-dflash2-power"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "ed451b6ba6251d4c46a36b675e07ed1e56d925479dec595b419b1c03b67d0551",
+        "results.json": "344c135031fd5967633978169c6fc787c1f05cedd36d05f0d5a21f45f8aa46fb",
+        "summary.md": "d60cac3d55ada08b92bc11af53c194e6a2b9a1a17aeba98492650db38f52cfcc",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-82-mimo-hysparse2-kv",
+      "issues": [82],
+      "command": ["inference-lab", "mimo-hysparse2-kv", "--out", "runs/validation/issue-82-mimo-hysparse2-kv"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "2d81390bfdbd1dc35f42293ccbaa7c895803a69e99e8a59c2db27ed64466bdda",
+        "results.json": "2a54ba08838292a950f7fffed4064aacafd982e98761f37e7f025062ca44c3d5",
+        "summary.md": "9bc52362ff8a7a30828d76e7e66d941196bef7c55c34cc5fe3b26d398a4e7560",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-83-apple-nvidia-sidecar",
+      "issues": [83],
+      "command": ["inference-lab", "apple-nvidia-sidecar", "--out", "runs/validation/issue-83-apple-nvidia-sidecar"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "unavailable_hardware_runtime",
+      "artifact_sha256": {
+        "inputs.json": "3fe05736b1d94fea1cd2e5b19412f8c91ec84d233be73b7e2e4cfcaa934e9def",
+        "results.json": "d98872b4b4b93ac2dfe0f533e03dc5861abee4828645f57c5694cf68831f2c9e",
+        "summary.md": "c1141aeed3661409b46bb9c27a77d385ca13f9ca7a424b6c53cd701e9c345264",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "subdir": "issue-84-silicon-codesign-audit",
+      "issues": [84],
+      "command": ["inference-lab", "silicon-codesign-audit", "--out", "runs/validation/issue-84-silicon-codesign-audit"],
+      "execution_class": "bounded_contract_harness",
+      "physical_hardware_or_artifact_gate": "blocked_on_artifacts",
+      "artifact_sha256": {
+        "inputs.json": "1eb97159d538467fe7c8acc1e401eab8d0fda147d7f56692e7aabc9afd8895f5",
+        "results.json": "77b6ef47f35833f374a547bea542af417b89bb1ca5fd7435ca812bc60d763ef1",
+        "summary.md": "5f8788ef4aec615193464dc6c0224c16a305970bcc7cb46043e146aa5e1a885f",
+        "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ]
+}

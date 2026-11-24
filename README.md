@@ -131,6 +131,23 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 | `lfm3-d1-decision` | [#73](https://github.com/OnixResearch/inference-lab/issues/73) | `bounded_contract_harness` | Default-off `LFM3-1.7B` (miniature tri-hybrid cached-vs-full parity `<= 1e-12` & `8K`–`256K` scaling) and `d1-2B` single-pass typed decision schema conformance, exact ECE/Brier calibration with confidence-independent consumer grading, `LFM3-Audio-2B` exclusion (`audio-lab#2`), and 8 negative controls |
 | `batch7-suite` | `#62`–`#73` | `bounded_contract_harness` | Runs all 12 Batch 7 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
 
+## Implemented harnesses (Batch 8: `#74`–`#84`)
+
+| Command | Tracked issue(s) | Execution class | Current bounded scope |
+| --- | --- | --- | --- |
+| `pdl-breakable-graphs` | [#74](https://github.com/OnixResearch/inference-lab/issues/74) | `bounded_contract_harness` | Baseten PDL & breakable prefill CUDA-graph related-work record (`post_only_article_no_public_repo`), default-off toggles on miniature fused QK-norm/router/mHC flash-MoE fixture (`<= 1e-12` parity vs standard launches), correlated host/GPU bubble & TTFT reducer (`#39`, `#40`), and 8 negative controls |
+| `tensorlean-kernel-verify` | [#75](https://github.com/OnixResearch/inference-lab/issues/75) | `bounded_contract_harness` | TensorLean related-work & TCB-assumption record (`blocked_on_artifacts`), default-off Lean formal-verification boundary on pinned tiled causal GEMM+softmax kernel, symbolic invariant vs aligned/unaligned differential testing across 5 seeded kernel bugs (`#15`, `#52`), and 8 negative controls |
+| `blink-cpu-free-serving` | [#76](https://github.com/OnixResearch/inference-lab/issues/76) | `bounded_contract_harness` | Blink CPU-free SmartNIC GPUDirect RDMA + persistent GPU scheduler related-work record (`blocked_on_artifacts`), host-scheduled (vLLM/SGLang) vs GPU-resident persistent scheduling under `idle`/`moderate`/`heavy` host-CPU contention (`P50`/`P99` TTFT & ITL jitter, `#39`/`#40`/`#61`), RDMA gate, and 8 negative controls |
+| `qwen35-neuron-steering` | [#77](https://github.com/OnixResearch/inference-lab/issues/77) | `bounded_contract_harness` | Extends `#45` with Qwen3.5-4B exact two-neuron `down_proj` steering (`L14 N8949 +1`, `L13 N7956 -1`, `sign * dose * median(||resid||) / ||W_down[:, n]||`) on pure-Rust SwiGLU/MLP fixture, deterministic SHA-256 replay receipts, dose-response (`0.0`–`2.0`) vs unsteered & matched-L2-norm random control, and 8 negative controls |
+| `hnet-byte-modeling` | [#78](https://github.com/OnixResearch/inference-lab/issues/78) | `bounded_contract_harness` | H-Net v2 byte-level hierarchical modeling related-work record (`blocked_on_artifacts`), pure-Rust UTF-8 dynamic boundary chunker & hierarchical reconstruction parity (`<= 1e-12`) across 6 tokenizer-hostile edge cases vs BPE baseline (`#52`), decode-step ratio accounting, and 8 negative controls |
+| `tkcc-hillclimb-profile` | [#79](https://github.com/OnixResearch/inference-lab/issues/79) | `bounded_contract_harness` | Together Compiler (TKCC) related-work record beside `#53`/`#61`, local hill-climb cycle profiler (`compile`, `warm_up`, `parity_check`, `measurement`, `teardown_overhead`), Amdahl ceilings, failure-retaining candidate/hr denominators, parity-skip refusal, and 8 negative controls |
+| `exl3-longctx-quant` | [#80](https://github.com/OnixResearch/inference-lab/issues/80) | `bounded_contract_harness` | Default-off pinned `pepuscz/strix-halo-llm@52993549` (`MIT`) & `project-maya#908`, real pure-Rust exact `2.25`-bpw (36 bits/16-weight tile) WHT-16 trellis quantizer (bit-exact pack/unpack & matvec parity `<= 1e-12`) vs FP4 & FP64, independently checked `128K`–`1M` reasoning & coding end tasks (beyond needle retrieval), and 8 negative controls |
+| `saber-dflash2-power` | [#81](https://github.com/OnixResearch/inference-lab/issues/81) | `bounded_contract_harness` | Default-off pinned `GGZ14/saber-engine@1da27661` (`Apache-2.0`) + DFlash2 on Qwen3.8-27B (`#3`, `#43`), greedy & exact analytical stochastic rejection-sampling parity (`<= 1e-12`) gating acceptance length, TTFT, and sensor-gated power-capped `tok/s/W` & `J/token` (missing sensor = `unknown`, never 0W), and 8 negative controls |
+| `mimo-hysparse2-kv` | [#82](https://github.com/OnixResearch/inference-lab/issues/82) | `bounded_contract_harness` | MiMo HySparse2 causal encoder-decoder KV projection related-work record (`blocked_on_artifacts`), pure-Rust causal encoder-decoder cached-vs-full parity (`<= 1e-12`), strict causal non-leakage verification, `8K`–`1M` prefill-FLOP & KV-size ablation vs 49-layer dense baseline (`#28`), and 8 negative controls |
+| `apple-nvidia-sidecar` | [#83](https://github.com/OnixResearch/inference-lab/issues/83) | `bounded_contract_harness` | Default-off pinned `joesinvestments/apple-nvidia-sidecar@c59a276a` (`MIT`) beside `#41`/`#42`, pure-Rust 4-layer single-device vs 2-stage Apple-host + NVIDIA-eGPU split parity (`<= 1e-12`) with SHA-256 stage envelopes, TB4/TB5 link bandwidth & concurrency scaling, zero silent CPU fallback, and 8 negative controls |
+| `silicon-codesign-audit` | [#84](https://github.com/OnixResearch/inference-lab/issues/84) | `bounded_contract_harness` | `arXiv:2611.18859` pre-silicon ML/silicon co-design related-work record (`blocked_on_artifacts`), structured workload/precision/bandwidth/energy assumption audit, deterministic roofline & `J/token` comparator against lab hardware baseline envelopes (`#43`), silicon-validation flags, and 8 negative controls |
+| `batch8-suite` | `#74`–`#84` | `bounded_contract_harness` | Runs all 11 Batch 8 suites into a fresh directory with per-suite subdirs, aggregate reports, SHA-256 `manifest.json`, and empty `COMPLETE` written last |
+
 ## Ownership boundaries
 
 | Owner | Responsibility retained there |
@@ -161,6 +178,7 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [Batch 5 contract & reference-math evidence (`#32`–`#39`, `#42`, `#44`–`#46`)](evidence/batch5/README.md)
 - [Batch 6 contract & reference-math evidence (`#47`–`#51`, `#53`–`#55`, `#57`, `#59`, `#61`)](evidence/batch6/README.md)
 - [Batch 7 contract & reference-math evidence (`#62`–`#73`)](evidence/batch7/README.md)
+- [Batch 8 contract & reference-math evidence (`#74`–`#84`)](evidence/batch8/README.md)
 - [OpenSpec change record (Batch 1)](openspec/changes/bootstrap-and-batch1-contracts/proposal.md)
 - [OpenSpec change record (Batch 2)](openspec/changes/batch2-drafting-serving-lifecycle/proposal.md)
 - [OpenSpec change record (Batch 3)](openspec/changes/batch3-rwkv-ggml-mla-moe-quant/proposal.md)
@@ -168,6 +186,7 @@ All CLI commands require a new `--out` directory whose parent already exists. Ea
 - [OpenSpec change record (Batch 5)](openspec/changes/batch5-qsa-recurrent-tiered-split-interventions/proposal.md)
 - [OpenSpec change record (Batch 6)](openspec/changes/batch6-speculative-nvme-hillclimb-tufazip-clairic-mini-megakernels/proposal.md)
 - [OpenSpec change record (Batch 7)](openspec/changes/batch7-disagg-kv-linquant-varloop-ternary-uno-lfm3/proposal.md)
+- [OpenSpec change record (Batch 8)](openspec/changes/batch8-pdl-tensorlean-blink-steering-hnet-exl3-saber-hysparse/proposal.md)
 - [OpenSpec change record (`qwen38-benchmark` import)](openspec/changes/import-tt-onix-qwen38-benchmark/proposal.md)
 - [OpenSpec change record (`retention-eval` import)](openspec/changes/import-tt-onix-retention-eval/proposal.md)
 - [OpenSpec change record (`http-batch-group` import)](openspec/changes/import-tt-onix-http-batch-group/proposal.md)

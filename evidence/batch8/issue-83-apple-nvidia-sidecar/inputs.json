@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.apple-nvidia-sidecar.inputs.v1",
+  "issue": 83,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "upstream_repo": "joesinvestments/apple-nvidia-sidecar",
+  "upstream_commit": "c59a276a1ce5fc3c2e12e05f070a0180550cb619",
+  "upstream_license": "MIT",
+  "upstream_x_post": "https://x.com/JoesInvestments/status/2119450204512419959",
+  "wire_schema": "sidecar-stage-envelope.v1",
+  "related_issues": [41, 42]
+}

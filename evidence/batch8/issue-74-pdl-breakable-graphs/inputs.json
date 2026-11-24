@@ -1,0 +1,13 @@
+{
+  "schema": "inference-lab.pdl-breakable-graphs.inputs.v1",
+  "issue": 74,
+  "execution_class": "bounded_contract_harness",
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "pin_status": "post_only_article_no_public_repo",
+  "upstream_x_post": "https://x.com/thealexker/status/2117989442090598798",
+  "upstream_article_url": "https://x.com/i/article/2117464653169082368",
+  "fixture_model_id": "deepseek-v4.1-flash-552b-moe-mini-fixture-v1",
+  "parity_tol": 0.000000000001,
+  "related_issues": [39, 40]
+}
