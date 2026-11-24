@@ -8,24 +8,25 @@ use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use inference_lab::{
-    adaptive_spec, adv_spec_reasoning, alora_prefix_cache, anchor_label_drafter,
-    apple_nvidia_sidecar, batch2, batch3, batch4, batch5, batch6, batch7, batch8, batch9,
-    biollm_protocol, blink_cpu_free_serving, clairic_extraction, compact_hybrids, cpu_contention,
-    decode_megakernels, deepseek_ref, deepseek_spark, diffusion, disagg_kv_transfer, djev_protocol,
-    drafter_opd_replay, drafting, exl3_longctx_quant, expert_placement, flash_topk, ggml_ops,
-    graphical_sampling, harness_lora_compare, hetero_rollout, hnet_byte_modeling,
-    hypertune_kv_adapters, inkling_mini_serve, inkling_residuals, intervention_replay, k2_uno_mova,
-    kernel_opt, knowledgator_sys1_extract, kv_compression, kv_routing, latent_feedback,
-    learned_compiler, lfm3_d1_decision, lifecycle, ling_fp8kv_alloc_cap, link_sparse_attention,
-    linquant_recurrent, loop_kv_compression, macaq_r, maya_ik2_serve, mimo_hysparse2_kv,
-    mit_qda_quant, mla_comparison, moe_spec_roofline, mtp_decoder, native_recurrent_bench,
-    nemotron_spark, nvfp4_mxfp8, nvme_coalescing, parasite_feature_control, pdl_breakable_graphs,
-    perseus_mpk_rdma, phoenix_nano, power, proof_completion, qsa_state_coherence, quark_eval,
-    qwen35_neuron_steering, qwen38_longbook_gdn, qwen38_qsa, qwen38_quant, related_work, rsi_bench,
-    rwkv_ggml, rwkv_leaf, saber_dflash2_power, seed, serving_bench, serving_hill_climb,
-    silicon_codesign_audit, simplehc_mhc, spark_copydrafter, spark_engines, spark_kv_checkpoint,
-    spark_rdma_tp, sparse_moe, split_m2_p150, stage, structured_read, tensorlean_kernel_verify,
-    tiered_eval, tkcc_hillclimb_profile, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec,
+    activation_injection_controls, adaptive_spec, adv_spec_reasoning, alora_prefix_cache,
+    anchor_label_drafter, apple_nvidia_sidecar, batch2, batch3, batch4, batch5, batch6, batch7,
+    batch8, batch9, biollm_protocol, blink_cpu_free_serving, clairic_extraction, compact_hybrids,
+    cpu_contention, decode_megakernels, deepseek_ref, deepseek_spark, diffusion,
+    disagg_kv_transfer, djev_protocol, drafter_opd_replay, drafting, exl3_longctx_quant,
+    expert_placement, flash_topk, ggml_ops, graphical_sampling, harness_lora_compare,
+    hetero_rollout, hnet_byte_modeling, hypertune_kv_adapters, inkling_mini_serve,
+    inkling_residuals, intervention_replay, k2_uno_mova, kernel_opt, knowledgator_sys1_extract,
+    kv_compression, kv_routing, latent_feedback, learned_compiler, lfm3_d1_decision, lifecycle,
+    ling_fp8kv_alloc_cap, link_sparse_attention, linquant_recurrent, loop_kv_compression, macaq_r,
+    maya_ik2_serve, mimo_hysparse2_kv, mit_qda_quant, mla_comparison, moe_spec_roofline,
+    mtp_decoder, native_recurrent_bench, nemotron_spark, nvfp4_mxfp8, nvme_coalescing,
+    parasite_feature_control, pdl_breakable_graphs, perseus_mpk_rdma, phoenix_nano, power,
+    proof_completion, qsa_state_coherence, quark_eval, qwen35_neuron_steering, qwen38_longbook_gdn,
+    qwen38_qsa, qwen38_quant, related_work, rsi_bench, rwkv_ggml, rwkv_leaf, saber_dflash2_power,
+    seed, serving_bench, serving_hill_climb, silicon_codesign_audit, simplehc_mhc,
+    spark_copydrafter, spark_engines, spark_kv_checkpoint, spark_rdma_tp, sparse_moe,
+    split_m2_p150, stage, structured_read, tensorlean_kernel_verify, tiered_eval,
+    tkcc_hillclimb_profile, tokenizer, trace, ttf_ternary_qwen, tufazip_online_codec,
     unlimited_ocr_longdoc, varloop_budget_protocol, vision_infusion,
 };
 
@@ -156,6 +157,9 @@ Batch 9 commands (#85-#95):
   ling-fp8kv-alloc-cap    Issue #95 Single-Spark Ling-3.2-air NVFP4 2x2 FP8-KV vs torch allocator cap (262K)
   batch9-suite            Run all Batch 9 harnesses (#85-#95) with SHA-256 manifest & COMPLETE last
 
+Issue #96 commands:
+  activation-injection-controls Issue #96 Default-off concept-injection anomaly sweep, SAE refusal/truthfulness controls & non-circularity guard (#45, #77, #94)
+
 Rules:
   The output directory must not exist; its parent directory must exist.
   Writes inputs.json, results.json, summary.md, and finally an empty COMPLETE marker.
@@ -268,6 +272,7 @@ enum Command {
     ParasiteFeatureControl(PathBuf),
     LingFp8KvAllocCap(PathBuf),
     Batch9Suite(PathBuf),
+    ActivationInjectionControls(PathBuf),
 }
 
 fn parse(args: &[String]) -> Result<Command, String> {
@@ -378,6 +383,7 @@ fn parse(args: &[String]) -> Result<Command, String> {
                 "parasite-feature-control" => Ok(Command::ParasiteFeatureControl(out)),
                 "ling-fp8kv-alloc-cap" => Ok(Command::LingFp8KvAllocCap(out)),
                 "batch9-suite" => Ok(Command::Batch9Suite(out)),
+                "activation-injection-controls" => Ok(Command::ActivationInjectionControls(out)),
                 other => Err(format!("unknown command `{other}`")),
             }
         }
@@ -407,6 +413,31 @@ fn publish(path: &Path, inputs: &str, results: &str, summary: &str) -> Result<()
         ("inputs.json", inputs),
         ("results.json", results),
         ("summary.md", summary),
+    ] {
+        write_new_file(&path.join(name), content.as_bytes())?;
+    }
+    write_new_file(&path.join("COMPLETE"), &[])?;
+    Ok(())
+}
+
+fn publish_with_manifest(
+    path: &Path,
+    inputs: &str,
+    results: &str,
+    summary: &str,
+    manifest: &str,
+) -> Result<(), String> {
+    fs::create_dir(path).map_err(|error| {
+        format!(
+            "cannot create new output directory {}: {error}",
+            path.display()
+        )
+    })?;
+    for (name, content) in [
+        ("inputs.json", inputs),
+        ("results.json", results),
+        ("summary.md", summary),
+        ("manifest.json", manifest),
     ] {
         write_new_file(&path.join(name), content.as_bytes())?;
     }
@@ -1426,6 +1457,16 @@ fn run(command: Command) -> Result<String, String> {
             publish_batch9_suite(&path, &bundle)?;
             Ok(bundle.aggregate_summary_md)
         }
+        Command::ActivationInjectionControls(path) => {
+            let report = activation_injection_controls::run_default_harness()?;
+            let inputs = activation_injection_controls::inputs_json(&report);
+            let results = activation_injection_controls::results_json(&report);
+            let summary = activation_injection_controls::summary_markdown(&report);
+            let manifest =
+                activation_injection_controls::manifest_json(&report, &inputs, &results, &summary);
+            publish_with_manifest(&path, &inputs, &results, &summary, &manifest)?;
+            Ok(summary)
+        }
     }
 }
 
@@ -1560,6 +1601,7 @@ mod tests {
             "parasite-feature-control",
             "ling-fp8kv-alloc-cap",
             "batch9-suite",
+            "activation-injection-controls",
         ] {
             assert!(parse(&[cmd.into(), "--out".into(), "out-dir".into()]).is_ok());
         }

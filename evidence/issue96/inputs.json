@@ -1,0 +1,26 @@
+{
+  "schema": "inference-lab.activation-injection-controls.inputs.v1",
+  "issue": 96,
+  "extends_issues": [45, 77, 94],
+  "execution_class": "bounded_contract_harness",
+  "default_off": true,
+  "default_enabled": false,
+  "synthetic_contract_fixture": true,
+  "phenomenal_consciousness_claim": false,
+  "model_revision_digest": "qwen-tiny-anomaly-sae-ref@sha256:9601e4a8",
+  "references": {
+    "lindsey_et_al": "Jack Lindsey et al. (Anthropic), Emergent Introspective Awareness in Large Language Models (transformer-circuits.pub)",
+    "berg_et_al_arxiv": "arXiv:2510.24797",
+    "berg_et_al": "Cameron Berg, Diogo de Lucena, & Judd Rosenblatt (arXiv:2510.24797), Large Language Models Report Subjective Experience Under Self-Referential Processing"
+  },
+  "experiment1_alpha_grid": [0.0, 0.1, 0.5, 1.5, 4.0, 12.0],
+  "experiment1_prompt_count": 8,
+  "experiment1_detection_threshold": 0.55,
+  "experiment2_sae_features": ["refusal_boilerplate", "truthfulness", "deception_roleplay", "self_ref_cluster", "factual_grounding", "safety_boundary"],
+  "experiment2_prompt_counts": {
+    "self_referential": 4,
+    "generic_safety_refusal": 4,
+    "generic_factual_calibration": 4
+  },
+  "experiment3_causal_gradient_min": 0.000001
+}

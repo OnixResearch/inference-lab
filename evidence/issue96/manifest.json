@@ -1,0 +1,18 @@
+{
+  "schema": "inference-lab.issue96-evidence.v1",
+  "issue": 96,
+  "extends_issues": [45, 77, 94],
+  "command": ["inference-lab", "activation-injection-controls", "--out", "evidence/issue96"],
+  "execution_class": "bounded_contract_harness",
+  "hardware_gate_status": "unavailable_hardware_runtime",
+  "default_off": true,
+  "synthetic_contract_fixture": true,
+  "phenomenal_consciousness_claim": false,
+  "digest_algorithm": "sha256",
+  "artifact_sha256": {
+    "inputs.json": "cab2b3529940c1e27a8812e1fc8e1ee07621b5e664aa87a81814a4609406863d",
+    "results.json": "a27f3419fc52f79c20cbb2b8f2a3dfec5f7eeb73ac6c344c611cb12fa3a1e8c5",
+    "summary.md": "98a300641e71c635eeb3bed026eaf03f489f0b589af6cafcd6d3f615225fb488",
+    "COMPLETE": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

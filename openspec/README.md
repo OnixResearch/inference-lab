@@ -16,5 +16,6 @@ Active changes:
 - [qwen38-benchmark-stream-deadlines](changes/qwen38-benchmark-stream-deadlines/proposal.md): Add bounded SSE event-gap tracking, explicit token-to-event cumulative deadline checks, failure-retaining population accounting, and frozen prefill-interference mode to `qwen38-benchmark` (`tt-onix#17`).
 - [import-tt-onix-retention-eval](changes/import-tt-onix-retention-eval/proposal.md): Import `OnixResearch/tt-onix`'s portable six-passage full-vocabulary retention evaluator (`retention.py`, frozen fixtures, standalone CLI, and Nix package).
 - [import-tt-onix-http-batch-group](changes/import-tt-onix-http-batch-group/proposal.md): Import `OnixResearch/tt-onix`'s portable HTTP barrier batch-group driver and frozen three-worker subagent review workload.
+- [activation-injection-sae-controls](changes/activation-injection-sae-controls/proposal.md): Add default-off activation-injection anomaly detection sweep, SAE refusal/boilerplate vs. truthfulness disentanglement controls, and non-circularity trade-off guards to the intervention replay harness (`#96`, extending `#45`, `#77`, `#94`).
 
 Task checkboxes are updated only after the corresponding implementation and validation have been observed.

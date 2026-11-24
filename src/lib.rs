@@ -4,6 +4,7 @@
 //! negative controls, and explicit provenance/hardware-gate reporting without performing
 //! filesystem, network, clock, process, or accelerator I/O.
 
+pub mod activation_injection_controls;
 pub mod adaptive_spec;
 pub mod adv_spec_reasoning;
 pub mod alora_prefix_cache;
